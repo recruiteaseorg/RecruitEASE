@@ -984,33 +984,14 @@ app.get('/api/check-resume', async (req, res) => {
         res.status(500).json({ error: 'Server error' });
     }
 });
-        const profilesPath = path.join(__dirname, 'profiles.json');
-        if (!fs.existsSync(profilesPath)) return res.json({ hasResume: false });
-        const profiles = JSON.parse(fs.readFileSync(profilesPath, 'utf8'));
-        const profile = profiles.find(p => p.email && p.email.toLowerCase() === email);
-        const hasResume = !!(profile && (profile.markdownFile || profile.resumeFile));
-        res.json({ hasResume });
-    } catch (e) {
-        res.json({ hasResume: false });
-    }
-});
 
 // Helper to load candidate resume text from disk
-const getResumeTextByEmail = (email) => {
-    const profilesPath = path.join(__dirname, 'profiles.json');
-    if (!fs.existsSync(profilesPath)) {
-        throw new Error('Profiles database not found.');
+const getResumeTextByEmail = async (email) => {
+    const profile = await Profile.findOne({ email });
+    if (!profile || !profile.resumeMarkdown) {
+        throw new Error('Candidate profile or resume not found.');
     }
-    const profiles = JSON.parse(fs.readFileSync(profilesPath, 'utf8'));
-    const profile = profiles.find(p => p.email.toLowerCase() === email.toLowerCase());
-    if (!profile || !profile.markdownFile) {
-        throw new Error('Candidate profile or resume file not found.');
-    }
-    const resumePath = path.join(__dirname, 'uploads', profile.markdownFile);
-    if (!fs.existsSync(resumePath)) {
-        throw new Error('Resume file not found on disk.');
-    }
-    return fs.readFileSync(resumePath, 'utf8');
+    return profile.resumeMarkdown;
 };
 
 // Helper to clean markdown blocks from LLM JSON responses
@@ -1030,7 +1011,7 @@ app.post('/api/generate-self-intro', async (req, res) => {
             return res.status(400).send('Email is required.');
         }
 
-        const resume_text = getResumeTextByEmail(email);
+        const resume_text = await getResumeTextByEmail(email);
         const prompt = `
 You are an expert career coach. Analyze the following candidate resume:
 ---
@@ -1065,7 +1046,7 @@ app.post('/api/generate-dashboard-ai', async (req, res) => {
             return res.status(400).send('Email is required.');
         }
 
-        const resume_text = getResumeTextByEmail(email);
+        const resume_text = await getResumeTextByEmail(email);
         const prompt = `
 You are a technical placement coordinator. Analyze the following candidate resume:
 ---
@@ -1113,7 +1094,7 @@ app.post('/api/jobs/recommendations', async (req, res) => {
             return res.status(400).send('Email is required.');
         }
 
-        const resume_text = getResumeTextByEmail(email);
+        const resume_text = await getResumeTextByEmail(email);
         const { data: jobs, error } = await supabase
             .from('jobs')
             .select('external_job_id, title, company, description')
