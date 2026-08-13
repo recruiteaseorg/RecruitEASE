@@ -877,7 +877,7 @@ app.get('/api/config', (req, res) => {
 });
 
 // POST endpoint to handle OAuth login checks / auto-profile association
-app.post('/api/oauth-login', (req, res) => {
+app.post('/api/oauth-login', async (req, res) => {
     try {
         const { email, name, avatarUrl } = req.body;
         if (!email) {
