@@ -20,8 +20,8 @@ if (typeof pdf !== 'function' && pdf.default) {
 }
 
 // Supabase client initialization
-const supabaseUrl = 'https://ldcfkvvxtpyttvvgkifp.supabase.co';
-const supabaseKey = 'sb_secret_Hgr8Jd6dbQ65kVnyAMA6cA_vuyjY3Z7';
+const supabaseUrl = process.env.SUPABASE_URL || 'https://ldcfkvvxtpyttvvgkifp.supabase.co';
+const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const app = express();
