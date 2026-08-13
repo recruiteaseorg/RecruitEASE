@@ -1,0 +1,870 @@
+<html lang="en"><head>
+  <script src="auth_guard.js"></script>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>Explore Jobs – RecruitEase</title><meta name="description" content="Discover job opportunities tailored to your skills using AI-powered matching."/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600&display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-dim":"#cfdce5","surface-container-low":"#e8f6ff","error-container":"#ffdad6","surface-variant":"#d7e4ee","on-primary-container":"#84a5c4","secondary-fixed-dim":"#5ed9d6","on-background":"#111d24","background":"#f4faff","surface-bright":"#f4faff","primary":"#00253c","primary-fixed-dim":"#a9caea","outline":"#73777e","on-secondary-fixed-variant":"#00504f","on-tertiary":"#ffffff","secondary-fixed":"#7df5f3","on-secondary":"#ffffff","surface-tint":"#41627d","secondary-container":"#7df5f3","on-tertiary-fixed-variant":"#004f51","primary-container":"#173b55","error":"#ba1a1a","on-primary":"#ffffff","inverse-primary":"#a9caea","inverse-surface":"#263239","primary-fixed":"#cce5ff","on-tertiary-container":"#51afb2","on-tertiary-fixed":"#002021","on-surface-variant":"#42474d","surface":"#f4faff","on-error-container":"#93000a","on-error":"#ffffff","inverse-on-surface":"#e5f3fc","on-secondary-container":"#00706f","tertiary":"#002729","surface-container":"#e2f0f9","surface-container-highest":"#d7e4ee","on-secondary-fixed":"#00201f","surface-container-high":"#ddeaf3","tertiary-container":"#003f41","on-primary-fixed":"#001e31","on-surface":"#111d24","outline-variant":"#c2c7ce","surface-container-lowest":"#ffffff","on-primary-fixed-variant":"#284a64","tertiary-fixed-dim":"#79d5d8","secondary":"#006a68","tertiary-fixed":"#95f2f5"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"sidebar_width":"260px","margin_page":"40px","stack_md":"16px","header_height":"72px","gutter":"24px","stack_sm":"8px","stack_lg":"32px"},"fontFamily":{"headline-md":["Poppins"],"headline-lg":["Poppins"],"headline-xl":["Poppins"],"body-lg":["Inter"],"body-sm":["Inter"],"label-sm":["Inter"],"headline-sm":["Poppins"],"body-md":["Inter"],"label-md":["Inter"]},"fontSize":{"headline-md":["24px",{"lineHeight":"32px","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-xl":["40px",{"lineHeight":"52px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"body-sm":["14px",{"lineHeight":"20px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","fontWeight":"500"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"600"}]}}}}</script>
+</head>
+<body class="bg-surface font-body-md text-on-surface">
+
+<!-- Sidebar -->
+<aside class="fixed left-0 top-0 h-full w-[240px] bg-surface-container-lowest border-r border-outline-variant z-50 flex flex-col overflow-y-auto">
+  <div class="h-[72px] flex items-center px-6 mb-stack-md">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-sm">RE</div>
+      <span class="font-bold text-lg text-primary">Recruit<span class="text-secondary">Ease</span></span>
+    </div>
+  </div>
+  <nav class="flex-1 px-4 space-y-6 pb-8">
+    <section>
+      <p class="px-4 mb-2 text-label-md text-on-surface-variant uppercase tracking-wider">CANDIDATE PORTAL</p>
+      <div class="space-y-1">
+        <a href="dashboard.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">grid_view</span>Dashboard</a>
+        <a href="explore_jobs.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm bg-primary-container text-on-primary-container font-medium transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">work</span>Explore Jobs</a>
+        <a href="applications.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">assignment</span>Applications &amp; Status</a>
+        <a href="self_development.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">psychology</span>Self Development</a>
+        <a href="ai_interview.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">mic</span>AI Mock Interview</a>
+        <a href="behavioral_assessment.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">quiz</span>Behavioral Test</a>
+        <a href="proctored_assessment.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">verified_user</span>NOVA Assessment</a>
+      </div>
+    </section>
+    <section class="pt-4 border-t border-outline-variant">
+      <div class="space-y-1">
+        <a href="app.html" id="btn-logout" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-error-container hover:text-on-error-container transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">logout</span>Sign Out</a>
+      </div>
+    </section>
+  </nav>
+</aside>
+
+<!-- Main content -->
+<div class="pl-[240px]">
+  <!-- Top Header -->
+  <header class="fixed top-0 left-[240px] right-0 h-[64px] bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant z-40 flex items-center px-8 justify-between">
+    <div class="flex-1 flex items-center gap-8">
+      <div class="relative w-full max-w-md">
+        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+        <input id="header-search" class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-transparent focus:border-secondary rounded-lg text-body-sm outline-none transition-all" placeholder="Search jobs, companies..." type="text"/>
+      </div>
+    </div>
+    <div class="flex items-center gap-6">
+      <button class="relative p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
+        <span class="material-symbols-outlined">notifications</span>
+        <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+      </button>
+      <div class="flex items-center gap-3 pl-4 border-l border-outline-variant">
+        <div class="text-right">
+          <p class="text-label-md text-on-surface" id="db-username">Candidate</p>
+          <p class="text-label-sm text-on-surface-variant" id="db-user-role">Job Seeker</p>
+        </div>
+        <div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm border border-outline-variant overflow-hidden" id="db-user-avatar">?</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative pt-[64px] min-h-screen">
+    <div class="p-margin_page">
+      <div class="flex flex-col w-full h-full gap-stack_lg">
+
+        <!-- Page Header -->
+        <header class="flex flex-col gap-stack_md">
+          <div class="flex justify-between items-end">
+            <div>
+              <h1 class="font-headline-xl text-headline-xl text-on-surface">Find your next opportunity.</h1>
+              <p class="font-body-lg text-body-lg text-on-surface-variant mt-2 max-w-2xl">Discover roles tailored to your skills using our AI-driven matching engine.</p>
+            </div>
+          </div>
+
+          <!-- Filter Bar -->
+          <div class="bg-surface-container-lowest p-2 rounded-xl shadow-sm flex flex-wrap lg:flex-nowrap gap-2 items-center">
+            <div class="flex-1 relative min-w-[200px]">
+              <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+              <input id="jobs-search-input" class="w-full pl-12 pr-4 py-3 bg-surface-container hover:bg-surface-container-high rounded-lg font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-secondary transition-all" placeholder="Keyword or company" type="text"/>
+            </div>
+            <div class="flex-1 relative min-w-[200px]">
+              <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">location_on</span>
+              <input id="jobs-location-input" class="w-full pl-12 pr-4 py-3 bg-surface-container hover:bg-surface-container-high rounded-lg font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-secondary transition-all" placeholder="Location" type="text"/>
+            </div>
+            <div class="relative min-w-[160px]">
+              <select id="jobs-type-filter" class="w-full appearance-none pl-4 pr-10 py-3 bg-surface-container hover:bg-surface-container-high rounded-lg font-body-md text-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary transition-all cursor-pointer">
+                <option value="">Job Type</option>
+                <option value="full-time">Full-time</option>
+                <option value="part-time">Part-time</option>
+                <option value="contract">Contract</option>
+              </select>
+              <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+            </div>
+            <button id="jobs-search-btn" class="bg-secondary text-on-secondary w-12 h-12 rounded-lg flex items-center justify-center hover:bg-secondary-container hover:text-on-secondary-container transition-colors shadow-sm ml-2 shrink-0">
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+
+          <!-- Left Column: Job Listings -->
+          <div class="lg:col-span-8 flex flex-col gap-stack_md">
+            <!-- AI Job Recommendations -->
+            <div class="mb-4 hidden" id="ai-recommendations-wrapper">
+              <div class="flex justify-between items-center mb-4">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-secondary text-[24px]">auto_awesome</span>
+                  <h2 class="font-headline-md text-headline-md text-on-surface">AI Job Recommendations</h2>
+                </div>
+                <button id="refresh-recommendations-btn" class="flex items-center gap-1 text-label-sm font-label-sm text-secondary hover:text-on-surface transition-colors px-3 py-1.5 bg-surface-container rounded-lg border border-outline-variant hover:bg-surface-container-high">
+                  <span class="material-symbols-outlined text-[16px]">refresh</span>
+                  Refresh
+                </button>
+              </div>
+              <!-- Gallery View Container -->
+              <div id="ai-recommendations-container" class="flex overflow-x-auto gap-4 pb-4 snap-x">
+                <!-- Skeletons loaded via JS -->
+              </div>
+            </div>
+
+            <div class="flex justify-between items-center mb-2">
+              <h2 class="font-headline-md text-headline-md text-on-surface">Jobs by Company</h2>
+              <span id="jobs-count-label" class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Loading...</span>
+            </div>
+
+            <!-- Company-Grouped Job Cards Container -->
+            <div id="jobs-list-container" class="flex flex-col gap-3">
+              <!-- Skeleton loaders while fetching -->
+              <div class="skeleton-card bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/30 animate-pulse">
+                <div class="flex gap-4 items-center mb-4">
+                  <div class="w-12 h-12 rounded-xl bg-surface-container-high"></div>
+                  <div class="flex-1 space-y-2">
+                    <div class="h-4 bg-surface-container-high rounded w-3/4"></div>
+                    <div class="h-3 bg-surface-container rounded w-1/2"></div>
+                  </div>
+                </div>
+                <div class="space-y-2 mb-4">
+                  <div class="h-3 bg-surface-container rounded w-full"></div>
+                  <div class="h-3 bg-surface-container rounded w-5/6"></div>
+                </div>
+                <div class="flex gap-2">
+                  <div class="h-6 w-16 bg-surface-container rounded-md"></div>
+                  <div class="h-6 w-16 bg-surface-container rounded-md"></div>
+                  <div class="h-6 w-16 bg-surface-container rounded-md"></div>
+                </div>
+              </div>
+              <div class="skeleton-card bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/30 animate-pulse">
+                <div class="flex gap-4 items-center mb-4">
+                  <div class="w-12 h-12 rounded-xl bg-surface-container-high"></div>
+                  <div class="flex-1 space-y-2">
+                    <div class="h-4 bg-surface-container-high rounded w-2/3"></div>
+                    <div class="h-3 bg-surface-container rounded w-1/3"></div>
+                  </div>
+                </div>
+                <div class="space-y-2 mb-4">
+                  <div class="h-3 bg-surface-container rounded w-full"></div>
+                  <div class="h-3 bg-surface-container rounded w-4/5"></div>
+                </div>
+                <div class="flex gap-2">
+                  <div class="h-6 w-20 bg-surface-container rounded-md"></div>
+                  <div class="h-6 w-14 bg-surface-container rounded-md"></div>
+                </div>
+              </div>
+              <div class="skeleton-card bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/30 animate-pulse">
+                <div class="flex gap-4 items-center mb-4">
+                  <div class="w-12 h-12 rounded-xl bg-surface-container-high"></div>
+                  <div class="flex-1 space-y-2">
+                    <div class="h-4 bg-surface-container-high rounded w-1/2"></div>
+                    <div class="h-3 bg-surface-container rounded w-2/5"></div>
+                  </div>
+                </div>
+                <div class="space-y-2 mb-4">
+                  <div class="h-3 bg-surface-container rounded w-full"></div>
+                  <div class="h-3 bg-surface-container rounded w-3/4"></div>
+                </div>
+                <div class="flex gap-2">
+                  <div class="h-6 w-12 bg-surface-container rounded-md"></div>
+                  <div class="h-6 w-18 bg-surface-container rounded-md"></div>
+                  <div class="h-6 w-16 bg-surface-container rounded-md"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pagination Controls -->
+            <div id="jobs-pagination" class="hidden items-center justify-between pt-2">
+              <button id="btn-jobs-prev" class="flex items-center gap-2 px-5 py-2.5 bg-surface-container-lowest border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container-low transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+                <span class="material-symbols-outlined text-[18px]">chevron_left</span> Previous
+              </button>
+              <span id="jobs-page-info" class="font-body-sm text-body-sm text-on-surface-variant">Page 1</span>
+              <button id="btn-jobs-next" class="flex items-center gap-2 px-5 py-2.5 bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+                Next <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Column: AI Insights Panel -->
+          <aside class="lg:col-span-4 sticky top-[104px] flex flex-col gap-stack_md">
+            <!-- Overall Match Summary -->
+            <div class="bg-primary rounded-2xl p-6 shadow-md relative overflow-hidden text-on-primary">
+              <div class="absolute top-0 right-0 -mt-8 -mr-8 w-48 h-48 bg-gradient-to-br from-secondary/30 to-transparent rounded-full blur-2xl"></div>
+              <div class="flex items-center gap-3 mb-6 relative z-10">
+                <span class="material-symbols-outlined text-secondary">psychology</span>
+                <h2 class="font-headline-sm text-headline-sm">AI Career Insight</h2>
+              </div>
+              <div class="flex items-center justify-between mb-8 relative z-10">
+                <div>
+                  <p class="font-label-sm text-label-sm text-on-primary/70 uppercase tracking-widest mb-1">Market Fit Score</p>
+                  <p class="font-headline-xl text-headline-xl" id="ai-fit-score">82<span class="text-secondary font-headline-md text-headline-md">%</span></p>
+                </div>
+                <div class="relative w-20 h-20">
+                  <svg class="w-full h-full -rotate-90" viewBox="0 0 36 36">
+                    <path class="text-on-primary/20" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+                    <path id="ai-fit-arc" class="text-secondary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="82, 100" stroke-linecap="round" stroke-width="3"></path>
+                  </svg>
+                </div>
+              </div>
+              <p class="font-body-sm text-body-sm text-on-primary/90 relative z-10 mb-6" id="ai-insight-text">
+                Your profile aligns with current market demands. Highlight your recent projects to unlock higher-tier matches.
+              </p>
+              <button id="btn-optimize-resume" class="w-full py-3 bg-secondary text-on-secondary rounded-lg font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-secondary-fixed transition-colors shadow-sm relative z-10">
+                <span class="material-symbols-outlined text-[18px]">edit_document</span>
+                Optimize Resume
+              </button>
+            </div>
+
+            <!-- Trending Skills -->
+            <div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/30">
+              <h3 class="font-headline-sm text-headline-sm text-on-surface mb-4">Trending Skills</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Based on jobs in the database, these skills are highly requested:</p>
+              <div class="space-y-4" id="trending-skills-container">
+                <div>
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="font-label-sm text-label-sm text-on-surface">Python</span>
+                    <span class="font-label-sm text-label-sm text-on-surface-variant">High demand</span>
+                  </div>
+                  <div class="w-full bg-surface-container-high rounded-full h-1.5">
+                    <div class="bg-secondary h-1.5 rounded-full" style="width: 88%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="font-label-sm text-label-sm text-on-surface">Cloud Architecture</span>
+                    <span class="font-label-sm text-label-sm text-on-surface-variant">Growing</span>
+                  </div>
+                  <div class="w-full bg-surface-container-high rounded-full h-1.5">
+                    <div class="bg-primary h-1.5 rounded-full" style="width: 75%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="font-label-sm text-label-sm text-on-surface">React / Node.js</span>
+                    <span class="font-label-sm text-label-sm text-on-surface-variant">Consider adding</span>
+                  </div>
+                  <div class="w-full bg-surface-container-high rounded-full h-1.5">
+                    <div class="bg-tertiary-fixed-dim h-1.5 rounded-full" style="width: 60%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Optimize Resume Modal -->
+<div id="optimize-resume-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center">
+  <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" id="optimize-resume-backdrop"></div>
+  <div class="relative bg-surface-container-lowest rounded-2xl w-full max-w-lg shadow-xl flex flex-col m-4 overflow-hidden transform scale-95 opacity-0 transition-all duration-300" id="optimize-resume-panel">
+    <div class="flex items-center justify-between p-6 border-b border-surface-container-high">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-secondary">psychology</span>
+        <h3 class="font-headline-sm text-headline-sm text-primary">AI Resume Tips</h3>
+      </div>
+      <button id="close-optimize-modal" class="text-on-surface-variant hover:text-on-surface transition-colors p-1 rounded-full hover:bg-surface-container">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    
+    <div class="p-6 overflow-y-auto max-h-[70vh] flex flex-col gap-6">
+      <div class="flex gap-4 items-start bg-primary/5 p-4 rounded-xl border border-primary/10">
+        <div class="bg-primary text-on-primary w-8 h-8 rounded-full flex items-center justify-center font-bold shrink-0">1</div>
+        <div>
+          <h4 class="font-bold text-primary mb-1">Quantify Your Impact</h4>
+          <p class="text-sm text-on-surface-variant">Don't just list responsibilities. Use numbers and metrics (e.g., "Increased sales by 15%," "Reduced load time by 2s") to demonstrate the actual value you brought.</p>
+        </div>
+      </div>
+      
+      <div class="flex gap-4 items-start bg-secondary/5 p-4 rounded-xl border border-secondary/10">
+        <div class="bg-secondary text-on-secondary w-8 h-8 rounded-full flex items-center justify-center font-bold shrink-0">2</div>
+        <div>
+          <h4 class="font-bold text-primary mb-1">Mirror the Job Description</h4>
+          <p class="text-sm text-on-surface-variant">Incorporate exact keywords from the job posting. If they ask for "Cloud Architecture," make sure those exact words appear in your skills or experience sections.</p>
+        </div>
+      </div>
+      
+      <div class="flex gap-4 items-start bg-tertiary/5 p-4 rounded-xl border border-tertiary/10">
+        <div class="bg-tertiary text-on-tertiary w-8 h-8 rounded-full flex items-center justify-center font-bold shrink-0">3</div>
+        <div>
+          <h4 class="font-bold text-primary mb-1">Highlight Recent Projects</h4>
+          <p class="text-sm text-on-surface-variant">Your market fit is 82%. To push it over 90%, add 1-2 recent, highly relevant projects showcasing modern frameworks (like React or Python) right at the top of your experience.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="p-4 border-t border-surface-container-high bg-surface-container-lowest flex justify-end">
+      <a href="profile.html" class="px-5 py-2.5 bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm">
+        Edit Profile Now
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Job Detail Modal -->
+<div id="job-detail-modal" class="fixed inset-0 z-[9999] bg-black/60 backdrop-blur-sm items-center justify-center p-4 hidden" style="display:none;">
+  <div class="bg-surface rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl relative overflow-hidden">
+    <div class="flex justify-between items-center p-6 border-b border-outline-variant">
+      <div>
+        <h3 class="font-headline-sm text-headline-sm text-on-surface" id="modal-job-title">Job Title</h3>
+        <p class="font-body-sm text-body-sm text-on-surface-variant mt-1" id="modal-job-company">Company • Location</p>
+      </div>
+      <button id="job-modal-close" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+    </div>
+    <div class="p-6 overflow-y-auto flex-1">
+      <div class="flex flex-wrap gap-2 mb-4" id="modal-job-tags"></div>
+      <p class="font-body-md text-body-md text-on-surface leading-relaxed whitespace-pre-line" id="modal-job-description">Loading job details...</p>
+    </div>
+    <div class="p-6 border-t border-outline-variant flex gap-3">
+      <button id="modal-apply-btn" class="flex-1 py-3 bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors flex items-center justify-center gap-2">
+        <span class="material-symbols-outlined text-[18px]">send</span> Apply Now
+      </button>
+      <button id="modal-save-btn" class="py-3 px-5 bg-surface-container text-on-surface rounded-lg font-label-md text-label-md hover:bg-surface-container-high transition-colors flex items-center gap-2">
+        <span class="material-symbols-outlined text-[18px]">bookmark_border</span> Save
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .company-group-card .company-jobs-list { display: none; }
+  .company-group-card.open .company-jobs-list { display: flex; flex-direction: column; gap: 0.5rem; padding-top: 0.75rem; }
+  .company-group-card.open .company-toggle-icon { transform: rotate(180deg); }
+  .company-toggle-icon { transition: transform 0.25s ease; display: inline-flex; }
+</style>
+
+<script src="candidate_portal.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ── State ─────────────────────────────────────────────────────────────────────────────────────────────────
+  let allJobsList = [];
+  let currentJobsPage = 1;
+  const companiesPerPage = 8;
+  let searchQuery = '';
+  let searchDebounceTimeout = null;
+
+  const container = document.getElementById('jobs-list-container');
+  const countLabel = document.getElementById('jobs-count-label');
+  const pagination = document.getElementById('jobs-pagination');
+  const pageInfo = document.getElementById('jobs-page-info');
+  const btnPrev = document.getElementById('btn-jobs-prev');
+  const btnNext = document.getElementById('btn-jobs-next');
+
+  // ── Helpers ────────────────────────────────────────────────────────
+  function getInitials(name) {
+    if (!name) return '??';
+    return name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+  }
+
+  const companyColorMap = {};
+  const colorPalette = [
+    { bg: 'bg-blue-100',   text: 'text-blue-700'   },
+    { bg: 'bg-emerald-100',text: 'text-emerald-700' },
+    { bg: 'bg-purple-100', text: 'text-purple-700'  },
+    { bg: 'bg-orange-100', text: 'text-orange-700'  },
+    { bg: 'bg-pink-100',   text: 'text-pink-700'    },
+    { bg: 'bg-teal-100',   text: 'text-teal-700'    },
+    { bg: 'bg-indigo-100', text: 'text-indigo-700'  },
+    { bg: 'bg-amber-100',  text: 'text-amber-700'   },
+    { bg: 'bg-rose-100',   text: 'text-rose-700'    },
+    { bg: 'bg-cyan-100',   text: 'text-cyan-700'    },
+  ];
+  let colorIndex = 0;
+  function getCompanyColor(company) {
+    if (!companyColorMap[company]) {
+      companyColorMap[company] = colorPalette[colorIndex % colorPalette.length];
+      colorIndex++;
+    }
+    return companyColorMap[company];
+  }
+
+  // ── Group & Paginate ───────────────────────────────────────────────
+  function getGroupedCompaniesPage(page) {
+    // Filter by search query client-side (on already-fetched data)
+    const filtered = searchQuery
+      ? allJobsList.filter(j =>
+          (j.title || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+          (j.company || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+          (j.location || '').toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      : allJobsList;
+
+    const companyGroups = {};
+    filtered.forEach(job => {
+      const key = job.company || 'Unknown Company';
+      if (!companyGroups[key]) companyGroups[key] = [];
+      companyGroups[key].push(job);
+    });
+
+    const sortedNames = Object.keys(companyGroups).sort((a, b) => a.localeCompare(b));
+    const totalPages = Math.max(1, Math.ceil(sortedNames.length / companiesPerPage));
+    const tp = Math.min(Math.max(page, 1), totalPages);
+    currentJobsPage = tp;
+
+    const start = (tp - 1) * companiesPerPage;
+    const pageNames = sortedNames.slice(start, start + companiesPerPage);
+    const pageGroups = {};
+    pageNames.forEach(n => { pageGroups[n] = companyGroups[n]; });
+
+    return { companies: pageGroups, totalPages, currentPage: tp, totalFiltered: filtered.length };
+  }
+
+  // ── Render a page of company cards ────────────────────────────────
+  function renderJobsPage(page) {
+    if (!container) return;
+    const { companies, totalPages, currentPage, totalFiltered } = getGroupedCompaniesPage(page);
+    const names = Object.keys(companies);
+
+    container.innerHTML = '';
+
+    if (names.length === 0) {
+      container.innerHTML = `<div class="p-12 text-center text-on-surface-variant font-body-md text-body-md">${
+        allJobsList.length === 0
+          ? 'No jobs loaded yet.'
+          : `No matches for "<strong>${searchQuery}</strong>". Try a different keyword.`
+      }</div>`;
+      pagination.style.display = 'none';
+      return;
+    }
+
+    names.forEach(companyName => {
+      const jobs = companies[companyName];
+      const color = getCompanyColor(companyName);
+      const initials = getInitials(companyName);
+
+      // Company card wrapper
+      const card = document.createElement('div');
+      card.className = 'company-group-card bg-surface-container-lowest rounded-2xl border border-outline-variant/30 shadow-sm overflow-hidden transition-shadow hover:shadow-md';
+
+      // Header (click to toggle)
+      const header = document.createElement('div');
+      header.className = 'company-group-header flex items-center justify-between px-6 py-4 cursor-pointer select-none';
+      header.innerHTML = `
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm shrink-0 ${color.bg} ${color.text}">
+            ${initials}
+          </div>
+          <div>
+            <span class="font-headline-sm text-headline-sm text-on-surface capitalize">${companyName}</span>
+            <span class="ml-3 inline-flex items-center px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-secondary/10 text-on-secondary-container">
+              ${jobs.length} job${jobs.length !== 1 ? 's' : ''}
+            </span>
+          </div>
+        </div>
+        <span class="material-symbols-outlined text-on-surface-variant company-toggle-icon">expand_more</span>
+      `;
+
+      // Jobs list
+      const jobsList = document.createElement('div');
+      jobsList.className = 'company-jobs-list px-6 pb-4';
+
+      let renderedCount = 0;
+      const jobsLimit = 10;
+
+      const renderMoreJobs = () => {
+        const batch = jobs.slice(renderedCount, renderedCount + jobsLimit);
+        batch.forEach(job => {
+          const dept = job.department && job.department !== 'Not Specified' ? job.department : '';
+          const location = job.location || 'Remote';
+
+          // Check if already applied
+          const appliedJobs = JSON.parse(localStorage.getItem('appliedJobs') || '[]');
+          const alreadyApplied = appliedJobs.some(a => a.jobId === (job.external_job_id || job.id || ''));
+
+          const jobRow = document.createElement('div');
+          jobRow.className = 'flex items-center justify-between gap-4 py-3 px-4 rounded-xl bg-surface-container hover:bg-surface-container-high transition-colors group';
+          jobRow.innerHTML = `
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="font-body-sm text-body-sm font-medium text-on-surface truncate">${job.title || 'Open Position'}</span>
+                ${dept ? `<span class="px-2 py-0.5 bg-surface-container-high rounded font-label-sm text-label-sm text-on-surface-variant shrink-0">${dept}</span>` : ''}
+              </div>
+              <div class="flex items-center gap-3 mt-0.5 text-on-surface-variant font-label-sm text-label-sm">
+                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">location_on</span>${location}</span>
+                ${job.source ? `<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">database</span>${job.source}</span>` : ''}
+              </div>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              ${job.application_url
+                ? `<a href="${job.application_url}" target="_blank" rel="noopener"
+                      title="View original job post"
+                      class="px-3 py-1.5 bg-surface-container-high text-on-surface-variant border border-outline-variant rounded-lg font-label-md text-label-md hover:bg-surface-container-highest transition-colors flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[14px]">open_in_new</span>View Post
+                  </a>`
+                : ''
+              }
+              <button
+                class="apply-job-btn px-3 py-1.5 rounded-lg font-label-md text-label-md flex items-center gap-1 transition-colors ${alreadyApplied
+                  ? 'bg-emerald-100 text-emerald-700 cursor-default'
+                  : 'bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary-container'}"
+                data-job-id="${job.external_job_id || job.id || ''}"
+                data-job-title="${(job.title || '').replace(/"/g, '&quot;')}"
+                data-job-company="${(job.company || '').replace(/"/g, '&quot;')}"
+                data-job-location="${(job.location || '').replace(/"/g, '&quot;')}"
+                data-job-dept="${dept.replace(/"/g, '&quot;')}"
+                data-job-url="${(job.application_url || '').replace(/"/g, '&quot;')}"
+                ${alreadyApplied ? 'disabled' : ''}>
+                <span class="material-symbols-outlined text-[14px]">${alreadyApplied ? 'check_circle' : 'send'}</span>
+                ${alreadyApplied ? 'Applied' : 'Apply'}
+              </button>
+            </div>
+          `;
+
+          // Apply button handler
+          const applyBtn = jobRow.querySelector('.apply-job-btn');
+          if (applyBtn && !alreadyApplied) {
+            applyBtn.addEventListener('click', () => {
+              // Save to localStorage applied jobs list
+              const apps = JSON.parse(localStorage.getItem('appliedJobs') || '[]');
+              const newApp = {
+                jobId: job.external_job_id || job.id || '',
+                title: job.title || 'Open Position',
+                company: job.company || 'Unknown Company',
+                location: job.location || 'Remote',
+                department: dept,
+                applicationUrl: job.application_url || '',
+                appliedAt: new Date().toISOString(),
+                status: 'Applied'
+              };
+              // Avoid duplicates
+              if (!apps.some(a => a.jobId === newApp.jobId)) {
+                apps.unshift(newApp);
+                localStorage.setItem('appliedJobs', JSON.stringify(apps));
+                
+                // Push real-time update to HR DB
+                const savedProfileStr = localStorage.getItem('currentUserProfile');
+                if (savedProfileStr) {
+                    try {
+                        const profile = JSON.parse(savedProfileStr);
+                        // Update Job Title (used by HR portal to filter applicants by job)
+                        fetch('/api/update-profile', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ email: profile.email, jobTitle: newApp.title })
+                        });
+                        fetch('/api/update-stage', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ email: profile.email, newStage: 'Applied' })
+                        });
+                    } catch(e) { console.error('Error syncing apply action:', e); }
+                }
+              }
+              // Visual feedback then redirect
+              applyBtn.innerHTML = '<span class="material-symbols-outlined text-[14px]">check_circle</span> Applied!';
+              applyBtn.classList.remove('bg-primary', 'text-on-primary', 'hover:bg-primary-container', 'hover:text-on-primary-container');
+              applyBtn.classList.add('bg-emerald-100', 'text-emerald-700');
+              applyBtn.disabled = true;
+              setTimeout(() => { window.location.href = 'applications.html'; }, 600);
+            });
+          }
+          jobsList.appendChild(jobRow);
+        });
+        renderedCount += batch.length;
+
+        // Remove old show-more if exists
+        jobsList.querySelector('.show-more-btn')?.remove();
+
+        if (renderedCount < jobs.length) {
+          const showMoreBtn = document.createElement('button');
+          showMoreBtn.className = 'show-more-btn w-full mt-2 py-2 text-secondary font-label-md text-label-md rounded-lg hover:bg-surface-container transition-colors border border-outline-variant/30';
+          showMoreBtn.textContent = `Show ${Math.min(jobsLimit, jobs.length - renderedCount)} more of ${jobs.length - renderedCount} remaining`;
+          showMoreBtn.addEventListener('click', (e) => { e.stopPropagation(); renderMoreJobs(); });
+          jobsList.appendChild(showMoreBtn);
+        }
+      };
+
+      // Toggle on header click — lazy render on first open
+      header.addEventListener('click', () => {
+        const isOpen = card.classList.toggle('open');
+        if (isOpen && renderedCount === 0) renderMoreJobs();
+      });
+
+      card.appendChild(header);
+      card.appendChild(jobsList);
+      container.appendChild(card);
+    });
+
+    // Update pagination
+    if (pageInfo) pageInfo.textContent = `Page ${currentPage} of ${totalPages} · ${totalFiltered} jobs`;
+    if (btnPrev) btnPrev.disabled = currentPage === 1;
+    if (btnNext) btnNext.disabled = currentPage === totalPages;
+
+    if (totalPages > 1) {
+      pagination.style.display = 'flex';
+    } else {
+      pagination.style.display = 'none';
+    }
+  }
+
+  // ── Fetch all jobs in batches ──────────────────────────────────────
+  async function loadAllJobs() {
+    if (!container) return;
+    allJobsList = [];
+    container.innerHTML = `
+      <div class="flex items-center justify-center p-12 gap-3 text-on-surface-variant">
+        <div class="w-5 h-5 border-2 border-secondary border-t-transparent rounded-full animate-spin"></div>
+        <span class="font-body-sm text-body-sm">Fetching live job opportunities...</span>
+      </div>`;
+    countLabel.textContent = 'Loading...';
+
+    try {
+      // Batch 1
+      const res = await fetch('/api/jobs?page=1&limit=200');
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      allJobsList = data.jobs || [];
+      const total = data.total || allJobsList.length;
+      const totalPages = Math.ceil(total / 200);
+
+      countLabel.textContent = `${total.toLocaleString()} jobs`;
+      renderJobsPage(1);
+
+      // Fetch remaining batches in background
+      for (let p = 2; p <= totalPages; p++) {
+        try {
+          const bRes = await fetch(`/api/jobs?page=${p}&limit=200`);
+          if (bRes.ok) {
+            const bData = await bRes.json();
+            allJobsList = allJobsList.concat(bData.jobs || []);
+            renderJobsPage(currentJobsPage);
+          }
+        } catch (bErr) {
+          console.error(`Batch ${p} failed:`, bErr);
+        }
+      }
+      countLabel.textContent = `${allJobsList.length.toLocaleString()} jobs across ${Object.keys((() => { const g = {}; allJobsList.forEach(j => { g[j.company || 'Unknown'] = 1; }); return g; })()).length} companies`;
+
+    } catch (err) {
+      console.error('Failed to load jobs:', err);
+      container.innerHTML = `
+        <div class="p-12 text-center">
+          <span class="material-symbols-outlined text-[48px] text-error mb-4 block">error_outline</span>
+          <p class="font-headline-sm text-headline-sm text-on-surface mb-2">Failed to connect</p>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">Make sure the server is running, then <button class="text-secondary underline" onclick="location.reload()">try again</button>.</p>
+        </div>`;
+    }
+  }
+
+  // ── Search (client-side on loaded data) ────────────────────────────
+  const searchInput  = document.getElementById('jobs-search-input');
+  const locationInput = document.getElementById('jobs-location-input');
+  const searchBtn    = document.getElementById('jobs-search-btn');
+  const headerSearch = document.getElementById('header-search');
+
+  function doClientSearch() {
+    const kw  = (searchInput?.value || '').trim();
+    const loc = (locationInput?.value || '').trim();
+    searchQuery = [kw, loc].filter(Boolean).join(' ');
+    currentJobsPage = 1;
+    renderJobsPage(1);
+  }
+
+  searchBtn?.addEventListener('click', doClientSearch);
+  searchInput?.addEventListener('input', () => {
+    clearTimeout(searchDebounceTimeout);
+    searchDebounceTimeout = setTimeout(doClientSearch, 300);
+  });
+  locationInput?.addEventListener('input', () => {
+    clearTimeout(searchDebounceTimeout);
+    searchDebounceTimeout = setTimeout(doClientSearch, 300);
+  });
+  headerSearch?.addEventListener('input', () => {
+    if (searchInput) searchInput.value = headerSearch.value;
+    clearTimeout(searchDebounceTimeout);
+    searchDebounceTimeout = setTimeout(doClientSearch, 300);
+  });
+
+  // ── Pagination buttons ─────────────────────────────────────────────
+  btnPrev?.addEventListener('click', () => {
+    if (currentJobsPage > 1) renderJobsPage(currentJobsPage - 1);
+  });
+  btnNext?.addEventListener('click', () => {
+    const { totalPages } = getGroupedCompaniesPage(currentJobsPage);
+    if (currentJobsPage < totalPages) renderJobsPage(currentJobsPage + 1);
+  });
+
+  // ── AI Job Recommendations ──────────────────────────────────────────
+  const aiRecWrapper = document.getElementById('ai-recommendations-wrapper');
+  const aiRecContainer = document.getElementById('ai-recommendations-container');
+  const refreshRecBtn = document.getElementById('refresh-recommendations-btn');
+
+  async function loadRecommendations() {
+    if (!aiRecContainer || !aiRecWrapper) return;
+    aiRecWrapper.classList.remove('hidden');
+    
+    // Set skeleton
+    aiRecContainer.innerHTML = `
+      <div class="skeleton-card flex-none w-[320px] h-[180px] bg-surface-container-lowest rounded-2xl p-5 shadow-sm border border-outline-variant/30 animate-pulse snap-start">
+        <div class="flex gap-3 items-center mb-4">
+          <div class="w-10 h-10 rounded-xl bg-surface-container-high"></div>
+          <div class="flex-1 space-y-2">
+            <div class="h-4 bg-surface-container-high rounded w-3/4"></div>
+            <div class="h-3 bg-surface-container rounded w-1/2"></div>
+          </div>
+        </div>
+        <div class="space-y-2 mb-4"><div class="h-3 bg-surface-container rounded w-full"></div></div>
+        <div class="h-8 bg-surface-container rounded w-1/3"></div>
+      </div>
+      <div class="skeleton-card flex-none w-[320px] h-[180px] bg-surface-container-lowest rounded-2xl p-5 shadow-sm border border-outline-variant/30 animate-pulse snap-start">
+        <div class="flex gap-3 items-center mb-4">
+          <div class="w-10 h-10 rounded-xl bg-surface-container-high"></div>
+          <div class="flex-1 space-y-2">
+            <div class="h-4 bg-surface-container-high rounded w-2/3"></div>
+            <div class="h-3 bg-surface-container rounded w-1/3"></div>
+          </div>
+        </div>
+        <div class="space-y-2 mb-4"><div class="h-3 bg-surface-container rounded w-full"></div></div>
+        <div class="h-8 bg-surface-container rounded w-1/3"></div>
+      </div>
+    `;
+
+    try {
+      const user = JSON.parse(localStorage.getItem('currentUserProfile') || '{"email": ""}');
+      const email = user.email || '';
+      
+      if (!email) {
+        aiRecContainer.innerHTML = '<div class="text-on-surface-variant text-body-sm p-4 w-full text-center">Please log in to see personalized recommendations.</div>';
+        return;
+      }
+
+      // Always use absolute URL so it works when page is served from localhost
+      const apiBase = window.location.origin.startsWith('http') ? window.location.origin : 'http://localhost:8000';
+      const res = await fetch(`${apiBase}/api/recommend-jobs`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      
+      if (!res.ok) {
+        const errText = await res.text();
+        throw new Error(`Server ${res.status}: ${errText}`);
+      }
+      const recs = await res.json();
+      
+      if (!recs || recs.length === 0) {
+         aiRecContainer.innerHTML = '<div class="text-on-surface-variant text-body-sm p-4 w-full text-center">No AI recommendations available right now. Upload your resume to get matches!</div>';
+         return;
+      }
+      
+      aiRecContainer.innerHTML = '';
+      recs.forEach(job => {
+        const title = job.title || 'Unknown Title';
+        const company = job.company || 'Unknown Company';
+        const colorInfo = getCompanyColor(company);
+        const initials = getInitials(company);
+        
+        let appliedJobs = [];
+        try { appliedJobs = JSON.parse(localStorage.getItem('appliedJobs') || '[]'); } catch(e){}
+        const isApplied = appliedJobs.some(a => a.jobId === (job.external_job_id || job.id || '') || (a.title === title && a.company === company));
+        
+        const card = document.createElement('div');
+        card.className = "flex-none w-[320px] bg-surface-container-lowest rounded-2xl p-5 shadow-sm border border-outline-variant/30 hover:shadow-md transition-shadow snap-start flex flex-col justify-between";
+        card.innerHTML = `
+          <div>
+            <div class="flex justify-between items-start mb-3">
+              <div class="flex gap-3 items-center">
+                <div class="w-10 h-10 rounded-xl ${colorInfo.bg} ${colorInfo.text} flex items-center justify-center font-bold text-sm shrink-0">
+                  ${initials}
+                </div>
+                <div>
+                  <h3 class="font-headline-sm text-body-md font-semibold text-on-surface line-clamp-1" title="${title}">${title}</h3>
+                  <p class="font-body-sm text-label-sm text-on-surface-variant line-clamp-1">${company}</p>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-1.5 mb-3">
+              <span class="inline-block px-2 py-1 rounded border border-secondary/20 bg-secondary/5 text-label-sm text-secondary flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">psychology</span> Top Match</span>
+            </div>
+            ${job.reason ? `<p class="text-on-surface-variant text-xs italic mb-2 line-clamp-2">${job.reason}</p>` : ''}
+          </div>
+          <div class="flex items-center justify-between mt-auto">
+            <button class="view-btn px-4 py-1.5 bg-surface-container text-on-surface rounded-lg font-label-md border border-outline-variant hover:bg-surface-container-high transition-colors">Details</button>
+            ${isApplied 
+              ? '<span class="px-4 py-1.5 bg-surface-container-high text-on-surface-variant rounded-lg font-label-md flex items-center gap-1 shrink-0"><span class="material-symbols-outlined text-[14px]">check</span>Applied</span>'
+              : '<button class="apply-btn px-4 py-1.5 bg-primary text-on-primary rounded-lg font-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors shrink-0">Apply</button>'
+            }
+          </div>
+        `;
+        
+        // Bind Apply Action
+        const applyBtn = card.querySelector('.apply-btn');
+        if (applyBtn) {
+          applyBtn.addEventListener('click', () => {
+            const newApp = {
+              jobId: job.external_job_id || job.id,
+              title: title,
+              company: company,
+              status: 'Applied',
+              appliedAt: new Date().toISOString()
+            };
+            appliedJobs.push(newApp);
+            localStorage.setItem('appliedJobs', JSON.stringify(appliedJobs));
+            alert('Application submitted successfully!');
+            location.href = 'applications.html';
+          });
+        }
+        
+        aiRecContainer.appendChild(card);
+      });
+    } catch(err) {
+      console.error('Recommendations error:', err);
+      aiRecContainer.innerHTML = `<div class="text-error text-body-sm p-4 w-full text-center">Could not load recommendations: ${err.message}</div>`;
+    }
+  }
+
+  if (refreshRecBtn) {
+    refreshRecBtn.addEventListener('click', loadRecommendations);
+  }
+
+  // ── Boot ───────────────────────────────────────────────────────────
+  loadAllJobs();
+  loadRecommendations();
+
+  // ── Optimize Resume Modal Logic ────────────────────────────────────
+  const optimizeBtn = document.getElementById('btn-optimize-resume');
+  const optimizeModal = document.getElementById('optimize-resume-modal');
+  const optimizePanel = document.getElementById('optimize-resume-panel');
+  const optimizeCloseBtn = document.getElementById('close-optimize-modal');
+  const optimizeBackdrop = document.getElementById('optimize-resume-backdrop');
+
+  const openOptimizeModal = () => {
+    optimizeModal.classList.remove('hidden');
+    // small delay for transition
+    setTimeout(() => {
+      optimizePanel.classList.remove('scale-95', 'opacity-0');
+      optimizePanel.classList.add('scale-100', 'opacity-100');
+    }, 10);
+  };
+
+  const closeOptimizeModal = () => {
+    optimizePanel.classList.remove('scale-100', 'opacity-100');
+    optimizePanel.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => {
+      optimizeModal.classList.add('hidden');
+    }, 300); // match transition duration
+  };
+
+  if (optimizeBtn) optimizeBtn.addEventListener('click', openOptimizeModal);
+  if (optimizeCloseBtn) optimizeCloseBtn.addEventListener('click', closeOptimizeModal);
+  if (optimizeBackdrop) optimizeBackdrop.addEventListener('click', closeOptimizeModal);
+
+});
+</script>
+</body></html>

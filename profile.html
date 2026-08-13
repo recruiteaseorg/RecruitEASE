@@ -1,0 +1,325 @@
+<html lang="en"><head>
+  <script src="auth_guard.js"></script>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Poppins:wght@600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-dim":"#cfdce5","surface-container-low":"#e8f6ff","error-container":"#ffdad6","surface-variant":"#d7e4ee","on-primary-container":"#84a5c4","secondary-fixed-dim":"#5ed9d6","on-background":"#111d24","background":"#f4faff","surface-bright":"#f4faff","primary":"#00253c","primary-fixed-dim":"#a9caea","outline":"#73777e","on-secondary-fixed-variant":"#00504f","on-tertiary":"#ffffff","secondary-fixed":"#7df5f3","on-secondary":"#ffffff","surface-tint":"#41627d","secondary-container":"#7df5f3","on-tertiary-fixed-variant":"#004f51","primary-container":"#173b55","error":"#ba1a1a","on-primary":"#ffffff","inverse-primary":"#a9caea","inverse-surface":"#263239","primary-fixed":"#cce5ff","on-tertiary-container":"#51afb2","on-tertiary-fixed":"#002021","on-surface-variant":"#42474d","surface":"#f4faff","on-error-container":"#93000a","on-error":"#ffffff","inverse-on-surface":"#e5f3fc","on-secondary-container":"#00706f","tertiary":"#002729","surface-container":"#e2f0f9","surface-container-highest":"#d7e4ee","on-secondary-fixed":"#00201f","surface-container-high":"#ddeaf3","tertiary-container":"#003f41","on-primary-fixed":"#001e31","on-surface":"#111d24","outline-variant":"#c2c7ce","surface-container-lowest":"#ffffff","on-primary-fixed-variant":"#284a64","tertiary-fixed-dim":"#79d5d8","secondary":"#006a68","tertiary-fixed":"#95f2f5"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"sidebar_width":"260px","margin_page":"40px","stack_md":"16px","header_height":"72px","gutter":"24px","stack_sm":"8px","stack_lg":"32px"},"fontFamily":{"headline-md":["Poppins"],"headline-lg":["Poppins"],"headline-xl":["Poppins"],"body-lg":["Inter"],"body-sm":["Inter"],"label-sm":["Inter"],"headline-sm":["Poppins"],"body-md":["Inter"],"label-md":["Inter"]},"fontSize":{"headline-md":["24px",{"lineHeight":"32px","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-xl":["40px",{"lineHeight":"52px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"body-sm":["14px",{"lineHeight":"20px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","fontWeight":"500"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"600"}]}}}}</script>
+</head>
+<body class="bg-surface font-body-md text-on-surface">
+<aside class="fixed left-0 top-0 h-full w-[240px] bg-surface-container-lowest border-r border-outline-variant z-50 flex flex-col overflow-y-auto">
+  <div class="h-[72px] flex items-center px-6 mb-stack-md">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-sm">RE</div>
+      <span class="font-bold text-lg text-primary">Recruit<span class="text-secondary">Ease</span></span>
+    </div>
+  </div>
+  <nav class="flex-1 px-4 space-y-6 pb-8">
+      <!-- Injected by candidate_portal.js -->
+  </nav>
+</aside>
+<div class="pl-[240px]">
+<header class="fixed top-0 left-[240px] right-0 h-[64px] bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant z-40 flex items-center px-8 justify-between">
+    <div class="flex-1 flex items-center gap-8">
+        <div class="relative w-full max-w-md">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+            <input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-transparent focus:border-secondary rounded-lg text-body-sm outline-none transition-all" placeholder="Search..." type="text"/>
+        </div>
+    </div>
+    <div class="flex items-center gap-6">
+        <button class="relative p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
+            <span class="material-symbols-outlined">notifications</span><span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+        </button>
+        <div class="flex items-center gap-3 pl-4 border-l border-outline-variant"></div>
+    </div>
+</header>
+<main class="relative pt-[64px] min-h-screen pb-12">
+  <div class="p-8 max-w-6xl mx-auto flex flex-col gap-6">
+      
+      <!-- Hero -->
+      <div class="relative overflow-hidden rounded-2xl bg-primary text-on-primary p-10 shadow-xl flex items-center justify-between">
+        <div class="absolute -top-12 -right-12 w-56 h-56 rounded-full bg-white/5"></div>
+        <div class="absolute -bottom-16 -right-4 w-40 h-40 rounded-full bg-secondary-fixed/10"></div>
+        <div class="relative z-10">
+          <h2 class="font-headline-xl text-headline-xl text-on-primary mb-3">Your Profile</h2>
+          <p class="font-body-lg text-body-lg text-primary-fixed-dim max-w-xl">
+            Update your details to stand out to employers and fine-tune your job recommendations.
+          </p>
+        </div>
+        <div class="relative z-10 hidden md:block">
+            <span class="material-symbols-outlined text-[100px] text-white/10">id_card</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-2">
+          
+          <!-- LEFT COLUMN: Avatar & Bio -->
+          <div class="lg:col-span-4 flex flex-col gap-6">
+              <div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/30 flex flex-col items-center">
+                  <!-- Avatar Preview -->
+                  <div class="relative group cursor-pointer mb-6" onclick="document.getElementById('page-profile-pic').click()">
+                      <div id="avatar-preview" class="w-32 h-32 rounded-full bg-surface-container-high border-4 border-surface flex items-center justify-center text-4xl font-bold text-on-surface-variant overflow-hidden shadow-md">
+                          <span class="material-symbols-outlined text-4xl">person</span>
+                      </div>
+                      <div class="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                          <span class="material-symbols-outlined text-white">photo_camera</span>
+                      </div>
+                      <input type="file" id="page-profile-pic" accept="image/*" class="hidden" onchange="previewAvatar(this)">
+                  </div>
+                  
+                  <div class="w-full">
+                      <label class="block text-xs font-semibold mb-1 text-on-surface-variant uppercase tracking-wider">Full Name *</label>
+                      <input type="text" id="page-fullName" class="w-full px-4 py-2 mb-4 bg-surface-container-lowest border border-outline-variant rounded-lg text-sm text-on-surface focus:outline-none focus:border-secondary transition-colors" required>
+                      
+                      <label class="block text-xs font-semibold mb-1 text-on-surface-variant uppercase tracking-wider">Job Title *</label>
+                      <input type="text" id="page-jobTitle" class="w-full px-4 py-2 mb-4 bg-surface-container-lowest border border-outline-variant rounded-lg text-sm text-on-surface focus:outline-none focus:border-secondary transition-colors" required>
+
+                      <label class="block text-xs font-semibold mb-1 text-on-surface-variant uppercase tracking-wider">Location</label>
+                      <input type="text" id="page-location" placeholder="City, State" class="w-full px-4 py-2 mb-4 bg-surface-container-lowest border border-outline-variant rounded-lg text-sm text-on-surface focus:outline-none focus:border-secondary transition-colors">
+
+                      <label class="block text-xs font-semibold mb-1 text-on-surface-variant uppercase tracking-wider">Bio / Summary</label>
+                      <textarea id="page-bio" rows="4" placeholder="Tell us about yourself..." class="w-full px-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg text-sm text-on-surface focus:outline-none focus:border-secondary transition-colors resize-none"></textarea>
+                  </div>
+              </div>
+          </div>
+
+          <!-- RIGHT COLUMN: Details & Resume -->
+          <div class="lg:col-span-8 flex flex-col gap-6">
+              <div class="bg-surface-container-lowest rounded-2xl p-8 shadow-sm border border-outline-variant/30">
+                  
+                  <!-- Resume Parsing Box -->
+                  <div class="mb-8 p-5 bg-secondary-container/20 border border-secondary/20 rounded-xl">
+                      <div class="flex items-start justify-between">
+                          <div>
+                              <h3 class="text-sm font-semibold text-secondary-fixed-dim flex items-center gap-2 mb-1">
+                                  <span class="material-symbols-outlined text-[18px]">auto_awesome</span> Smart Resume Upload
+                              </h3>
+                              <p class="text-xs text-on-surface-variant mb-4">Upload your resume and we will auto-fill your details below!</p>
+                          </div>
+                      </div>
+                      <div class="flex flex-col sm:flex-row gap-3">
+                          <input type="file" id="page-resume-file" accept=".pdf,.doc,.docx" class="block w-full text-sm text-on-surface-variant file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-surface-container file:text-on-surface hover:file:bg-surface-container-high cursor-pointer border border-outline-variant rounded-lg p-1 bg-surface-container-lowest transition-colors">
+                          <button id="page-parse-btn" class="px-5 py-2 whitespace-nowrap bg-secondary hover:bg-secondary-fixed text-on-secondary rounded-lg text-sm font-semibold flex items-center justify-center gap-2 transition-all shadow-sm">
+                              Parse Resume
+                          </button>
+                      </div>
+                      <p id="page-parse-status" class="mt-3 text-xs font-semibold hidden"></p>
+                  </div>
+
+                  <h3 class="font-headline-sm text-lg text-primary border-b border-outline-variant/50 pb-2 mb-5">Contact & Links</h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+                      <div>
+                          <label class="block text-xs font-semibold mb-1 text-on-surface-variant uppercase tracking-wider">Email <span class="font-normal">(read-only)</span></label>
+                          <input type="email" id="page-email" class="w-full px-4 py-2.5 bg-surface-container border border-outline-variant rounded-lg text-sm text-on-surface-variant cursor-not-allowed" readonly>
+                      </div>
+                      <div>
+                          <label class="block text-xs font-semibold mb-1 text-on-surface-variant uppercase tracking-wider">Phone *</label>
+                          <input type="text" id="page-phone" class="w-full px-4 py-2.5 bg-surface-container-lowest border border-outline-variant rounded-lg text-sm text-on-surface focus:outline-none focus:border-secondary transition-colors" required>
+                      </div>
+                      <div>
+                          <label class="block text-xs font-semibold mb-1 text-on-surface-variant uppercase tracking-wider">LinkedIn URL</label>
+                          <input type="url" id="page-linkedin" placeholder="https://linkedin.com/in/username" class="w-full px-4 py-2.5 bg-surface-container-lowest border border-outline-variant rounded-lg text-sm text-on-surface focus:outline-none focus:border-secondary transition-colors">
+                      </div>
+                      <div>
+                          <label class="block text-xs font-semibold mb-1 text-on-surface-variant uppercase tracking-wider">Portfolio / GitHub</label>
+                          <input type="url" id="page-portfolio" placeholder="https://github.com/username" class="w-full px-4 py-2.5 bg-surface-container-lowest border border-outline-variant rounded-lg text-sm text-on-surface focus:outline-none focus:border-secondary transition-colors">
+                      </div>
+                  </div>
+
+                  <h3 class="font-headline-sm text-lg text-primary border-b border-outline-variant/50 pb-2 mb-5">Professional Details</h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+                      <div class="md:col-span-2">
+                          <label class="block text-xs font-semibold mb-1 text-on-surface-variant uppercase tracking-wider">Skills (comma-separated) *</label>
+                          <input type="text" id="page-skills" class="w-full px-4 py-2.5 bg-surface-container-lowest border border-outline-variant rounded-lg text-sm text-on-surface focus:outline-none focus:border-secondary transition-colors" placeholder="e.g. Python, React, AWS" required>
+                      </div>
+                      <div>
+                          <label class="block text-xs font-semibold mb-1 text-on-surface-variant uppercase tracking-wider">Experience Level *</label>
+                          <select id="page-exp" class="w-full px-4 py-2.5 bg-surface-container-lowest border border-outline-variant rounded-lg text-sm text-on-surface focus:outline-none focus:border-secondary transition-colors appearance-none" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2224%22 height=%2224%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2342474d%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><polyline points=%226 9 12 15 18 9%22></polyline></svg>'); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1.2rem;">
+                              <option value="Junior">Junior (0-2 years)</option>
+                              <option value="Mid">Mid (2-5 years)</option>
+                              <option value="Senior">Senior (5+ years)</option>
+                              <option value="Lead">Lead / Manager</option>
+                          </select>
+                      </div>
+                  </div>
+
+                  <!-- Submit Area -->
+                  <div class="flex items-center gap-4 pt-4 border-t border-outline-variant/50">
+                      <button id="page-save-btn" class="px-8 py-3 bg-primary hover:bg-primary-container text-on-primary hover:text-on-primary-container rounded-lg font-semibold text-sm transition-colors flex items-center justify-center gap-2 shadow-sm min-w-[200px]">
+                          <span class="material-symbols-outlined text-[20px]">save</span> Save Profile
+                      </button>
+                      <p id="page-save-status" class="text-sm font-medium hidden"></p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</main>
+</div>
+
+<script src="candidate_portal.js"></script>
+<script>
+    // Avatar Preview logic
+    function previewAvatar(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('avatar-preview').innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover">`;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Fetch current user from local storage
+        let profile = null;
+        try { profile = JSON.parse(localStorage.getItem('currentUserProfile') || 'null'); } catch(e){}
+        if(!profile) return;
+
+        // Populate fields
+        document.getElementById('page-fullName').value = profile.fullName || '';
+        document.getElementById('page-email').value = profile.email || '';
+        document.getElementById('page-phone').value = profile.phone || '';
+        document.getElementById('page-jobTitle').value = profile.jobTitle || '';
+        document.getElementById('page-location').value = profile.location || '';
+        document.getElementById('page-bio').value = profile.bio || '';
+        document.getElementById('page-linkedin').value = profile.linkedinUrl || '';
+        document.getElementById('page-portfolio').value = profile.portfolioUrl || '';
+        document.getElementById('page-skills').value = Array.isArray(profile.skills) ? profile.skills.join(', ') : (profile.skills || '');
+        
+        if (profile.profilePic) {
+            document.getElementById('avatar-preview').innerHTML = `<img src="${profile.profilePic}" class="w-full h-full object-cover">`;
+        } else {
+            document.getElementById('avatar-preview').textContent = (profile.fullName || 'C').substring(0, 2).toUpperCase();
+        }
+
+        const sel = document.getElementById('page-exp');
+        for (let i = 0; i < sel.options.length; i++) {
+            if (sel.options[i].value.toLowerCase() === (profile.experienceLevel || '').toLowerCase() || 
+                sel.options[i].value.toLowerCase().startsWith((profile.experienceLevel || '').toLowerCase())) {
+                sel.selectedIndex = i; break;
+            }
+        }
+
+        // Parse button logic
+        document.getElementById('page-parse-btn').addEventListener('click', async () => {
+            const file = document.getElementById('page-resume-file').files[0];
+            const btn = document.getElementById('page-parse-btn');
+            const status = document.getElementById('page-parse-status');
+            
+            if (!file) {
+                status.style.display = 'block';
+                status.textContent = '❌ Please select a resume file first.';
+                status.style.color = '#ba1a1a';
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[18px]">sync</span> Parsing...';
+            status.style.display = 'block';
+            status.style.color = '#555';
+            status.textContent = 'Extracting data...';
+            
+            try {
+                const fd = new FormData();
+                fd.append('resume', file);
+                const res = await fetch('/api/parse-resume-only', { method: 'POST', body: fd });
+                if (!res.ok) throw new Error(await res.text());
+                const data = await res.json();
+                
+                if (data.fullName) document.getElementById('page-fullName').value = data.fullName;
+                if (data.phone) document.getElementById('page-phone').value = data.phone;
+                if (data.jobTitle) document.getElementById('page-jobTitle').value = data.jobTitle;
+                if (data.skills) document.getElementById('page-skills').value = Array.isArray(data.skills) ? data.skills.join(', ') : data.skills;
+                if (data.experienceLevel) {
+                    for (let i = 0; i < sel.options.length; i++) {
+                        if (sel.options[i].value.toLowerCase().startsWith(data.experienceLevel.toLowerCase())) {
+                            sel.selectedIndex = i; break;
+                        }
+                    }
+                }
+                status.textContent = '✅ Success! Fields auto-filled from resume.';
+                status.style.color = '#006a68'; // Secondary color
+            } catch (err) {
+                status.textContent = '❌ Error parsing resume: ' + err.message;
+                status.style.color = '#ba1a1a';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Parse Resume';
+            }
+        });
+
+        // Save button logic
+        document.getElementById('page-save-btn').addEventListener('click', async () => {
+            const btn = document.getElementById('page-save-btn');
+            const status = document.getElementById('page-save-status');
+            const resumeFile = document.getElementById('page-resume-file').files[0];
+            const profilePicFile = document.getElementById('page-profile-pic').files[0];
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[20px]">sync</span> Saving...';
+            status.style.display = 'block';
+            status.style.color = '#555';
+            status.textContent = 'Saving your profile...';
+            
+            try {
+                let res;
+                // If there's a file (resume or pic), use FormData
+                if (resumeFile || profilePicFile) {
+                    const fd = new FormData();
+                    if (resumeFile) fd.append('resume', resumeFile);
+                    if (profilePicFile) fd.append('profilePic', profilePicFile);
+                    fd.append('fullName', document.getElementById('page-fullName').value);
+                    fd.append('email', document.getElementById('page-email').value);
+                    fd.append('phone', document.getElementById('page-phone').value);
+                    fd.append('jobTitle', document.getElementById('page-jobTitle').value);
+                    fd.append('location', document.getElementById('page-location').value);
+                    fd.append('bio', document.getElementById('page-bio').value);
+                    fd.append('linkedinUrl', document.getElementById('page-linkedin').value);
+                    fd.append('portfolioUrl', document.getElementById('page-portfolio').value);
+                    fd.append('experienceLevel', document.getElementById('page-exp').value.split(' ')[0]); // Store just "Junior", "Mid", etc
+                    fd.append('skills', document.getElementById('page-skills').value);
+                    fd.append('isUpdate', 'true');
+                    res = await fetch('/api/profile', { method: 'POST', body: fd });
+                } else {
+                    res = await fetch('/api/update-profile', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            fullName: document.getElementById('page-fullName').value,
+                            email: document.getElementById('page-email').value,
+                            phone: document.getElementById('page-phone').value,
+                            jobTitle: document.getElementById('page-jobTitle').value,
+                            location: document.getElementById('page-location').value,
+                            bio: document.getElementById('page-bio').value,
+                            linkedinUrl: document.getElementById('page-linkedin').value,
+                            portfolioUrl: document.getElementById('page-portfolio').value,
+                            experienceLevel: document.getElementById('page-exp').value.split(' ')[0],
+                            skills: document.getElementById('page-skills').value
+                        })
+                    });
+                }
+                
+                if (!res.ok) throw new Error(await res.text());
+                const data = await res.json();
+                
+                // Update local storage and force header refresh
+                localStorage.setItem('currentUserProfile', JSON.stringify(data.profile));
+                
+                status.textContent = '✅ Profile successfully updated!';
+                status.style.color = '#006a68'; // Secondary color
+                
+                // Refresh header immediately
+                window.location.reload();
+            } catch (err) {
+                status.textContent = '❌ Error saving profile: ' + err.message;
+                status.style.color = '#ba1a1a';
+                btn.disabled = false;
+                btn.innerHTML = '<span class="material-symbols-outlined text-[20px]">save</span> Save Profile';
+            }
+        });
+    });
+</script>
+</body></html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="auth_guard.js"></script>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <style>
+    @layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": { "surface-dim": "#cfdce5", "surface-container-low": "#e8f6ff", "error-container": "#ffdad6", "surface-variant": "#d7e4ee", "on-primary-container": "#84a5c4", "secondary-fixed-dim": "#5ed9d6", "on-background": "#111d24", "background": "#f4faff", "surface-bright": "#f4faff", "primary": "#00253c", "primary-fixed-dim": "#a9caea", "outline": "#73777e", "on-secondary-fixed-variant": "#00504f", "on-tertiary": "#ffffff", "secondary-fixed": "#7df5f3", "on-secondary": "#ffffff", "surface-tint": "#41627d", "secondary-container": "#7df5f3", "on-tertiary-fixed-variant": "#004f51", "primary-container": "#173b55", "error": "#ba1a1a", "on-primary": "#ffffff", "inverse-primary": "#a9caea", "inverse-surface": "#263239", "primary-fixed": "#cce5ff", "on-tertiary-container": "#51afb2", "on-tertiary-fixed": "#002021", "on-surface-variant": "#42474d", "surface": "#f4faff", "on-error-container": "#93000a", "on-error": "#ffffff", "inverse-on-surface": "#e5f3fc", "on-secondary-container": "#00706f", "tertiary": "#002729", "surface-container": "#e2f0f9", "surface-container-highest": "#d7e4ee", "on-secondary-fixed": "#00201f", "surface-container-high": "#ddeaf3", "tertiary-container": "#003f41", "on-primary-fixed": "#001e31", "on-surface": "#111d24", "outline-variant": "#c2c7ce", "surface-container-lowest": "#ffffff", "on-primary-fixed-variant": "#284a64", "tertiary-fixed-dim": "#79d5d8", "secondary": "#006a68", "tertiary-fixed": "#95f2f5" },
+          "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+          "spacing": { "sidebar_width": "260px", "margin_page": "40px", "stack_md": "16px", "header_height": "72px", "gutter": "24px", "stack_sm": "8px", "stack_lg": "32px" },
+          "fontFamily": { "headline-md": ["Poppins"], "headline-lg": ["Poppins"], "headline-xl": ["Poppins"], "body-lg": ["Inter"], "body-sm": ["Inter"], "label-sm": ["Inter"], "headline-sm": ["Poppins"], "body-md": ["Inter"], "label-md": ["Inter"] },
+          "fontSize": { "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-xl": ["40px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "500" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }] }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-surface font-body-md text-on-surface">
+  <aside class="fixed left-0 top-0 h-full w-[240px] bg-surface-container-lowest border-r border-outline-variant z-50 flex flex-col overflow-y-auto">
+    <div class="h-[72px] flex items-center px-6 mb-stack-md">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-sm">RE</div>
+        <span class="font-bold text-lg text-primary">Recruit<span class="text-secondary">Ease</span></span>
+      </div>
+    </div>
+    <nav class="flex-1 px-4 space-y-6 pb-8">
+      <section>
+        <p class="px-4 mb-2 text-label-md text-on-surface-variant uppercase tracking-wider">RECRUITER PORTAL</p>
+        <div class="space-y-1">
+          <a href="recruiter_workspace.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">grid_view</span>Workspace</a>
+          <a href="job_management.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">work</span>Job Management</a>
+          <a href="add_job.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">post_add</span>Post New Job</a>
+          <a href="intelligence.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">insights</span>Intelligence</a>
+          <a href="workflow_ui.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">account_tree</span>Hiring Workflow</a>
+        </div>
+      </section>
+    </nav>
+  </aside>
+  <div class="pl-[240px]">
+    <header class="fixed top-0 left-[240px] right-0 h-[64px] bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant z-40 flex items-center px-8 justify-between">
+      <div class="flex-1 flex items-center gap-8">
+        <div class="relative w-full max-w-md">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+          <input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-transparent focus:border-secondary rounded-lg text-body-sm outline-none transition-all" placeholder="Search candidates, jobs, interviews..." type="text"/>
+        </div>
+      </div>
+      <div class="flex items-center gap-6">
+        <button class="relative p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+        </button>
+        <div class="flex items-center gap-3 pl-4 border-l border-outline-variant">
+          <div class="text-right">
+            <p class="text-label-md text-on-surface">Alex Morgan</p>
+            <p class="text-label-sm text-on-surface-variant">HR Manager</p>
+          </div>
+          <img alt="Alex Morgan" class="w-10 h-10 rounded-full border border-outline-variant object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLtoBxNwdhyR7o6UBzYFqLcQCDkvWs0LOfafjpdc87Ctvs-4Q-RqDc0lkM2OhEJ7qRtR-nugUigJJbF8nbD0AUqBQ9zSpAl29xbbZl9_NfnP0C_VdF8tQ7tndwx9VsMd9qVsIpm6OJ5cXIHrjR9dEu18u_yirok3sV5CH4O-u4vYdkaWylYiShKowSuZi-P4AaoaVHVICZ6o13hRV4OoW4k2ZPhzXEDk3b7uSGKJ95fmRYhCusdW6l2n7vLf"/>
+        </div>
+      </div>
+    </header>
+    <main class="relative pt-[64px] min-h-screen">
+      <div class="p-margin_page">
+        <div class="flex flex-col w-full relative">
+          <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-secondary-fixed/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none"></div>
+          <div class="mb-stack_lg">
+            <div class="flex items-start justify-between">
+              <div class="flex gap-gutter">
+                <div class="w-24 h-24 rounded-full overflow-hidden shrink-0 border-4 border-surface-container-lowest shadow-sm relative">
+                  <img class="w-full h-full object-cover" data-alt="Professional headshot of a young male software engineer in his 30s with short hair and glasses, wearing a smart casual dark blue shirt, smiling subtly. Taken in a modern San Francisco office environment with blurred glass and steel background, natural soft lighting. Corporate modern photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKlVZYB5_onWggV9M4-nOBVsXc6JnaAuoNUwx-5E2pU-lZOVyuKmwrFU15KJL0OcyGDGp9du3I0uQfQXl0R2Fz7Cqh6pP7Z555zIdJlUc9UdszuPrqaTacvaRFZ9zG1O88TGQyzOhIkLS5oVbxaS_tdAXxedDvoKjB41q9GuDkeYBocpY2kBySGuHNvsvoa28ZSEeJWrYNj0bifiqXoKEh60cEuS3Z08fl6-4pL4LlL1sJ5wo7A9JrRw"/>
+                  <div class="absolute bottom-0 right-0 w-6 h-6 bg-secondary-fixed rounded-full border-2 border-surface-container-lowest flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[14px] text-on-secondary-fixed">verified</span>
+                  </div>
+                </div>
+                <div class="flex flex-col justify-center">
+                  <div class="flex items-center gap-3 mb-1">
+                    <h1 id="cand-name" class="font-headline-lg text-headline-lg text-on-surface">Alex Johnson</h1>
+                    <span class="bg-primary-container text-on-primary-container text-label-sm font-label-sm px-2.5 py-1 rounded-full flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[14px]">psychology</span> AI Verified
+                    </span>
+                  </div>
+                  <p id="cand-title" class="font-body-lg text-body-lg text-on-surface-variant mb-2">Senior Software Engineer</p>
+                  <div class="flex items-center gap-4 text-on-surface-variant font-body-sm text-body-sm hidden" id="cand-meta-block">
+                  </div>
+                </div>
+              </div>
+              <div class="flex gap-3">
+                <button id="btn-reject" class="bg-surface-container-lowest border border-outline-variant text-primary px-6 py-2.5 rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors flex items-center gap-2 shadow-sm">
+                  <span class="material-symbols-outlined text-[18px]">close</span> Reject
+                </button>
+                <button id="btn-schedule" class="bg-secondary-fixed text-on-secondary-fixed px-6 py-2.5 rounded-lg font-label-md text-label-md hover:bg-secondary-fixed-dim transition-colors flex items-center gap-2 shadow-sm">
+                  <span class="material-symbols-outlined text-[18px]">schedule</span> Schedule
+                </button>
+                <button id="btn-shortlist" class="bg-primary text-on-primary px-6 py-2.5 rounded-lg font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors flex items-center gap-2 shadow-sm">
+                  <span class="material-symbols-outlined text-[18px]">bookmark_add</span> Shortlist
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="flex gap-8 border-b border-outline-variant mb-stack_lg">
+            <button class="tab-btn pb-3 border-b-2 border-primary text-primary font-label-md text-label-md px-1" data-tab="tab-overview">Overview</button>
+            <button class="tab-btn pb-3 border-b-2 border-transparent text-on-surface-variant font-label-md text-label-md px-1 hover:text-on-surface" data-tab="tab-resume">Resume</button>
+            <button class="tab-btn pb-3 border-b-2 border-transparent text-on-surface-variant font-label-md text-label-md px-1 hover:text-on-surface" data-tab="tab-skills">Skills Assessment</button>
+            <button class="tab-btn pb-3 border-b-2 border-transparent text-on-surface-variant font-label-md text-label-md px-1 hover:text-on-surface" data-tab="tab-behavioral">Behavioral</button>
+            <button class="tab-btn pb-3 border-b-2 border-transparent text-on-surface-variant font-label-md text-label-md px-1 hover:text-on-surface" data-tab="tab-interview">AI Interview</button>
+          </div>
+          
+          <div id="tab-overview" class="tab-content">
+            <div class="grid grid-cols-12 gap-gutter">
+              <div class="col-span-8 flex flex-col gap-gutter">
+                <div class="bg-surface-container-lowest rounded-2xl p-8 shadow-sm flex gap-8">
+                  <div class="flex-1">
+                    <h2 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
+                      <span class="material-symbols-outlined text-tertiary-fixed-dim">analytics</span>
+                      AI Recruitment Score
+                    </h2>
+                    <div class="grid grid-cols-2 gap-x-6 gap-y-4">
+                      <div class="flex items-center justify-between group">
+                        <span class="font-body-sm text-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Resume Match</span>
+                        <div class="flex items-center gap-3">
+                          <div class="w-32 h-1.5 bg-surface-container rounded-full overflow-hidden">
+                            <div class="h-full bg-primary w-[94%] rounded-full"></div>
+                          </div>
+                          <span class="font-label-md text-label-md text-primary w-8 text-right">94%</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="shrink-0 w-48 flex flex-col items-center justify-center relative">
+                    <svg class="w-40 h-40 transform -rotate-90" viewBox="0 0 100 100">
+                      <circle class="text-surface-container" cx="50" cy="50" fill="none" r="40" stroke="currentColor" stroke-width="8"></circle>
+                      <circle class="text-secondary-fixed" id="circle-overall" cx="50" cy="50" fill="none" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="22.6" stroke-linecap="round" stroke-width="8"></circle>
+                    </svg>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                      <span id="cand-big-score" class="font-headline-xl text-headline-xl text-on-surface leading-none">91</span>
+                      <span id="cand-match-text" class="font-label-sm text-label-sm text-on-surface-variant mt-1">Excellent Match</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-surface-container-low rounded-2xl p-8 shadow-sm relative overflow-hidden mt-gutter">
+                  <div class="relative z-10">
+                    <h3 class="font-headline-sm text-headline-sm text-on-surface mb-4">Candidate Bio</h3>
+                    <p id="cand-bio" class="font-body-lg text-body-lg text-on-surface leading-relaxed text-on-surface-variant">
+                      Loading bio...
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-4 flex flex-col gap-gutter">
+                <div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+                  <h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-6">Skills Analysis</h3>
+                  <div class="mb-6" id="cand-skills-wrapper">
+                    <p class="font-body-sm text-body-sm text-on-surface font-medium mb-3">Matched Requirements</p>
+                    <div class="flex flex-wrap gap-2" id="cand-skills-container">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div id="tab-resume" class="tab-content hidden">
+            <div class="bg-surface-container-lowest rounded-2xl p-8 shadow-sm text-center py-20" id="resume-content-area">
+              <span class="material-symbols-outlined text-4xl text-on-surface-variant mb-4">description</span>
+              <h3 class="text-headline-sm text-on-surface mb-2">Resume Document</h3>
+              <p class="text-body-md text-on-surface-variant">The candidate's resume is not currently available for viewing in the dashboard.</p>
+            </div>
+          </div>
+          <div id="tab-skills" class="tab-content hidden">
+            <div class="bg-surface-container-lowest rounded-2xl p-8 shadow-sm text-center py-20">
+              <span class="material-symbols-outlined text-4xl text-on-surface-variant mb-4">code</span>
+              <h3 class="text-headline-sm text-on-surface mb-2">Skills Assessment</h3>
+              <p class="text-body-md text-on-surface-variant">The technical skills assessment results are pending or not required.</p>
+            </div>
+          </div>
+          <div id="tab-behavioral" class="tab-content hidden">
+            <div class="bg-surface-container-lowest rounded-2xl p-8 shadow-sm text-center py-20">
+              <span class="material-symbols-outlined text-4xl text-on-surface-variant mb-4">psychology</span>
+              <h3 class="text-headline-sm text-on-surface mb-2">Behavioral Evaluation</h3>
+              <p class="text-body-md text-on-surface-variant">No behavioral evaluation records found for this candidate.</p>
+            </div>
+          </div>
+          <div id="tab-interview" class="tab-content hidden">
+            <div class="bg-surface-container-lowest rounded-2xl p-8 shadow-sm text-center py-20">
+              <span class="material-symbols-outlined text-4xl text-on-surface-variant mb-4">videocam</span>
+              <h3 class="text-headline-sm text-on-surface mb-2">AI Interview</h3>
+              <p class="text-body-md text-on-surface-variant">The candidate has not completed an AI interview yet.</p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      const tabContents = document.querySelectorAll('.tab-content');
+
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetTab = btn.getAttribute('data-tab');
+          
+          // Hide all contents
+          tabContents.forEach(content => {
+            content.classList.add('hidden');
+          });
+          
+          // Remove active classes from all buttons
+          tabBtns.forEach(b => {
+            b.classList.remove('border-primary', 'text-primary');
+            b.classList.add('border-transparent', 'text-on-surface-variant');
+          });
+
+          // Show selected content
+          const targetEl = document.getElementById(targetTab);
+          if (targetEl) targetEl.classList.remove('hidden');
+
+          // Add active classes to clicked button
+          btn.classList.remove('border-transparent', 'text-on-surface-variant');
+          btn.classList.add('border-primary', 'text-primary');
+        });
+      });
+    });
+  </script>
+  <script src="hr_portal.js?v=4"></script>
+</body>
+</html>

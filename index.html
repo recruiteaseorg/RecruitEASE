@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RecruitEase — AI-Powered Recruitment Platform</title>
+  <meta name="description" content="RecruitEase: AI-driven hiring for candidates and recruiters. Sign in to your portal."/>
+  <!-- Supabase JS (for OAuth) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: {
+          "surface":"#f4faff","surface-dim":"#cfdce5","surface-container-low":"#e8f6ff",
+          "surface-container-lowest":"#ffffff","surface-container":"#e2f0f9",
+          "primary":"#00253c","primary-container":"#173b55","on-primary":"#ffffff",
+          "secondary":"#006a68","secondary-container":"#7df5f3","on-secondary":"#ffffff",
+          "on-secondary-container":"#00706f","secondary-fixed":"#7df5f3",
+          "on-surface":"#111d24","on-surface-variant":"#42474d",
+          "outline-variant":"#c2c7ce","outline":"#73777e",
+          "error":"#ba1a1a","error-container":"#ffdad6","on-error-container":"#93000a"
+        },
+        fontFamily: { sans:["Inter","sans-serif"], headline:["Poppins","sans-serif"] }
+      }}
+    };
+  </script>
+  <style>
+    body{margin:0;padding:0;}
+    .tab-btn.active { background:#00253c; color:#fff; }
+    .tab-btn { transition: all .2s; }
+    .form-panel { display:none; }
+    .form-panel.active { display:block; }
+    input:focus { outline:2px solid #006a68; outline-offset:2px; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none} }
+    .fade-up { animation: fadeUp .4s ease both; }
+    .google-btn {
+      width:100%; display:flex; align-items:center; justify-content:center; gap:10px;
+      padding:11px 16px; border-radius:12px; border:1.5px solid #c2c7ce;
+      background:#fff; font-size:14px; font-weight:600; color:#0f172a;
+      cursor:pointer; transition:all .2s; font-family:inherit;
+    }
+    .google-btn:hover { background:#f1f5f9; border-color:#94a3b8; box-shadow:0 2px 8px rgba(0,0,0,0.07); }
+    .google-btn svg { width:18px; height:18px; flex-shrink:0; }
+    .or-divider {
+      display:flex; align-items:center; gap:10px;
+      color:#94a3b8; font-size:12px; margin:14px 0;
+    }
+    .or-divider::before,.or-divider::after { content:''; flex:1; height:1px; background:#e2e8f0; }
+  </style>
+</head>
+<body class="bg-surface font-sans text-on-surface min-h-screen flex flex-col">
+
+  <!-- ─── TOPBAR ─── -->
+  <header class="h-[64px] bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant/40 fixed top-0 left-0 right-0 z-50 px-8 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center font-headline font-bold text-sm shadow-sm">RE</div>
+      <span class="font-headline font-bold text-xl text-primary">Recruit<span class="text-secondary">Ease</span></span>
+    </div>
+    <span class="text-label text-sm text-on-surface-variant">AI-Powered Recruitment Platform</span>
+  </header>
+
+  <!-- ─── MAIN ─── -->
+  <main class="flex-grow pt-[64px] flex min-h-screen">
+
+    <!-- LEFT: Branding panel -->
+    <div class="hidden lg:flex lg:w-1/2 bg-primary relative overflow-hidden flex-col justify-between p-14">
+      <!-- dot grid -->
+      <div class="absolute inset-0 opacity-[0.06]" style="background-image:radial-gradient(circle at 2px 2px,white 1px,transparent 0);background-size:28px 28px;"></div>
+      <!-- glow orbs -->
+      <div class="absolute top-1/3 -left-20 w-72 h-72 rounded-full bg-secondary/20 blur-3xl"></div>
+      <div class="absolute bottom-1/4 right-0 w-64 h-64 rounded-full bg-secondary-fixed/10 blur-3xl"></div>
+
+      <div class="relative z-10">
+        <div class="flex items-center gap-3 mb-16">
+          <div class="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center font-headline font-bold text-white">RE</div>
+          <span class="font-headline font-bold text-2xl text-white">RecruitEase</span>
+        </div>
+
+        <h1 class="font-headline text-[42px] leading-tight font-bold text-white mb-6">
+          Hire Smarter.<br/>Grow Faster.<br/><span class="text-secondary-fixed">With AI.</span>
+        </h1>
+        <p class="text-lg text-white/70 leading-relaxed max-w-md mb-10">
+          The end-to-end AI recruitment platform — from candidate screening and behavioral assessments to smart hiring decisions.
+        </p>
+
+        <!-- Feature pills -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-3 bg-white/10 border border-white/15 rounded-xl px-4 py-3">
+            <span class="material-symbols-outlined text-secondary-fixed text-[20px]">auto_awesome</span>
+            <span class="text-white/90 text-sm font-medium">Groq AI-powered mock interviews & behavioral tests</span>
+          </div>
+          <div class="flex items-center gap-3 bg-white/10 border border-white/15 rounded-xl px-4 py-3">
+            <span class="material-symbols-outlined text-secondary-fixed text-[20px]">document_scanner</span>
+            <span class="text-white/90 text-sm font-medium">Instant ATS resume parsing & scoring</span>
+          </div>
+          <div class="flex items-center gap-3 bg-white/10 border border-white/15 rounded-xl px-4 py-3">
+            <span class="material-symbols-outlined text-secondary-fixed text-[20px]">verified_user</span>
+            <span class="text-white/90 text-sm font-medium">NOVA proctored assessments with integrity scoring</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="relative z-10 text-white/40 text-sm">© 2026 RecruitEase. All rights reserved.</p>
+    </div>
+
+    <!-- RIGHT: Login / Signup panel -->
+    <div class="w-full lg:w-1/2 flex items-center justify-center p-8 bg-surface">
+      <div class="w-full max-w-md fade-up">
+
+        <!-- Who are you? role selector -->
+        <p class="text-sm font-medium text-on-surface-variant mb-3 text-center">I am a…</p>
+        <div class="grid grid-cols-2 gap-3 mb-8" id="role-selector">
+          <button onclick="selectRole('candidate')" id="role-candidate"
+            class="role-btn flex flex-col items-center gap-2 py-5 rounded-2xl border-2 border-outline-variant bg-surface-container-lowest hover:border-secondary hover:bg-surface-container-low transition-all group">
+            <span class="material-symbols-outlined text-[32px] text-on-surface-variant group-hover:text-secondary transition-colors">person_search</span>
+            <span class="font-semibold text-sm text-on-surface">Job Seeker</span>
+            <span class="text-xs text-on-surface-variant">Find &amp; apply for roles</span>
+          </button>
+          <button onclick="selectRole('hr')" id="role-hr"
+            class="role-btn flex flex-col items-center gap-2 py-5 rounded-2xl border-2 border-outline-variant bg-surface-container-lowest hover:border-primary hover:bg-surface-container-low transition-all group">
+            <span class="material-symbols-outlined text-[32px] text-on-surface-variant group-hover:text-primary transition-colors">business_center</span>
+            <span class="font-semibold text-sm text-on-surface">HR / Recruiter</span>
+            <span class="text-xs text-on-surface-variant">Manage hiring pipeline</span>
+          </button>
+        </div>
+
+        <!-- Login / Signup tabs -->
+        <div id="auth-panel" class="hidden">
+          <div id="portal-label" class="flex items-center gap-2 mb-6">
+            <div id="portal-icon" class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+              <span class="material-symbols-outlined text-white text-[18px]">person</span>
+            </div>
+            <div>
+              <h2 class="font-headline font-bold text-xl text-on-surface" id="portal-title">Candidate Portal</h2>
+              <p class="text-xs text-on-surface-variant" id="portal-subtitle">Sign in to access your dashboard</p>
+            </div>
+          </div>
+
+          <!-- Tabs -->
+          <div class="flex gap-1 p-1 bg-surface-container rounded-xl mb-6">
+            <button id="tab-login" onclick="showTab('login')"
+              class="tab-btn active flex-1 py-2 rounded-lg font-semibold text-sm transition-all">Sign In</button>
+            <button id="tab-signup" onclick="showTab('signup')"
+              class="tab-btn flex-1 py-2 rounded-lg font-semibold text-sm text-on-surface-variant transition-all">Create Account</button>
+          </div>
+
+          <!-- LOGIN form -->
+          <div id="panel-login" class="form-panel active space-y-4">
+            <div>
+              <label class="block text-sm font-semibold text-on-surface mb-1.5">Email Address</label>
+              <input id="login-email" type="email" placeholder="you@example.com"
+                class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-lowest text-sm focus:border-secondary transition-all"/>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-on-surface mb-1.5">Password</label>
+              <input id="login-password" type="password" placeholder="••••••••"
+                class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-lowest text-sm focus:border-secondary transition-all"/>
+            </div>
+            <p id="login-error" class="hidden text-sm text-error bg-error-container/50 rounded-lg px-3 py-2"></p>
+            <button id="login-btn" onclick="handleLogin()"
+              class="w-full py-3.5 rounded-xl font-semibold text-sm bg-primary text-on-primary hover:bg-primary/90 transition-all shadow-sm flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined text-[18px]">login</span>
+              Sign In
+            </button>
+            <!-- Divider -->
+            <div class="or-divider">or continue with</div>
+            <!-- Google Sign-In -->
+            <button class="google-btn" id="google-login-btn" onclick="triggerGoogleSignIn()">
+              <svg viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34.1 6.8 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34.1 6.8 29.3 4 24 4 16.3 4 9.7 8.4 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-1.9 13.5-5l-6.2-5.2C29.4 35.5 26.8 36.5 24 36.5c-5.2 0-9.7-3.3-11.3-8H6.4C9.7 39.2 16.3 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.8l6.2 5.2C41 35.8 44 30.3 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+              Sign in with Google
+            </button>
+            <p class="text-center text-xs text-on-surface-variant mt-2">
+              Don't have an account?
+              <button onclick="showTab('signup')" class="text-secondary font-semibold hover:underline">Create one</button>
+            </p>
+          </div>
+
+          <!-- SIGNUP form -->
+          <div id="panel-signup" class="form-panel space-y-4">
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-sm font-semibold text-on-surface mb-1.5">Full Name *</label>
+                <input id="reg-name" type="text" placeholder="Your full name"
+                  class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-lowest text-sm"/>
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-on-surface mb-1.5">Phone</label>
+                <input id="reg-phone" type="tel" placeholder="+1 (555) 000-0000"
+                  class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-lowest text-sm"/>
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-on-surface mb-1.5">Email Address *</label>
+              <input id="reg-email" type="email" placeholder="you@example.com"
+                class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-lowest text-sm"/>
+            </div>
+            <div id="candidate-fields">
+              <label class="block text-sm font-semibold text-on-surface mb-1.5">Job Title / Role</label>
+              <input id="reg-jobtitle" type="text" placeholder="e.g. Software Engineer"
+                class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-lowest text-sm"/>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-on-surface mb-1.5">Password *</label>
+              <input id="reg-password" type="password" placeholder="At least 6 characters"
+                class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-lowest text-sm"/>
+            </div>
+            <p id="reg-error" class="hidden text-sm text-error bg-error-container/50 rounded-lg px-3 py-2"></p>
+            <button id="reg-btn" onclick="handleRegister()"
+              class="w-full py-3.5 rounded-xl font-semibold text-sm bg-primary text-on-primary hover:bg-primary/90 transition-all shadow-sm flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined text-[18px]">person_add</span>
+              Create Account
+            </button>
+            <!-- Divider -->
+            <div class="or-divider">or sign up with</div>
+            <!-- Google Sign-Up -->
+            <button class="google-btn" id="google-signup-btn" onclick="triggerGoogleSignIn()">
+              <svg viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34.1 6.8 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34.1 6.8 29.3 4 24 4 16.3 4 9.7 8.4 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-1.9 13.5-5l-6.2-5.2C29.4 35.5 26.8 36.5 24 36.5c-5.2 0-9.7-3.3-11.3-8H6.4C9.7 39.2 16.3 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.8l6.2 5.2C41 35.8 44 30.3 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+              Sign up with Google
+            </button>
+            <p class="text-center text-xs text-on-surface-variant">
+              Already have an account?
+              <button onclick="showTab('login')" class="text-secondary font-semibold hover:underline">Sign in</button>
+            </p>
+          </div>
+        </div>
+
+        <!-- Demo shortcut (dev tool) -->
+        <div id="demo-shortcuts" class="hidden mt-6 pt-6 border-t border-outline-variant">
+          <p class="text-center text-xs text-on-surface-variant mb-3">— Quick Demo Access —</p>
+          <div class="grid grid-cols-2 gap-2">
+            <button onclick="demoLogin('candidate')"
+              class="py-2 text-xs font-semibold rounded-lg border border-secondary text-secondary hover:bg-secondary-container transition-colors">
+              Demo: Candidate
+            </button>
+            <button onclick="demoLogin('hr')"
+              class="py-2 text-xs font-semibold rounded-lg border border-primary text-primary hover:bg-surface-container-low transition-colors">
+              Demo: HR Manager
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ═══════════════════════════════════════════════
+       RESUME UPLOAD MODAL (shown after candidate login if no resume)
+  ═══════════════════════════════════════════════ -->
+  <div id="resume-modal" style="
+    display:none; position:fixed; inset:0; z-index:9999;
+    background:rgba(0,0,0,0.55); backdrop-filter:blur(4px);
+    align-items:center; justify-content:center;">
+    <div style="
+      background:#fff; border-radius:20px; padding:40px 36px;
+      width:min(520px,92vw); max-height:90vh; overflow-y:auto;
+      box-shadow:0 24px 60px rgba(0,0,0,0.25); font-family:'Inter',sans-serif;">
+
+      <!-- Header -->
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+        <div style="width:42px;height:42px;border-radius:12px;background:#006a68;display:flex;align-items:center;justify-content:center;">
+          <svg style="width:22px;height:22px;fill:#fff" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
+        </div>
+        <div>
+          <h2 style="margin:0;font-size:20px;font-weight:700;color:#0f172a">Upload Your Resume</h2>
+          <p style="margin:0;font-size:13px;color:#64748b">One-time setup to unlock your full dashboard</p>
+        </div>
+      </div>
+
+      <p style="font-size:14px;color:#475569;margin:16px 0 24px;line-height:1.6">
+        RecruitEase uses your resume for <strong>AI-powered ATS screening</strong>, job matching, and personalised tips.
+        Supported formats: <strong>PDF, DOCX, TXT</strong>.
+      </p>
+
+      <!-- Drop zone -->
+      <div id="resume-dropzone" style="
+        border:2px dashed #006a68; border-radius:14px; padding:32px 24px;
+        text-align:center; cursor:pointer; background:#f0fdfb;
+        transition:background .2s;" onclick="document.getElementById('resume-file-input').click()"
+        ondragover="event.preventDefault();this.style.background='#ccfbf1'"
+        ondragleave="this.style.background='#f0fdfb'"
+        ondrop="handleResumeDrop(event)">
+        <svg style="width:40px;height:40px;fill:#006a68;margin-bottom:10px" viewBox="0 0 24 24"><path d="M19.35 10.04A7.49 7.49 0 0012 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 000 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+        <p style="margin:0;font-size:14px;font-weight:600;color:#006a68">Click to browse or drag & drop</p>
+        <p style="margin:6px 0 0;font-size:12px;color:#94a3b8">PDF, DOCX, TXT — max 10 MB</p>
+      </div>
+      <input type="file" id="resume-file-input" accept=".pdf,.docx,.doc,.txt" style="display:none" onchange="handleResumeFile(this.files[0])">
+
+      <!-- File name display -->
+      <div id="resume-file-display" style="
+        display:none; margin-top:14px; padding:12px 16px;
+        background:#f1f5f9; border-radius:10px; font-size:13px;
+        color:#334155; display:flex; align-items:center; gap:10px;">
+        <svg style="width:18px;height:18px;fill:#006a68;flex-shrink:0" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
+        <span id="resume-file-name" style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
+        <button onclick="clearResumeFile()" style="background:none;border:none;cursor:pointer;color:#94a3b8;font-size:16px;padding:0">✕</button>
+      </div>
+
+      <!-- Upload progress -->
+      <div id="resume-progress-wrap" style="display:none;margin-top:16px">
+        <div style="height:4px;background:#e2e8f0;border-radius:99px;overflow:hidden">
+          <div id="resume-progress-bar" style="height:100%;width:0%;background:#006a68;transition:width .3s"></div>
+        </div>
+        <p id="resume-progress-text" style="margin:8px 0 0;font-size:12px;color:#64748b;text-align:center">Uploading…</p>
+      </div>
+
+      <!-- Error -->
+      <p id="resume-error" style="display:none;margin-top:12px;font-size:13px;color:#dc2626;background:#fef2f2;border-radius:8px;padding:10px 14px"></p>
+
+      <!-- Buttons -->
+      <div style="display:flex;gap:10px;margin-top:24px">
+        <button id="resume-upload-btn" onclick="submitResumeUpload()" style="
+          flex:1;padding:13px;background:#006a68;color:#fff;border:none;
+          border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;
+          font-family:inherit;transition:background .2s"
+          onmouseover="this.style.background='#004f4e'"
+          onmouseout="this.style.background='#006a68'">
+          Upload & Continue
+        </button>
+        <button onclick="skipResumeUpload()" style="
+          padding:13px 20px;background:transparent;color:#64748b;
+          border:1.5px solid #e2e8f0;border-radius:12px;font-size:14px;
+          font-weight:500;cursor:pointer;font-family:inherit;
+          transition:all .2s"
+          onmouseover="this.style.background='#f8fafc'"
+          onmouseout="this.style.background='transparent'">
+          Skip for now
+        </button>
+      </div>
+      <p style="margin:12px 0 0;font-size:11px;color:#94a3b8;text-align:center">You can always upload from your dashboard later</p>
+    </div>
+  </div>
+
+<script>
+// ─── Supabase init ─────────────────────────────────────────────────────────
+const SUPABASE_URL = 'https://ldcfkvvxtpyttvvgkifp.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_HwAwQKtYBC7TtjF_Lay_ow_huzi5H7x';
+const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let selectedRole = null;
+
+function selectRole(role) {
+  selectedRole = role;
+
+  // Update role button styles
+  document.querySelectorAll('.role-btn').forEach(b => {
+    b.classList.remove('border-secondary','border-primary','bg-secondary-container','bg-surface-container-low');
+    b.classList.add('border-outline-variant');
+  });
+
+  const btn = document.getElementById(`role-${role}`);
+  btn.classList.remove('border-outline-variant');
+  btn.classList.add(role === 'candidate' ? 'border-secondary' : 'border-primary', 'bg-surface-container-low');
+
+  // Update portal header
+  const title    = document.getElementById('portal-title');
+  const subtitle = document.getElementById('portal-subtitle');
+  const icon     = document.getElementById('portal-icon');
+
+  if (role === 'candidate') {
+    title.textContent    = 'Candidate Portal';
+    subtitle.textContent = 'Sign in to access your career dashboard';
+    icon.className       = 'w-8 h-8 rounded-lg bg-secondary flex items-center justify-center';
+    icon.innerHTML       = '<span class="material-symbols-outlined text-white text-[18px]">person_search</span>';
+    document.getElementById('candidate-fields').style.display = 'block';
+  } else {
+    title.textContent    = 'HR / Recruiter Portal';
+    subtitle.textContent = 'Sign in to manage your hiring pipeline';
+    icon.className       = 'w-8 h-8 rounded-lg bg-primary flex items-center justify-center';
+    icon.innerHTML       = '<span class="material-symbols-outlined text-white text-[18px]">business_center</span>';
+    document.getElementById('candidate-fields').style.display = 'none';
+  }
+
+  // Show auth panel
+  document.getElementById('auth-panel').classList.remove('hidden');
+  document.getElementById('demo-shortcuts').classList.remove('hidden');
+  showTab('login');
+}
+
+function showTab(tab) {
+  document.getElementById('tab-login').classList.toggle('active',   tab === 'login');
+  document.getElementById('tab-signup').classList.toggle('active',  tab === 'signup');
+  document.getElementById('tab-login').classList.toggle('text-on-surface-variant',  tab !== 'login');
+  document.getElementById('tab-signup').classList.toggle('text-on-surface-variant', tab !== 'signup');
+  document.getElementById('panel-login').classList.toggle('active',  tab === 'login');
+  document.getElementById('panel-signup').classList.toggle('active', tab === 'signup');
+}
+
+function showError(id, msg) {
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.classList.remove('hidden');
+  setTimeout(() => el.classList.add('hidden'), 5000);
+}
+
+let _pendingProfile = null;
+let _selectedResumeFile = null;
+
+function saveAndRedirect(profile) {
+  localStorage.setItem('currentUserProfile', JSON.stringify(profile));
+  localStorage.setItem('currentUserRole', profile.role);
+
+  // HR → straight to dashboard
+  if (profile.role === 'hr') {
+    window.location.href = '/recruiter_workspace.html';
+    return;
+  }
+
+  // Check if there's a pending deep-link redirect
+  const redirect = sessionStorage.getItem('redirectAfterLogin');
+  sessionStorage.removeItem('redirectAfterLogin');
+  if (redirect && !redirect.includes('index.html')) {
+    window.location.href = redirect;
+    return;
+  }
+
+  // Candidate: check if they already have a resume on file
+  fetch('/api/check-resume?email=' + encodeURIComponent(profile.email))
+    .then(r => r.json())
+    .then(data => {
+      if (data.hasResume) {
+        window.location.href = '/dashboard.html';
+      } else {
+        // Show resume upload modal
+        _pendingProfile = profile;
+        showResumeModal();
+      }
+    })
+    .catch(() => {
+      // If check fails, just go to dashboard
+      window.location.href = '/dashboard.html';
+    });
+}
+
+// ─── Resume Modal Functions ───────────────────────────────────────────────────
+function showResumeModal() {
+  const modal = document.getElementById('resume-modal');
+  modal.style.display = 'flex';
+}
+
+function handleResumeFile(file) {
+  if (!file) return;
+  _selectedResumeFile = file;
+  document.getElementById('resume-file-name').textContent = file.name;
+  document.getElementById('resume-file-display').style.display = 'flex';
+  document.getElementById('resume-dropzone').style.borderColor = '#006a68';
+  document.getElementById('resume-dropzone').style.background = '#f0fdfb';
+}
+
+function handleResumeDrop(event) {
+  event.preventDefault();
+  document.getElementById('resume-dropzone').style.background = '#f0fdfb';
+  const file = event.dataTransfer.files[0];
+  if (file) handleResumeFile(file);
+}
+
+function clearResumeFile() {
+  _selectedResumeFile = null;
+  document.getElementById('resume-file-input').value = '';
+  document.getElementById('resume-file-display').style.display = 'none';
+}
+
+async function submitResumeUpload() {
+  if (!_selectedResumeFile) {
+    const err = document.getElementById('resume-error');
+    err.textContent = 'Please select a resume file first.';
+    err.style.display = 'block';
+    return;
+  }
+
+  document.getElementById('resume-error').style.display = 'none';
+  document.getElementById('resume-upload-btn').disabled = true;
+  document.getElementById('resume-upload-btn').textContent = 'Uploading…';
+  document.getElementById('resume-progress-wrap').style.display = 'block';
+
+  // Animate progress bar
+  let pct = 0;
+  const bar = document.getElementById('resume-progress-bar');
+  const progressInterval = setInterval(() => {
+    pct = Math.min(pct + 8, 85);
+    bar.style.width = pct + '%';
+  }, 200);
+
+  try {
+    const formData = new FormData();
+    formData.append('resume', _selectedResumeFile);
+    if (_pendingProfile) formData.append('email', _pendingProfile.email);
+
+    const res = await fetch('/api/parse-uploaded-resume', {
+      method: 'POST',
+      body: formData
+    });
+    const data = await res.json();
+
+    clearInterval(progressInterval);
+    bar.style.width = '100%';
+    document.getElementById('resume-progress-text').textContent = 'Upload complete!';
+
+    if (res.ok && data.resumeFile) {
+      // Save resume info to profile
+      const profile = _pendingProfile || JSON.parse(localStorage.getItem('currentUserProfile') || '{}');
+      profile.resumeFile = data.resumeFile;
+      if (data.extractedData) Object.assign(profile, data.extractedData);
+      localStorage.setItem('currentUserProfile', JSON.stringify(profile));
+      
+      setTimeout(() => { window.location.href = '/dashboard.html'; }, 600);
+    } else {
+      throw new Error(data.error || 'Upload failed');
+    }
+  } catch (err) {
+    clearInterval(progressInterval);
+    document.getElementById('resume-progress-wrap').style.display = 'none';
+    document.getElementById('resume-upload-btn').disabled = false;
+    document.getElementById('resume-upload-btn').textContent = 'Upload & Continue';
+    const errEl = document.getElementById('resume-error');
+    errEl.textContent = err.message;
+    errEl.style.display = 'block';
+  }
+}
+
+function skipResumeUpload() {
+  document.getElementById('resume-modal').style.display = 'none';
+  window.location.href = '/dashboard.html';
+}
+
+
+async function handleLogin() {
+  if (!selectedRole) { alert('Please select your role first.'); return; }
+  const email    = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+  if (!email || !password) { showError('login-error', 'Please enter your email and password.'); return; }
+
+  const btn = document.getElementById('login-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div> Signing in…';
+
+  try {
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password, role: selectedRole })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || data.error || 'Login failed');
+    const profile = data.profile || data;
+    profile.role = selectedRole;
+    saveAndRedirect(profile);
+  } catch (err) {
+    showError('login-error', err.message);
+    btn.disabled = false;
+    btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">login</span> Sign In';
+  }
+}
+
+async function handleRegister() {
+  if (!selectedRole) { alert('Please select your role first.'); return; }
+  const name     = document.getElementById('reg-name').value.trim();
+  const email    = document.getElementById('reg-email').value.trim();
+  const phone    = document.getElementById('reg-phone').value.trim();
+  const password = document.getElementById('reg-password').value;
+  const jobTitle = document.getElementById('reg-jobtitle').value.trim();
+
+  if (!name || !email || !password) { showError('reg-error', 'Name, email and password are required.'); return; }
+  if (password.length < 6)          { showError('reg-error', 'Password must be at least 6 characters.'); return; }
+
+  const btn = document.getElementById('reg-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div> Creating account…';
+
+  try {
+    const res = await fetch('/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ fullName: name, email, password, phone, jobTitle, role: selectedRole })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || data.error || 'Registration failed');
+    const profile = data.profile || data;
+    profile.role = selectedRole;
+    saveAndRedirect(profile);
+  } catch (err) {
+    showError('reg-error', err.message);
+    btn.disabled = false;
+    btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">person_add</span> Create Account';
+  }
+}
+
+// Demo quick-login (populates localStorage directly without backend)
+function demoLogin(role) {
+  const profile = role === 'hr' ? {
+    fullName: 'HR Manager', email: 'hr@recruitease.demo',
+    phone: '', jobTitle: 'HR Manager', experienceLevel: 'Senior',
+    skills: ['Recruitment','Talent Acquisition','HR Strategy'],
+    role: 'hr', isDemo: true
+  } : {
+    fullName: 'Demo Candidate', email: 'candidate@recruitease.demo',
+    phone: '', jobTitle: 'Software Engineer', experienceLevel: 'Mid',
+    skills: ['JavaScript','Python','React'],
+    role: 'candidate', isDemo: true
+  };
+  saveAndRedirect(profile);
+}
+
+// If already logged in, redirect immediately
+(function() {
+  try {
+    const p = JSON.parse(localStorage.getItem('currentUserProfile') || 'null');
+    if (p && p.email) {
+      window.location.href = p.role === 'hr' ? '/recruiter_workspace.html' : '/dashboard.html';
+    }
+  } catch(e) {}
+})();
+// ─── Google OAuth via Supabase ──────────────────────────────────────────────
+async function triggerGoogleSignIn() {
+  if (!selectedRole) {
+    alert('Please select your role (Job Seeker or HR / Recruiter) before signing in with Google.');
+    return;
+  }
+  // Store role so we can read it after the OAuth redirect
+  sessionStorage.setItem('oauthRole', selectedRole);
+
+  const { error } = await _supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: window.location.origin + '/index.html',
+      queryParams: { prompt: 'select_account' }
+    }
+  });
+  if (error) alert('Google sign-in failed: ' + error.message);
+}
+
+// ─── Handle OAuth callback on page load ─────────────────────────────────────
+(async function handleOAuthCallback() {
+  try {
+    const { data: { session }, error } = await _supabase.auth.getSession();
+    if (error || !session) return;
+
+    const user = session.user;
+    const name = user.user_metadata?.full_name || user.user_metadata?.name || '';
+    const email = user.email;
+    const avatarUrl = user.user_metadata?.avatar_url || '';
+    const role = sessionStorage.getItem('oauthRole') || 'candidate';
+    sessionStorage.removeItem('oauthRole');
+
+    // Upsert via backend
+    const res = await fetch('/api/google-auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ supabaseUser: { email, name, avatarUrl }, role })
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      const profile = data.profile;
+      profile.role = role;
+      saveAndRedirect(profile);
+    }
+  } catch (e) {
+    console.error('OAuth callback error:', e);
+  }
+})();
+</script>
+</body>
+</html>

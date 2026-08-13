@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Score Results</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg-main: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            margin: 0;
+            padding: 2rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .status-excellent { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+        .status-shortlisted { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+        .status-consider { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+        .status-reject { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .score-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s;
+        }
+
+        .score-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .score-card.main-score {
+            grid-column: 1 / -1;
+            background: linear-gradient(145deg, var(--bg-card), #2a3b54);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            text-align: left;
+        }
+
+        .score-card.main-score .score-value {
+            font-size: 4rem;
+            color: var(--primary);
+        }
+
+        .score-title {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .score-value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .detail-section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .detail-section h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+            font-size: 1.1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .tag.success { border-color: rgba(16, 185, 129, 0.3); color: #a7f3d0; }
+        .tag.danger { border-color: rgba(239, 68, 68, 0.3); color: #fecaca; }
+
+        ul {
+            margin: 0;
+            padding-left: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .summary-text {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+        <!-- Rendered by JS -->
+    </div>
+
+    <script>
+        // Mock data based on the provided JSON structure
+        const mockData = {
+            "candidate_name": "Jane Doe",
+            "overall_score": 85,
+            "technical_score": 35,
+            "experience_score": 20,
+            "projects_score": 12,
+            "education_score": 10,
+            "preferred_skill_score": 4,
+            "keyword_score": 4,
+            "recommendation": "Strong candidate with good technical background.",
+            "status": "Shortlisted",
+            "matched_skills": ["Java", "Spring Boot", "SQL", "Git"],
+            "missing_skills": ["Docker", "Kubernetes"],
+            "strengths": ["Strong core Java experience", "Good project portfolio"],
+            "weaknesses": ["Lacks containerization experience"],
+            "summary": "Jane is a solid backend developer with 4 years of experience primarily in the Java ecosystem. She meets most of the core requirements but will need some ramp-up on DevOps practices.",
+            "interview_focus": ["Deep dive into Spring Boot architecture", "Assess willingness to learn Docker/K8s"]
+        };
+
+        function getStatusClass(score) {
+            if (score >= 90) return 'status-excellent';
+            if (score >= 80) return 'status-shortlisted';
+            if (score >= 70) return 'status-consider';
+            return 'status-reject';
+        }
+
+        function renderApp() {
+            const app = document.getElementById('app');
+            const data = mockData;
+            const statusClass = getStatusClass(data.overall_score);
+
+            app.innerHTML = `
+                <div class="header">
+                    <div>
+                        <h1>${data.candidate_name}</h1>
+                        <p style="color: var(--text-muted); margin: 0.5rem 0 0 0;">Resume Analysis Results</p>
+                    </div>
+                    <div class="status-badge ${statusClass}">${data.status}</div>
+                </div>
+
+                <div class="score-grid">
+                    <div class="score-card main-score">
+                        <div>
+                            <div class="score-title">Overall Score</div>
+                            <div class="score-value">${data.overall_score}<span style="font-size: 2rem; color: var(--text-muted)">/100</span></div>
+                        </div>
+                        <div style="max-width: 50%;">
+                            <div class="score-title">Recommendation</div>
+                            <div style="font-size: 1.1rem">${data.recommendation}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="score-card">
+                        <div class="score-title">Technical (40%)</div>
+                        <div class="score-value">${data.technical_score}</div>
+                    </div>
+                    <div class="score-card">
+                        <div class="score-title">Experience (25%)</div>
+                        <div class="score-value">${data.experience_score}</div>
+                    </div>
+                    <div class="score-card">
+                        <div class="score-title">Projects (15%)</div>
+                        <div class="score-value">${data.projects_score}</div>
+                    </div>
+                    <div class="score-card">
+                        <div class="score-title">Education (10%)</div>
+                        <div class="score-value">${data.education_score}</div>
+                    </div>
+                </div>
+
+                <div class="details-grid">
+                    <div class="detail-section" style="grid-column: 1 / -1;">
+                        <h3>Executive Summary</h3>
+                        <p class="summary-text">${data.summary}</p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>Matched Skills</h3>
+                        <div class="tag-list">
+                            ${data.matched_skills.map(skill => `<span class="tag success">${skill}</span>`).join('')}
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>Missing Skills</h3>
+                        <div class="tag-list">
+                            ${data.missing_skills.map(skill => `<span class="tag danger">${skill}</span>`).join('')}
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>Strengths</h3>
+                        <ul>
+                            ${data.strengths.map(s => `<li>${s}</li>`).join('')}
+                        </ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>Weaknesses</h3>
+                        <ul>
+                            ${data.weaknesses.map(w => `<li>${w}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="detail-section" style="grid-column: 1 / -1;">
+                        <h3>Suggested Interview Focus</h3>
+                        <ul>
+                            ${data.interview_focus.map(f => `<li>${f}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize
+        renderApp();
+    </script>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<html lang="en"><head>
+  <script src="auth_guard.js"></script>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Poppins:wght@600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-dim":"#cfdce5","surface-container-low":"#e8f6ff","error-container":"#ffdad6","surface-variant":"#d7e4ee","on-primary-container":"#84a5c4","secondary-fixed-dim":"#5ed9d6","on-background":"#111d24","background":"#f4faff","surface-bright":"#f4faff","primary":"#00253c","primary-fixed-dim":"#a9caea","outline":"#73777e","on-secondary-fixed-variant":"#00504f","on-tertiary":"#ffffff","secondary-fixed":"#7df5f3","on-secondary":"#ffffff","surface-tint":"#41627d","secondary-container":"#7df5f3","on-tertiary-fixed-variant":"#004f51","primary-container":"#173b55","error":"#ba1a1a","on-primary":"#ffffff","inverse-primary":"#a9caea","inverse-surface":"#263239","primary-fixed":"#cce5ff","on-tertiary-container":"#51afb2","on-tertiary-fixed":"#002021","on-surface-variant":"#42474d","surface":"#f4faff","on-error-container":"#93000a","on-error":"#ffffff","inverse-on-surface":"#e5f3fc","on-secondary-container":"#00706f","tertiary":"#002729","surface-container":"#e2f0f9","surface-container-highest":"#d7e4ee","on-secondary-fixed":"#00201f","surface-container-high":"#ddeaf3","tertiary-container":"#003f41","on-primary-fixed":"#001e31","on-surface":"#111d24","outline-variant":"#c2c7ce","surface-container-lowest":"#ffffff","on-primary-fixed-variant":"#284a64","tertiary-fixed-dim":"#79d5d8","secondary":"#006a68","tertiary-fixed":"#95f2f5"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"sidebar_width":"260px","margin_page":"40px","stack_md":"16px","header_height":"72px","gutter":"24px","stack_sm":"8px","stack_lg":"32px"},"fontFamily":{"headline-md":["Poppins"],"headline-lg":["Poppins"],"headline-xl":["Poppins"],"body-lg":["Inter"],"body-sm":["Inter"],"label-sm":["Inter"],"headline-sm":["Poppins"],"body-md":["Inter"],"label-md":["Inter"]},"fontSize":{"headline-md":["24px",{"lineHeight":"32px","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-xl":["40px",{"lineHeight":"52px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"body-sm":["14px",{"lineHeight":"20px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","fontWeight":"500"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"600"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-[240px] bg-surface-container-lowest border-r border-outline-variant z-50 flex flex-col overflow-y-auto">
+  <div class="h-[72px] flex items-center px-6 mb-stack-md">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-sm">RE</div>
+      <span class="font-bold text-lg text-primary">Recruit<span class="text-secondary">Ease</span></span>
+    </div>
+  </div>
+  <nav class="flex-1 px-4 space-y-6 pb-8">
+    <section>
+      <p class="px-4 mb-2 text-label-md text-on-surface-variant uppercase tracking-wider">RECRUITER PORTAL</p>
+      <div class="space-y-1">
+        <a href="recruiter_workspace.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">grid_view</span>Workspace</a>
+        
+        <a href="job_management.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">work</span>Job Management</a>
+        <a href="add_job.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">post_add</span>Post New Job</a>
+        <a href="intelligence.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">insights</span>Intelligence</a>
+        <a href="workflow_ui.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">account_tree</span>Hiring Workflow</a>
+      </div>
+    </section>
+  </nav>
+</aside><div class="pl-[240px]"><header class="fixed top-0 left-[240px] right-0 h-[64px] bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant z-40 flex items-center px-8 justify-between"><div class="flex-1 flex items-center gap-8"><div class="relative w-full max-w-md"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span><input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-transparent focus:border-secondary rounded-lg text-body-sm outline-none transition-all" placeholder="Search candidates, jobs, interviews..." type="text"/></div></div><div class="flex items-center gap-6"><button class="relative p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors"><span class="material-symbols-outlined">notifications</span><span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span></button><div class="flex items-center gap-3 pl-4 border-l border-outline-variant"><div class="text-right"><p class="text-label-md text-on-surface">Alex Morgan</p><p class="text-label-sm text-on-surface-variant">HR Manager</p></div><img alt="Alex Morgan" class="w-10 h-10 rounded-full border border-outline-variant object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLtoBxNwdhyR7o6UBzYFqLcQCDkvWs0LOfafjpdc87Ctvs-4Q-RqDc0lkM2OhEJ7qRtR-nugUigJJbF8nbD0AUqBQ9zSpAl29xbbZl9_NfnP0C_VdF8tQ7tndwx9VsMd9qVsIpm6OJ5cXIHrjR9dEu18u_yirok3sV5CH4O-u4vYdkaWylYiShKowSuZi-P4AaoaVHVICZ6o13hRV4OoW4k2ZPhzXEDk3b7uSGKJ95fmRYhCusdW6l2n7vLf"/></div></div></header><main class="relative pt-[64px] min-h-screen"><div class="p-margin_page"><div class="flex flex-col w-full font-body-md text-on-surface">
+<div class="flex items-center justify-between mb-stack-lg">
+<div>
+<h1 class="font-headline-xl text-headline-xl text-primary">Recruitment Intelligence</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Comprehensive data analysis and performance metrics across the hiring pipeline.</p>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-2 bg-surface-container-high text-on-surface font-label-md text-label-md uppercase tracking-wider rounded flex items-center hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined mr-2 text-[20px]">calendar_today</span> Last 30 Days
+      </button>
+<button class="px-6 py-2 bg-primary text-on-primary font-label-md text-label-md uppercase tracking-wider rounded flex items-center hover:bg-primary-container transition-colors shadow-sm">
+<span class="material-symbols-outlined mr-2 text-[20px]">download</span> Export Report
+      </button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-gutter mb-stack-lg">
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm flex flex-col justify-between h-[140px] relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="absolute -right-4 -bottom-4 w-24 h-24 bg-surface-container-low rounded-full opacity-50 blur-xl group-hover:scale-110 transition-transform"></div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider z-10">Candidates Screened</p>
+<div class="flex items-baseline gap-2 z-10">
+<span class="font-headline-xl text-headline-xl text-primary">2,481</span>
+<span class="font-label-sm text-label-sm text-secondary-container bg-on-secondary-container px-2 py-0.5 rounded-full flex items-center"><span class="material-symbols-outlined text-[12px] mr-1">arrow_upward</span>12%</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm flex flex-col justify-between h-[140px] relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="absolute -right-4 -bottom-4 w-24 h-24 bg-tertiary-container/10 rounded-full opacity-50 blur-xl group-hover:scale-110 transition-transform"></div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider z-10">Avg Match Score</p>
+<div class="flex items-baseline gap-2 z-10">
+<span class="font-headline-xl text-headline-xl text-primary">86%</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center">Target: 80%</span>
+</div>
+<div class="w-full h-1 bg-surface-container mt-2 rounded-full overflow-hidden z-10">
+<div class="h-full bg-secondary w-[86%] rounded-full"></div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm flex flex-col justify-between h-[140px] relative overflow-hidden group hover:shadow-md transition-shadow">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider z-10">Avg Screening Time</p>
+<div class="flex items-baseline gap-2 z-10">
+<span class="font-headline-xl text-headline-xl text-primary">4.2</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">min</span>
+</div>
+<div class="w-full flex h-8 mt-2 items-end gap-1 opacity-70 z-10">
+<div class="flex-1 bg-surface-container-high h-[40%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container-high h-[60%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container-high h-[80%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary h-[30%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container-high h-[50%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container-high h-[70%] rounded-t-sm"></div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm flex flex-col justify-between h-[140px] relative overflow-hidden group hover:shadow-md transition-shadow">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider z-10">Completion Rate</p>
+<div class="flex items-baseline gap-2 z-10">
+<span class="font-headline-xl text-headline-xl text-primary">91%</span>
+<span class="font-label-sm text-label-sm text-secondary-container bg-on-secondary-container px-2 py-0.5 rounded-full flex items-center"><span class="material-symbols-outlined text-[12px] mr-1">arrow_upward</span>3%</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm flex flex-col justify-between h-[140px] relative overflow-hidden group hover:shadow-md transition-shadow">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider z-10">Conversion to Offer</p>
+<div class="flex items-baseline gap-2 z-10">
+<span class="font-headline-xl text-headline-xl text-primary">68%</span>
+</div>
+<div class="w-full flex h-8 mt-2 items-end gap-1 opacity-70 z-10">
+<div class="flex-1 bg-surface-container-high h-[30%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container-high h-[40%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container-high h-[60%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container-high h-[75%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary h-[100%] rounded-t-sm"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter mb-stack-lg">
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm lg:col-span-2">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-md text-headline-md text-primary">Hiring Funnel Analytics</h2>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">more_horiz</span>
+</div>
+<div class="relative h-[320px] w-full flex items-end justify-between px-8 pb-8 pt-4">
+<div class="absolute inset-0 pointer-events-none opacity-5">
+<svg height="100%" preserveaspectratio="none" width="100%">
+<path class="text-primary" d="M0,320 L0,50 L200,80 L400,20 L600,120 L800,60 L1000,150 L1000,320 Z" fill="currentColor"></path>
+</svg>
+</div>
+<div class="absolute bottom-8 left-8 right-8 top-4 flex flex-col justify-between pointer-events-none">
+<div class="w-full border-t border-surface-container border-dashed h-0"></div>
+<div class="w-full border-t border-surface-container border-dashed h-0"></div>
+<div class="w-full border-t border-surface-container border-dashed h-0"></div>
+<div class="w-full border-t border-surface-container border-dashed h-0"></div>
+</div>
+<div class="flex flex-col items-center group relative z-10 w-1/5">
+<div class="text-primary font-headline-sm text-headline-sm mb-2 opacity-0 group-hover:opacity-100 transition-opacity absolute -top-8 bg-surface-container-lowest px-3 py-1 rounded shadow-sm">2481</div>
+<div class="w-16 bg-surface-container-high h-[280px] rounded-t-md relative overflow-hidden transition-all group-hover:bg-primary/20">
+<div class="absolute bottom-0 w-full bg-primary h-full opacity-80"></div>
+</div>
+<span class="mt-4 font-label-md text-label-md text-on-surface-variant uppercase text-center">Applied</span>
+</div>
+<div class="flex flex-col items-center group relative z-10 w-1/5">
+<div class="text-primary font-headline-sm text-headline-sm mb-2 opacity-0 group-hover:opacity-100 transition-opacity absolute -top-8 bg-surface-container-lowest px-3 py-1 rounded shadow-sm">1850</div>
+<div class="w-16 bg-surface-container-high h-[200px] rounded-t-md relative overflow-hidden transition-all group-hover:bg-primary/20">
+<div class="absolute bottom-0 w-full bg-primary h-full opacity-80"></div>
+</div>
+<span class="mt-4 font-label-md text-label-md text-on-surface-variant uppercase text-center">Screened</span>
+</div>
+<div class="flex flex-col items-center group relative z-10 w-1/5">
+<div class="text-secondary font-headline-sm text-headline-sm mb-2 opacity-0 group-hover:opacity-100 transition-opacity absolute -top-8 bg-surface-container-lowest px-3 py-1 rounded shadow-sm">840</div>
+<div class="w-16 bg-surface-container-high h-[120px] rounded-t-md relative overflow-hidden transition-all group-hover:bg-secondary/20">
+<div class="absolute bottom-0 w-full bg-secondary h-full opacity-80"></div>
+</div>
+<span class="mt-4 font-label-md text-label-md text-on-surface-variant uppercase text-center">Interviewed</span>
+</div>
+<div class="flex flex-col items-center group relative z-10 w-1/5">
+<div class="text-secondary font-headline-sm text-headline-sm mb-2 opacity-0 group-hover:opacity-100 transition-opacity absolute -top-8 bg-surface-container-lowest px-3 py-1 rounded shadow-sm">320</div>
+<div class="w-16 bg-surface-container-high h-[60px] rounded-t-md relative overflow-hidden transition-all group-hover:bg-secondary/20">
+<div class="absolute bottom-0 w-full bg-secondary h-full opacity-80"></div>
+</div>
+<span class="mt-4 font-label-md text-label-md text-on-surface-variant uppercase text-center">Offered</span>
+</div>
+<div class="flex flex-col items-center group relative z-10 w-1/5">
+<div class="text-tertiary-container font-headline-sm text-headline-sm mb-2 opacity-0 group-hover:opacity-100 transition-opacity absolute -top-8 bg-surface-container-lowest px-3 py-1 rounded shadow-sm">218</div>
+<div class="w-16 bg-surface-container-high h-[40px] rounded-t-md relative overflow-hidden transition-all group-hover:bg-tertiary-container/20">
+<div class="absolute bottom-0 w-full bg-tertiary-container h-full opacity-80"></div>
+</div>
+<span class="mt-4 font-label-md text-label-md text-on-surface-variant uppercase text-center">Hired</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-md text-headline-md text-primary">Candidate Quality</h2>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">info</span>
+</div>
+<div class="flex-1 flex flex-col justify-center items-center relative">
+<div class="w-48 h-48 relative flex items-center justify-center mb-8">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<circle class="text-surface-container-high" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-width="12"></circle>
+<circle class="text-secondary drop-shadow-md" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="60" stroke-width="12"></circle>
+<circle class="text-primary drop-shadow-md" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="180" stroke-width="12"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-headline-xl text-headline-xl text-primary">A+</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Avg Grade</span>
+</div>
+</div>
+<div class="w-full space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span class="font-body-sm text-body-sm text-on-surface">Exceptional Match (&gt;90%)</span>
+</div>
+<span class="font-label-md text-label-md text-primary">42%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-secondary"></div>
+<span class="font-body-sm text-body-sm text-on-surface">Strong Match (75-90%)</span>
+</div>
+<span class="font-label-md text-label-md text-secondary">38%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-surface-container-high"></div>
+<span class="font-body-sm text-body-sm text-on-surface">Developing (&lt;75%)</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">20%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-md text-headline-md text-primary">Skill Demand Velocity</h2>
+<button class="text-secondary font-label-md text-label-md uppercase hover:underline">View All</button>
+</div>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="font-body-md text-body-md text-on-surface font-medium">Machine Learning</span>
+<span class="font-label-sm text-label-sm text-secondary-container bg-on-secondary-container px-2 py-0.5 rounded-full">+24% MoM</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[85%] rounded-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="font-body-md text-body-md text-on-surface font-medium">React / Next.js</span>
+<span class="font-label-sm text-label-sm text-secondary-container bg-on-secondary-container px-2 py-0.5 rounded-full">+18% MoM</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[70%] rounded-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="font-body-md text-body-md text-on-surface font-medium">System Architecture</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full">+5% MoM</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-surface-tint w-[60%] rounded-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="font-body-md text-body-md text-on-surface font-medium">Data Engineering</span>
+<span class="font-label-sm text-label-sm text-error-container bg-on-error-container px-2 py-0.5 rounded-full">-2% MoM</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-surface-container-highest w-[45%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm overflow-hidden relative">
+<div class="absolute top-0 right-0 w-64 h-64 bg-secondary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none"></div>
+<div class="flex justify-between items-center mb-6 relative z-10">
+<h2 class="font-headline-md text-headline-md text-primary">Time to Hire Breakdown</h2>
+</div>
+<div class="flex flex-col justify-center h-full pb-8 relative z-10">
+<div class="flex items-center justify-between mb-8">
+<div class="text-center">
+<div class="font-headline-xl text-headline-xl text-primary">18<span class="text-headline-sm font-headline-sm text-on-surface-variant ml-1">days</span></div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-1">Average Total</div>
+</div>
+<div class="w-px h-16 bg-surface-container"></div>
+<div class="text-center">
+<div class="font-headline-xl text-headline-xl text-secondary">2.4<span class="text-headline-sm font-headline-sm text-on-surface-variant ml-1">days</span></div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-1">Faster than Q3</div>
+</div>
+</div>
+<div class="w-full h-12 flex rounded-md overflow-hidden shadow-inner bg-surface-container">
+<div class="h-full bg-primary hover:opacity-90 transition-opacity flex items-center justify-center group relative cursor-pointer" style="width: 20%">
+<span class="opacity-0 group-hover:opacity-100 text-on-primary font-label-md text-label-md absolute -top-8 bg-inverse-surface px-2 py-1 rounded whitespace-nowrap transition-opacity">Sourcing (3.6d)</span>
+</div>
+<div class="h-full bg-secondary hover:opacity-90 transition-opacity flex items-center justify-center group relative cursor-pointer" style="width: 40%">
+<span class="opacity-0 group-hover:opacity-100 text-on-primary font-label-md text-label-md absolute -top-8 bg-inverse-surface px-2 py-1 rounded whitespace-nowrap transition-opacity">Screening &amp; Intervies (7.2d)</span>
+</div>
+<div class="h-full bg-surface-tint hover:opacity-90 transition-opacity flex items-center justify-center group relative cursor-pointer" style="width: 25%">
+<span class="opacity-0 group-hover:opacity-100 text-on-primary font-label-md text-label-md absolute -top-8 bg-inverse-surface px-2 py-1 rounded whitespace-nowrap transition-opacity">Offer Stage (4.5d)</span>
+</div>
+<div class="h-full bg-surface-container-highest hover:opacity-90 transition-opacity flex items-center justify-center group relative cursor-pointer" style="width: 15%">
+<span class="opacity-0 group-hover:opacity-100 text-on-primary font-label-md text-label-md absolute -top-8 bg-inverse-surface px-2 py-1 rounded whitespace-nowrap transition-opacity">Background/Admin (2.7d)</span>
+</div>
+</div>
+<div class="flex justify-between mt-4">
+<div class="flex items-center gap-2"><div class="w-3 h-3 rounded bg-primary"></div><span class="font-label-sm text-label-sm text-on-surface-variant">Sourcing</span></div>
+<div class="flex items-center gap-2"><div class="w-3 h-3 rounded bg-secondary"></div><span class="font-label-sm text-label-sm text-on-surface-variant">Interviews</span></div>
+<div class="flex items-center gap-2"><div class="w-3 h-3 rounded bg-surface-tint"></div><span class="font-label-sm text-label-sm text-on-surface-variant">Offer</span></div>
+<div class="flex items-center gap-2"><div class="w-3 h-3 rounded bg-surface-container-highest"></div><span class="font-label-sm text-label-sm text-on-surface-variant">Admin</span></div>
+</div>
+</div>
+</div>
+</div>
+</div></div></main></div>    <script src="hr_portal.js"></script>
+</body></html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RecruitEASE HR Job Management</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <!-- App Dashboard -->
+  <div id="app-dashboard" class="app-container">
+    <!-- Header -->
+    <header>
+      <div class="brand-section" style="display: none;">
+        <h1>RecruitEASE</h1>
+        <p id="company-subtitle">Job Management Portal</p>
+      </div>
+
+      <!-- Simulated HR User Authentication -->
+      <div class="session-panel">
+        <span class="session-label">Active Company:</span>
+        <select id="user-session-select" class="session-select">
+          <option value="instacart">Instacart</option>
+          <option value="amazon">Amazon</option>
+          <option value="walmart">Walmart</option>
+        </select>
+
+        <div
+          style="display: flex; align-items: center; gap: 0.5rem; margin-left: 1rem; font-size: 0.75rem; font-weight: 600; color: var(--text-secondary);">
+          <input type="checkbox" id="mock-mode-toggle" style="cursor: pointer;">
+          <label for="mock-mode-toggle"
+            style="cursor: pointer; text-transform: none; font-size: 0.75rem; letter-spacing: 0;">Use Mock Data</label>
+        </div>
+
+        <div id="api-status" class="api-status-badge status-live" style="margin-left: 1rem;">
+          <span class="status-dot"></span>
+          <span id="api-status-text">Live Webhook API</span>
+        </div>
+      </div>
+
+    </header>
+
+    <!-- Stats Grid -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-title">Total Jobs</div>
+        <div id="stat-total" class="stat-value">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-title">Active Positions</div>
+        <div id="stat-active" class="stat-value">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-title">Departments</div>
+        <div id="stat-depts" class="stat-value">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-title">Job Locations</div>
+        <div id="stat-locations" class="stat-value">0</div>
+      </div>
+    </section>
+
+    <!-- Controls Bar -->
+    <section class="controls-bar">
+      <div class="search-filter-group">
+        <div class="search-input-wrapper">
+          <svg class="search-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="search-jobs" class="search-input" placeholder="Search by job title or location...">
+        </div>
+        <select id="filter-department" class="filter-select">
+          <option value="">All Departments</option>
+        </select>
+        <select id="filter-status" class="filter-select">
+          <option value="">All Statuses</option>
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+      </div>
+
+      <button id="add-job-btn" class="btn btn-primary">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        Add New Job
+      </button>
+    </section>
+
+    <!-- Table Section -->
+    <section class="table-container">
+      <table id="jobs-table">
+        <thead>
+          <tr>
+            <th>Job Title</th>
+            <th>Department</th>
+            <th>Location</th>
+            <th>Status</th>
+            <th>Mandatory Skills</th>
+            <th style="width: 250px;">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="jobs-tbody">
+          <!-- Populated by JavaScript -->
+        </tbody>
+      </table>
+      <div id="empty-state" class="empty-state" style="display: none;">
+        <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+        <h3>No jobs found</h3>
+        <p>Try clearing your filters or create a new job position.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Add/Edit Job Modal -->
+  <div id="job-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-title" class="modal-title">Create Job Position</h2>
+        <button id="close-modal" class="close-btn">&times;</button>
+      </div>
+      <form id="job-form" onsubmit="return false;">
+        <div class="modal-body">
+          <div class="form-grid">
+            <!-- Job Title -->
+            <div class="form-group full-width">
+              <label for="form-title">Job Title *</label>
+              <input type="text" id="form-title" required placeholder="e.g. Senior Software Engineer">
+            </div>
+
+            <!-- Company (READ ONLY / LOCKED) -->
+            <div class="form-group">
+              <label for="form-company">Company (Locked to Session)</label>
+              <input type="text" id="form-company" class="locked-field" readonly>
+            </div>
+
+            <!-- Location -->
+            <div class="form-group">
+              <label for="form-location">Location *</label>
+              <input type="text" id="form-location" required placeholder="e.g. Bangalore, India">
+            </div>
+
+            <!-- Department -->
+            <div class="form-group">
+              <label for="form-department">Department *</label>
+              <input type="text" id="form-department" required placeholder="e.g. Technology">
+            </div>
+
+            <!-- Source -->
+            <div class="form-group">
+              <label for="form-source">Source</label>
+              <input type="text" id="form-source" placeholder="e.g. RecruitEASE">
+            </div>
+
+            <!-- Status -->
+            <div class="form-group">
+              <label for="form-status">Status</label>
+              <select id="form-status">
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+            </div>
+
+            <!-- Application URL -->
+            <div class="form-group full-width">
+              <label for="form-url">Application URL</label>
+              <input type="url" id="form-url" placeholder="https://example.com/apply">
+            </div>
+
+            <!-- Mandatory Skills -->
+            <div class="form-group full-width">
+              <label for="form-mandatory-skills">Mandatory Skills *</label>
+              <input type="text" id="form-mandatory-skills" required
+                placeholder="Comma-separated (e.g. React, JavaScript, HTML)">
+            </div>
+
+            <!-- Preferred Skills -->
+            <div class="form-group full-width">
+              <label for="form-preferred-skills">Preferred Skills</label>
+              <input type="text" id="form-preferred-skills" placeholder="Comma-separated (e.g. Next.js, Node.js)">
+            </div>
+
+            <!-- Description -->
+            <div class="form-group full-width">
+              <label for="form-description">Description *</label>
+              <textarea id="form-description" required
+                placeholder="Detailed description of the responsibilities and qualifications..."></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="cancel-modal" class="btn btn-secondary">Cancel</button>
+          <button type="button" id="save-job-btn" class="btn btn-primary">Save Job</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- View Job Detail Modal -->
+  <div id="view-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="view-modal-title" class="modal-title">Job Details</h2>
+        <button id="close-view-modal" class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="view-details-content">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="close-view-btn" class="btn btn-secondary">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toasts Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

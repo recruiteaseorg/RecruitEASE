@@ -1,0 +1,13 @@
+{
+  "name": "recruitease-hr",
+  "version": "1.0.0",
+  "description": "RecruitEASE HR Job Management Portal",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx http-server -p 8089 -o",
+    "start": "npx http-server -p 8089"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

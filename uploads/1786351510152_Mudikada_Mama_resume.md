@@ -1,0 +1,50 @@
+# Resume: Mudikada Mama
+
+## Contact Information
+- **Email**: mudikadamama@gmail.com
+- **Phone**: 555-0199
+
+## Extracted Resume Content (PDF)
+
+
+
+Aadil JM
+aadiljm2007@gmail.com | 555-0199
+Professional Summary
+AI Engineer with 7+ years of experience shipping production systems.
+Strong backend engineering fundamentals with deep expertise in scalable architecture
+and technical debt management. Proven track record in product management and
+stakeholder management. Extensive direct experience with Stripe products and
+payments. Experienced in Agile development methodologies and DevOps practices.
+Passionate about LLMs, workflow automation, and Next.js platforms.
+Experience
+Senior AI Engineer - TechCorp (2020 - Present)
+- Architected scalable architecture for high-volume payments systems, with
+  direct experience integrating Stripe products and APIs into core business.
+- Demonstrated strong backend engineering fundamentals by debugging systems,
+  managing technical debt, and building AI/LLM tools using Python, Node.js,
+  Ruby, and Next.js.
+- Led product management initiatives for internal tools, practicing stakeholder
+  management to ensure alignment with Solutions Architecture goals.
+- Championed Agile development methodologies across engineering pods.
+Backend DevOps Engineer - InnovateTech (2017 - 2020)
+- Built deployment pipelines and maintained cloud infrastructure using modern
+  DevOps practices on AWS and GCP.
+- Delivered workflow automation solutions for technical discovery and GTM teams.
+- Exhibited strong written and verbal communication skills by leading technical
+  workshops for non-engineers.
+Projects
+- Stripe Payment Automation: Built a robust Next.js and Node.js platform with
+  direct experience using Stripe products to automate billing.
+- Enterprise Agent Platform: Built an LLM-powered tool to manage technical debt
+  and optimize cloud infrastructure costs.
+Technical Skills
+- Core: Strong backend engineering fundamentals, Scalable architecture,
+  Technical debt management
+- Methodologies: Agile development methodologies, Product management,
+  Stakeholder management
+- Engineering: Next.js, Python, Ruby, Node.js, DevOps, AWS, GCP, Stripe products
+- AI: AI/LLM tools, Workflow Automation, Agents
+- Soft Skills: Strong written and verbal communication skills
+Education
+B.S. in Computer Science - State University

@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RecruitEase simplifies your entire hiring journey with AI, automation, and smart insights. From resume to recruitment, all in one place.">
+    <title>RecruitEase - AI-Powered Recruitment Platform</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="index.css">
+    <!-- PDF.js library for frontend text extraction -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script>
+        // Specify workerSrc for PDF.js
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+    </script>
+
+    <!-- Tailwind CSS & Google Fonts for Stitch UI -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-dim": "#cfdce5",
+                        "surface-container-low": "#e8f6ff",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#d7e4ee",
+                        "on-primary-container": "#84a5c4",
+                        "secondary-fixed-dim": "#5ed9d6",
+                        "on-background": "#111d24",
+                        "background": "#f4faff",
+                        "surface-bright": "#f4faff",
+                        "primary": "#00253c",
+                        "primary-fixed-dim": "#a9caea",
+                        "outline": "#73777e",
+                        "on-secondary-fixed-variant": "#00504f",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#7df5f3",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#41627d",
+                        "secondary-container": "#7df5f3",
+                        "on-tertiary-fixed-variant": "#004f51",
+                        "primary-container": "#173b55",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#a9caea",
+                        "inverse-surface": "#263239",
+                        "primary-fixed": "#cce5ff",
+                        "on-tertiary-container": "#51afb2",
+                        "on-tertiary-fixed": "#002021",
+                        "on-surface-variant": "#42474d",
+                        "surface": "#f4faff",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#e5f3fc",
+                        "on-secondary-container": "#00706f",
+                        "tertiary": "#002729",
+                        "surface-container": "#e2f0f9",
+                        "surface-container-highest": "#d7e4ee",
+                        "on-secondary-fixed": "#00201f",
+                        "surface-container-high": "#ddeaf3",
+                        "tertiary-container": "#003f41",
+                        "on-primary-fixed": "#001e31",
+                        "on-surface": "#111d24",
+                        "outline-variant": "#c2c7ce",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#284a64",
+                        "tertiary-fixed-dim": "#79d5d8",
+                        "secondary": "#006a68",
+                        "tertiary-fixed": "#95f2f5"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        sidebar_width: "260px",
+                        margin_page: "40px",
+                        stack_md: "16px",
+                        header_height: "72px",
+                        gutter: "24px",
+                        stack_sm: "8px",
+                        stack_lg: "32px"
+                    },
+                    fontFamily: {
+                        "headline-md": ["Poppins"],
+                        "headline-lg": ["Poppins"],
+                        "headline-xl": ["Poppins"],
+                        "body-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-sm": ["Poppins"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"]
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        /* Overlay old styles in dashboard mode */
+        .dashboard-view.active {
+            display: flex !important;
+            position: fixed !important;
+            inset: 0 !important;
+            z-index: 9999 !important;
+            background-color: #f4faff !important;
+            flex-direction: row !important;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- Header Navigation (Stitch UI Theme) -->
+    <header class="h-[72px] bg-white/90 backdrop-blur-md border-b border-outline-variant/40 fixed top-0 left-0 right-0 z-50 px-8 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-primary text-white flex items-center justify-center font-headline font-bold text-lg shadow-sm">RE</div>
+            <span class="font-headline font-bold text-xl text-primary">Recruit<span class="text-secondary">Ease</span></span>
+        </div>
+
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-on-surface-variant">
+            <a href="/dashboard.html" class="hover:text-primary transition-colors flex items-center gap-1 font-semibold">
+                <span class="material-symbols-outlined text-[18px]">person</span> Candidate Portal
+            </a>
+            <a href="/recruiter_workspace.html" class="hover:text-primary transition-colors flex items-center gap-1 font-semibold">
+                <span class="material-symbols-outlined text-[18px]">business_center</span> Recruiter Workspace
+            </a>
+            <a href="/explore_jobs.html" class="hover:text-primary transition-colors flex items-center gap-1">
+                <span class="material-symbols-outlined text-[18px]">work</span> Explore Jobs
+            </a>
+            <a href="/nova/" class="hover:text-primary transition-colors flex items-center gap-1 text-secondary font-semibold">
+                <span class="material-symbols-outlined text-[18px]">auto_awesome</span> Nova App
+            </a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+            <button class="px-4 py-2 border border-outline-variant rounded-lg text-sm font-semibold text-primary hover:bg-surface-container-low transition-all cursor-pointer" id="btn-login">Log In</button>
+            <button class="px-5 py-2 bg-primary text-white rounded-lg text-sm font-semibold hover:bg-primary-container transition-all shadow-sm cursor-pointer" id="btn-get-started">Sign Up</button>
+        </div>
+    </header>
+
+    <!-- Main Hero Landing Section (Stitch UI Theme) -->
+    <main class="pt-[120px] pb-16 px-6 max-w-7xl mx-auto w-full flex flex-col justify-center">
+        <!-- Hero Banner -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
+            <!-- Left Content -->
+            <div class="lg:col-span-7 space-y-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary-container/30 text-secondary font-semibold text-xs border border-secondary/20">
+                    <span class="material-symbols-outlined text-[16px]">auto_awesome</span>
+                    AI-POWERED RECRUITMENT ECOSYSTEM
+                </div>
+                
+                <h1 class="font-headline font-bold text-4xl sm:text-5xl lg:text-6xl text-primary leading-tight">
+                    From Resume to <span class="text-secondary underline decoration-secondary-container underline-offset-8">Recruitment.</span><br/>All in one place.
+                </h1>
+                
+                <p class="text-lg text-on-surface-variant max-w-2xl leading-relaxed">
+                    RecruitEase simplifies your entire hiring journey with AI screening, voice mock interviews, smart job matching, and candidate workflows.
+                </p>
+
+                <!-- CTA Actions -->
+                <div class="flex flex-wrap gap-4 pt-2">
+                    <a href="/dashboard.html" class="px-6 py-3.5 bg-primary text-white rounded-xl font-semibold hover:bg-primary-container transition-all shadow-md flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[20px]">person</span>
+                        Candidate Portal
+                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                    </a>
+
+                    <a href="/recruiter_workspace.html" class="px-6 py-3.5 bg-white border border-primary text-primary rounded-xl font-semibold hover:bg-surface-container-low transition-all shadow-sm flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[20px]">business_center</span>
+                        Recruiter Workspace
+                    </a>
+
+                    <button class="px-6 py-3.5 bg-secondary text-white rounded-xl font-semibold hover:bg-secondary/90 transition-all shadow-sm flex items-center gap-2 cursor-pointer" id="hero-btn-start">
+                        <span class="material-symbols-outlined text-[20px]">upload_file</span>
+                        Upload Resume
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Visual Feature Showcase -->
+            <div class="lg:col-span-5 relative">
+                <div class="bg-white p-6 rounded-3xl shadow-xl border border-outline-variant/30 space-y-6 relative overflow-hidden">
+                    <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">AI</div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-sm">Smart Candidate Matcher</h4>
+                                <p class="text-xs text-gray-500">Live Gemini Assessment</p>
+                            </div>
+                        </div>
+                        <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-2.5 py-1 rounded-full border border-emerald-200">95% Match</span>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="flex justify-between text-xs font-semibold text-gray-700">
+                            <span>Overall Skill Compatibility</span>
+                            <span class="text-emerald-600">95%</span>
+                        </div>
+                        <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden"><div class="bg-emerald-500 h-full w-[95%]"></div></div>
+
+                        <div class="flex justify-between text-xs font-semibold text-gray-700">
+                            <span>Domain Alignment</span>
+                            <span class="text-primary">88%</span>
+                        </div>
+                        <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden"><div class="bg-primary h-full w-[88%]"></div></div>
+                    </div>
+
+                    <div class="bg-surface-container-low p-4 rounded-xl border border-surface-variant flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-secondary">mic</span>
+                            <span class="text-xs font-semibold text-gray-800">Voice AI Interview Readiness</span>
+                        </div>
+                        <span class="text-xs font-bold text-secondary">86% Ready</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Role Switcher Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-outline-variant/30 hover:border-primary/50 transition-all flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-[28px]">person</span>
+                    </div>
+                    <h3 class="font-headline font-bold text-2xl text-primary mb-2">For Job Seekers</h3>
+                    <p class="text-on-surface-variant text-sm mb-6 leading-relaxed">
+                        Upload your resume to get instant AI Markdown parsing, dynamic skill compatibility scores, self-introduction generators, and mock interview practice.
+                    </p>
+                </div>
+                <a href="/dashboard.html" class="inline-flex items-center gap-2 text-primary font-bold hover:text-secondary transition-colors text-sm">
+                    Enter Candidate Portal <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </a>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-outline-variant/30 hover:border-secondary/50 transition-all flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-[28px]">business_center</span>
+                    </div>
+                    <h3 class="font-headline font-bold text-2xl text-primary mb-2">For HR & Recruiters</h3>
+                    <p class="text-on-surface-variant text-sm mb-6 leading-relaxed">
+                        Access live applicant pipelines, inspect parsed candidate Markdown resumes, manage job listings, evaluate scores, and optimize hiring workflows.
+                    </p>
+                </div>
+                <a href="/recruiter_workspace.html" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition-colors text-sm">
+                    Enter Recruiter Workspace <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Profile Setup Modal -->
+    <div class="modal-overlay" id="profile-modal">
+        <div class="modal-card">
+            <button class="modal-close" id="modal-close" aria-label="Close Modal">&times;</button>
+            <div class="modal-header">
+                <h2>Sign Up & Create Profile</h2>
+                <p>Welcome! Upload your resume and our AI will build your profile automatically.</p>
+            </div>
+            
+            <!-- Google OAuth for Signup -->
+            <div style="padding: 0 0 0 0;">
+                <button type="button" class="btn btn-outline btn-block" id="google-signup-btn" style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; background: var(--surface); border: 1px solid var(--border); color: var(--dark); font-weight: 500; cursor: pointer; width: 100%; margin-bottom: 1rem;">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.64 9.20455C17.64 8.56636 17.5827 7.95273 17.4764 7.36364H9V10.845H13.8436C13.635 11.97 13.0009 12.9232 12.0477 13.5614V15.8195H14.9564C16.6582 14.2527 17.64 11.9455 17.64 9.20455Z" fill="#4285F4"/>
+                        <path d="M9 18C11.43 18 13.4673 17.1941 14.9564 15.8195L12.0477 13.5614C11.2418 14.1014 10.2109 14.4205 9 14.4205C6.65591 14.4205 4.67182 12.8373 3.96409 10.71H0.957275V13.0418C2.44636 16.0077 5.50227 18 9 18Z" fill="#34A853"/>
+                        <path d="M3.96409 10.71C3.78409 10.17 3.68182 9.59318 3.68182 9C3.68182 8.40682 3.78409 7.83 3.96409 7.29V4.95818H0.957275C0.347727 6.17318 0 7.54773 0 9C0 10.4523 0.347727 11.8268 0.957275 13.0418L3.96409 10.71Z" fill="#FBBC05"/>
+                        <path d="M9 3.57955C10.3214 3.57955 11.5077 4.03364 12.4405 4.92545L15.0218 2.34409C13.4632 0.891818 11.4259 0 9 0C5.50227 0 2.44636 1.99227 0.957275 4.95818L3.96409 7.29C4.67182 5.16273 6.65591 3.57955 9 3.57955Z" fill="#EA4335"/>
+                    </svg>
+                    <span>Continue with Google</span>
+                </button>
+                <div class="oauth-divider" style="display: flex; align-items: center; text-align: center; margin: 0 0 1.25rem 0; color: var(--gray-400); font-size: 0.85rem;">
+                    <hr style="flex-grow: 1; border: none; border-top: 1px solid var(--border); margin: 0 0.75rem 0 0;">
+                    <span>OR sign up with email</span>
+                    <hr style="flex-grow: 1; border: none; border-top: 1px solid var(--border); margin: 0 0 0 0.75rem;">
+                </div>
+            </div>
+            
+            <form class="modal-form" id="profile-form" enctype="multipart/form-data">
+                <!-- Step 1: Upload Resume First -->
+                <div id="profile-step-1">
+                    <p class="text-on-surface-variant font-body-sm mb-4">Start by uploading your resume. Our AI will automatically extract your details to save you time.</p>
+                    
+                    <!-- Resume File Upload -->
+                    <div class="form-group">
+                        <label for="resume">Upload Resume * (TXT, MD, PDF, DOCX)</label>
+                        <div class="file-upload-wrapper">
+                            <input type="file" id="resume" name="resume" accept=".txt,.md,.pdf,.docx" required>
+                            <div class="file-upload-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                                </svg>
+                                <span>Choose Resume File...</span>
+                            </div>
+                            <div class="file-name-display" id="file-name-display">No file chosen</div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Picture Upload -->
+                    <div class="form-group">
+                        <label for="profilePic">Profile Picture (Optional)</label>
+                        <div class="file-upload-wrapper">
+                            <input type="file" id="profilePic" name="profilePic" accept="image/*">
+                            <div class="file-upload-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                                </svg>
+                                <span>Choose Image File...</span>
+                            </div>
+                            <div class="file-name-display" id="pic-name-display">No image chosen</div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary btn-block mt-4" id="btn-parse-resume">
+                        <span>Continue to Profile Details</span>
+                    </button>
+                </div>
+
+                <!-- Parsing Loading State -->
+                <div id="profile-step-loading" style="display: none; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 0; gap: 1rem;">
+                    <div class="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+                    <p class="font-headline-sm text-primary font-bold">Reading your resume...</p>
+                    <p class="font-body-sm text-on-surface-variant">Our AI is extracting your details to build your profile.</p>
+                </div>
+
+                <!-- Step 2: Review Extracted Details -->
+                <div id="profile-step-2" style="display: none;">
+                    <p class="text-on-surface-variant font-body-sm mb-4">We've pre-filled your details. Please review and edit them before completing your profile.</p>
+                    
+                    <!-- Form Row: Name and Email -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" name="fullName" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required placeholder="john@example.com">
+                        </div>
+                    </div>
+
+                    <!-- Form Row: Phone and Title -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="+1 (555) 019-2834">
+                        </div>
+                        <div class="form-group">
+                            <label for="jobTitle">Preferred Job Title *</label>
+                            <input type="text" id="jobTitle" name="jobTitle" required placeholder="Frontend Developer">
+                        </div>
+                    </div>
+
+                    <!-- Form Row: Experience Level and Core Skills -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="experienceLevel">Experience Level *</label>
+                            <select id="experienceLevel" name="experienceLevel" required>
+                                <option value="" disabled selected>Select Level</option>
+                                <option value="Junior">Junior (0-2 years)</option>
+                                <option value="Mid">Mid Level (2-5 years)</option>
+                                <option value="Senior">Senior (5-8 years)</option>
+                                <option value="Lead">Lead / Management (8+ years)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="skills">Core Skills * (comma-separated)</label>
+                            <input type="text" id="skills" name="skills" required placeholder="HTML, CSS, JavaScript, React">
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <button type="submit" class="btn btn-primary btn-block mt-4" id="form-submit-btn">
+                        <span>Finalize Profile & Create Account</span>
+                        <div class="loader" id="submit-loader"></div>
+                    </button>
+                </div>
+            </form>
+
+            <div class="modal-footer-hint" style="margin-top: 1rem; text-align: center; font-size: 0.85rem; color: var(--gray-500);">
+                <span>Already have an account? </span>
+                <a href="#" id="switch-to-login" style="color: var(--primary); font-weight: 600;">Log In here</a>
+            </div>
+            
+            <!-- Success Message Overlay inside modal -->
+            <div class="modal-success-screen" id="modal-success-screen">
+                <div class="success-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <path d="M20 6L9 17l-5-5"/>
+                    </svg>
+                </div>
+                <h3>Profile Created Successfully!</h3>
+                <p>Your resume has been converted to Markdown format and securely stored. We've matched you with top job possibilities.</p>
+                <button class="btn btn-primary" id="success-done-btn">Done</button>
+            </div>
+        </div>
+    <!-- Edit Profile Modal -->
+    <div class="modal-overlay" id="edit-profile-modal">
+        <div class="modal-card" style="max-width: 680px;">
+            <button class="modal-close" id="edit-modal-close" aria-label="Close Modal">&times;</button>
+            <div class="modal-header">
+                <h2>Edit Your Profile</h2>
+                <p>Update your details or upload a new resume to auto-fill fields.</p>
+            </div>
+            
+            <!-- Resume Re-Upload Section -->
+            <div style="background: var(--surface-container-low); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; border: 1px solid var(--border);">
+                <p style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--dark);">🔄 Upload New Resume <span style="font-weight: 400; color: var(--gray-500);">(optional — will auto-fill fields below)</span></p>
+                <div class="form-group" style="margin-bottom: 0.5rem;">
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="editResume" name="editResume" accept=".txt,.md,.pdf,.docx">
+                        <div class="file-upload-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                            </svg>
+                            <span>Choose Resume File (TXT, MD, PDF, DOCX)</span>
+                        </div>
+                        <div class="file-name-display" id="edit-resume-name-display">No file chosen</div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-outline btn-block" id="btn-parse-edit-resume" style="margin-top: 0.75rem;">
+                    <span id="parse-edit-resume-label">✨ Parse Resume & Auto-Fill Fields</span>
+                    <div class="loader" id="edit-parse-loader" style="display:none;"></div>
+                </button>
+            </div>
+
+            <form class="modal-form" id="edit-profile-form">
+                <!-- Form Row: Name and Email -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editFullName">Full Name *</label>
+                        <input type="text" id="editFullName" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editEmail">Email Address (Read-only)</label>
+                        <input type="email" id="editEmail" name="email" readonly style="background: var(--surface-container-low); cursor: not-allowed;">
+                    </div>
+                </div>
+
+                <!-- Form Row: Phone and Title -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editPhone">Phone Number *</label>
+                        <input type="tel" id="editPhone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editJobTitle">Preferred Job Title *</label>
+                        <input type="text" id="editJobTitle" name="jobTitle" required>
+                    </div>
+                </div>
+
+                <!-- Form Row: Experience Level and Core Skills -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editExperienceLevel">Experience Level *</label>
+                        <select id="editExperienceLevel" name="experienceLevel" required>
+                            <option value="" disabled selected>Select Level</option>
+                            <option value="Junior">Junior (0-2 years)</option>
+                            <option value="Mid">Mid Level (2-5 years)</option>
+                            <option value="Senior">Senior (5-8 years)</option>
+                            <option value="Lead">Lead / Management (8+ years)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editSkills">Core Skills * (comma-separated)</label>
+                        <input type="text" id="editSkills" name="skills" required>
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <button type="submit" class="btn btn-primary btn-block mt-4" id="edit-form-submit-btn">
+                    <span>Save Changes</span>
+                    <div class="loader" id="edit-submit-loader"></div>
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Login Modal -->
+    <!-- Resume Required Modal (shown when logged-in user has no resume) -->
+    <div class="modal-overlay" id="resume-required-modal">
+        <div class="modal-card">
+            <div class="modal-header" style="text-align:center;">
+                <div style="width:64px;height:64px;background:var(--primary-container);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
+                    <span class="material-symbols-outlined" style="font-size:32px;color:var(--primary);">upload_file</span>
+                </div>
+                <h2>Resume Required</h2>
+                <p>Your account doesn't have a resume yet. Please upload one so we can match you with the right opportunities.</p>
+            </div>
+
+            <form class="modal-form" id="resume-required-form" enctype="multipart/form-data">
+                <div id="resume-req-upload-step">
+                    <div class="form-group">
+                        <label for="resume-req-file">Upload Your Resume * (PDF, DOCX, TXT)</label>
+                        <div class="file-upload-wrapper">
+                            <input type="file" id="resume-req-file" name="resume" accept=".txt,.md,.pdf,.docx" required>
+                            <div class="file-upload-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                                </svg>
+                                <span>Choose Resume File...</span>
+                            </div>
+                            <div class="file-name-display" id="resume-req-name-display">No file chosen</div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-block mt-4" id="btn-req-parse-resume">
+                        <span>Continue — Extract My Details</span>
+                    </button>
+                </div>
+
+                <!-- Loading state -->
+                <div id="resume-req-loading" style="display:none;flex-direction:column;align-items:center;justify-content:center;padding:2rem 0;gap:1rem;">
+                    <div class="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+                    <p class="font-headline-sm text-primary font-bold">Reading your resume...</p>
+                    <p class="font-body-sm text-on-surface-variant">Our AI is extracting your details.</p>
+                </div>
+
+                <!-- Step 2: Review details -->
+                <div id="resume-req-details-step" style="display:none;">
+                    <p class="text-on-surface-variant font-body-sm mb-4">Review and confirm the details we extracted from your resume.</p>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="req-fullName">Full Name *</label>
+                            <input type="text" id="req-fullName" name="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="req-email">Email (Read-only)</label>
+                            <input type="email" id="req-email" name="email" readonly style="background:var(--surface-container-low);cursor:not-allowed;">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="req-phone">Phone Number *</label>
+                            <input type="tel" id="req-phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="req-jobTitle">Preferred Job Title *</label>
+                            <input type="text" id="req-jobTitle" name="jobTitle" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="req-experienceLevel">Experience Level *</label>
+                            <select id="req-experienceLevel" name="experienceLevel" required>
+                                <option value="" disabled selected>Select Level</option>
+                                <option value="Junior">Junior (0-2 years)</option>
+                                <option value="Mid">Mid Level (2-5 years)</option>
+                                <option value="Senior">Senior (5-8 years)</option>
+                                <option value="Lead">Lead / Management (8+ years)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="req-skills">Core Skills * (comma-separated)</label>
+                            <input type="text" id="req-skills" name="skills" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block mt-4" id="resume-req-submit-btn">
+                        <span>Save &amp; Enter Dashboard</span>
+                        <div class="loader" id="resume-req-loader"></div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="login-modal">
+        <div class="modal-card modal-card-sm">
+            <button class="modal-close" id="login-modal-close" aria-label="Close Modal">&times;</button>
+            <div class="modal-header">
+                <h2>Access RecruitEase</h2>
+                <p>Log in to access your recruitment portal and dashboard.</p>
+            </div>
+            
+            <form class="modal-form" id="login-form">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address *</label>
+                    <input type="email" id="loginEmail" name="email" required placeholder="john@example.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Password *</label>
+                    <input type="password" id="loginPassword" name="password" required placeholder="••••••••">
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginRole">Account Type *</label>
+                    <select id="loginRole" name="role" required>
+                        <option value="Candidate" selected>Candidate / Applicant</option>
+                        <option value="HR Manager">HR Recruiter / Manager</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block" id="login-submit-btn">
+                    <span>Log In</span>
+                    <div class="loader" id="login-loader"></div>
+                </button>
+
+                <div class="oauth-divider" style="display: flex; align-items: center; text-align: center; margin: 1.25rem 0; color: var(--gray-400); font-size: 0.85rem;">
+                    <hr style="flex-grow: 1; border: none; border-top: 1px solid var(--border); margin-right: 0.75rem; margin-top: 0; margin-bottom: 0;">
+                    <span>OR</span>
+                    <hr style="flex-grow: 1; border: none; border-top: 1px solid var(--border); margin-left: 0.75rem; margin-top: 0; margin-bottom: 0;">
+                </div>
+                
+                <button type="button" class="btn btn-outline btn-block" id="google-login-btn" style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; background: var(--surface); border: 1px solid var(--border); color: var(--dark); font-weight: 500; cursor: pointer; width: 100%;">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.64 9.20455C17.64 8.56636 17.5827 7.95273 17.4764 7.36364H9V10.845H13.8436C13.635 11.97 13.0009 12.9232 12.0477 13.5614V15.8195H14.9564C16.6582 14.2527 17.64 11.9455 17.64 9.20455Z" fill="#4285F4"/>
+                        <path d="M9 18C11.43 18 13.4673 17.1941 14.9564 15.8195L12.0477 13.5614C11.2418 14.1014 10.2109 14.4205 9 14.4205C6.65591 14.4205 4.67182 12.8373 3.96409 10.71H0.957275V13.0418C2.44636 16.0077 5.50227 18 9 18Z" fill="#34A853"/>
+                        <path d="M3.96409 10.71C3.78409 10.17 3.68182 9.59318 3.68182 9C3.68182 8.40682 3.78409 7.83 3.96409 7.29V4.95818H0.957275C0.347727 6.17318 0 7.54773 0 9C0 10.4523 0.347727 11.8268 0.957275 13.0418L3.96409 10.71Z" fill="#FBBC05"/>
+                        <path d="M9 3.57955C10.3214 3.57955 11.5077 4.03364 12.4405 4.92545L15.0218 2.34409C13.4632 0.891818 11.4259 0 9 0C5.50227 0 2.44636 1.99227 0.957275 4.95818L3.96409 7.29C4.67182 5.16273 6.65591 3.57955 9 3.57955Z" fill="#EA4335"/>
+                    </svg>
+                    <span>Continue with Google</span>
+                </button>
+            </form>
+            
+            <div class="modal-footer-hint" style="margin-top: 1.5rem; text-align: center; font-size: 0.85rem; color: var(--gray-500);">
+                <span>Don't have an account? </span>
+                <a href="#" id="switch-to-signup" style="color: var(--primary); font-weight: 600;">Sign Up here</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Dashboard View -->
+    
+    <!-- Application Dashboard View (Stitch UI Styled) -->
+    <div class="dashboard-view hidden font-body-md text-on-surface w-full h-full bg-surface overflow-hidden" id="dashboard-view">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="w-[240px] bg-surface-container-lowest border-r border-outline-variant h-full flex flex-col overflow-y-auto shrink-0">
+            <div class="h-[72px] flex items-center px-6 mb-stack-md">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-white font-bold">RE</div>
+                    <span class="font-headline-sm text-headline-sm text-primary">Recruit<span class="text-secondary">Ease</span></span>
+                </div>
+            </div>
+            
+            <nav class="flex-1 px-4 space-y-6 pb-8">
+                <!-- Candidate Links -->
+                <div id="sidebar-candidate-links">
+                    <p class="px-4 mb-2 text-label-md text-on-surface-variant uppercase tracking-wider">CANDIDATE</p>
+                    <div class="space-y-1">
+                        <button class="db-tab-btn active w-full flex items-center px-4 py-2.5 rounded-lg transition-all text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface" id="tab-btn-status" data-target="cand-status-view">
+                            <span class="material-symbols-outlined mr-3 text-[20px]">psychology</span>Self Development
+                        </button>
+                        <button class="db-tab-btn w-full flex items-center px-4 py-2.5 rounded-lg transition-all text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface" id="tab-btn-jobs" data-target="cand-jobs-view">
+                            <span class="material-symbols-outlined mr-3 text-[20px]">work</span>Explore Jobs
+                        </button>
+                        <button class="db-tab-btn w-full flex items-center px-4 py-2.5 rounded-lg transition-all text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface" id="tab-btn-hiring" data-target="cand-hiring-view">
+                            <span class="material-symbols-outlined mr-3 text-[20px]">assignment</span>Hiring Status
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recruiter / HR Links -->
+                <div id="sidebar-hr-links" style="display: none;">
+                    <p class="px-4 mb-2 text-label-md text-on-surface-variant uppercase tracking-wider">RECRUITER</p>
+                    <div class="space-y-1">
+                        <button class="w-full flex items-center px-4 py-2.5 rounded-lg bg-primary-container text-on-primary-container font-medium" id="tab-btn-hr-workspace">
+                            <span class="material-symbols-outlined mr-3 text-[20px]">grid_view</span>Workspace
+                        </button>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- User profile footer / Logout -->
+            <div class="p-4 border-t border-outline-variant mt-auto">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold" id="db-user-avatar">U</div>
+                    <div class="text-left overflow-hidden">
+                        <p class="text-label-md text-on-surface truncate font-semibold" id="db-username">User Name</p>
+                        <p class="text-label-sm text-on-surface-variant truncate" id="db-user-role">Role</p>
+                    </div>
+                </div>
+                <button class="w-full mb-2 py-2 bg-primary-container hover:bg-primary/90 hover:text-white text-on-primary-container rounded-lg font-body-sm text-body-sm transition-colors flex items-center justify-center gap-2" id="btn-edit-profile">
+                    <span class="material-symbols-outlined text-[18px]">edit</span> Edit Profile
+                </button>
+                <button class="w-full py-2 bg-surface-container hover:bg-surface-container-high text-on-surface rounded-lg font-body-sm text-body-sm transition-colors flex items-center justify-center gap-2" id="btn-logout">
+                    <span class="material-symbols-outlined text-[18px]">logout</span> Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Dashboard View Container -->
+        <div class="flex-1 flex flex-col overflow-y-auto">
+            <!-- Top bar / Header -->
+            <header class="h-[64px] bg-white border-b border-outline-variant flex items-center px-8 justify-between shrink-0">
+                <div class="w-72 relative">
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+                    <input class="w-full pl-10 pr-4 py-1.5 bg-surface-container rounded-lg text-body-sm outline-none" placeholder="Search..." type="text"/>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full"><span class="material-symbols-outlined">notifications</span></button>
+                </div>
+            </header>
+
+            <main class="flex-grow p-8 bg-surface">
+                <!-- 1. CANDIDATE PANEL -->
+                <div class="w-full" id="panel-candidate">
+                    
+                    <!-- TAB 1: SELF DEVELOPMENT -->
+                    <div class="db-tab-content active space-y-6" id="cand-status-view">
+                        <div class="mb-4">
+                            <h1 class="font-headline-xl text-headline-xl text-primary">Good morning, <span id="cand-name-header">Candidate</span>!</h1>
+                            <p class="text-body-lg text-on-surface-variant mt-1">Let's get you interview ready. Here is a comprehensive overview of your candidacy profile and actionable AI insights.</p>
+                        </div>
+
+                        <!-- Bento Metrics Grid -->
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                            <!-- Card 1 -->
+                            <div class="bg-white p-6 rounded-xl shadow-sm border border-outline-variant/30 relative overflow-hidden group">
+                                <p class="text-label-md text-on-surface-variant uppercase mb-3">Overall compatibility</p>
+                                <span class="font-headline-lg text-headline-lg text-primary" id="cand-compat-overall">95%</span>
+                                <div class="w-full bg-surface-container h-1.5 rounded-full mt-4 overflow-hidden"><div class="bg-primary h-full rounded-full" id="cand-compat-overall-bar" style="width: 95%"></div></div>
+                            </div>
+                            <!-- Card 2 -->
+                            <div class="bg-white p-6 rounded-xl shadow-sm border border-outline-variant/30 relative overflow-hidden group">
+                                <p class="text-label-md text-on-surface-variant uppercase mb-3">Domain compatibility</p>
+                                <span class="font-headline-lg text-headline-lg text-primary" id="cand-compat-domain">88%</span>
+                                <div class="w-full bg-surface-container h-1.5 rounded-full mt-4 overflow-hidden"><div class="bg-secondary h-full rounded-full" id="cand-compat-domain-bar" style="width: 88%"></div></div>
+                            </div>
+                            <!-- Card 3 -->
+                            <div class="bg-white p-6 rounded-xl shadow-sm border border-outline-variant/30 relative overflow-hidden group">
+                                <p class="text-label-md text-on-surface-variant uppercase mb-3">Technical compatibility</p>
+                                <span class="font-headline-lg text-headline-lg text-primary" id="cand-compat-tech">92%</span>
+                                <div class="w-full bg-surface-container h-1.5 rounded-full mt-4 overflow-hidden"><div class="bg-primary h-full rounded-full" id="cand-compat-tech-bar" style="width: 92%"></div></div>
+                            </div>
+                            <!-- Card 4 -->
+                            <div class="bg-white p-6 rounded-xl shadow-sm border border-outline-variant/30 relative overflow-hidden group">
+                                <p class="text-label-md text-on-surface-variant uppercase mb-3">Selected Job Title</p>
+                                <span class="font-headline-sm text-headline-sm text-primary block truncate" id="cand-title">Software Engineer</span>
+                            </div>
+                        </div>
+
+                        <!-- Main Bento Grid Split -->
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                            
+                            <!-- Left 8 Columns -->
+                            <div class="lg:col-span-8 space-y-6">
+                                <!-- Skill Compatibility circular breakdown -->
+                                <div class="bg-white p-8 rounded-xl shadow-sm border border-outline-variant/30">
+                                    <h3 class="font-headline-md text-headline-md text-primary mb-6">Skill Compatibility</h3>
+                                    <div class="skill-compat-list space-y-4">
+                                        <!-- Will be updated dynamically by app.js -->
+                                    </div>
+                                </div>
+
+                                <!-- AI Self Intro Pitch Generator -->
+                                <div class="bg-white p-8 rounded-xl shadow-sm border border-outline-variant/30">
+                                    <div class="flex justify-between items-center mb-4">
+                                        <h3 class="font-headline-md text-headline-md text-primary">✨ AI Self-Intro Generator</h3>
+                                        <button class="bg-primary text-white font-label-md text-label-md px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors" id="btn-generate-self-intro">Generate Pitch</button>
+                                    </div>
+                                    <p class="text-body-sm text-on-surface-variant mb-4">Create a compelling, recruiter-ready professional introduction based on your parsed resume.</p>
+                                    
+                                    <div class="flex gap-2 border-b border-outline-variant pb-2 mb-4">
+                                        <button class="self-intro-tab-btn active px-3 py-1.5 text-body-sm font-semibold rounded bg-primary-container text-on-primary-container" data-intro-tab="elevator">30s Elevator Pitch</button>
+                                        <button class="self-intro-tab-btn px-3 py-1.5 text-body-sm font-semibold rounded hover:bg-surface-container" data-intro-tab="summary">Professional Summary</button>
+                                        <button class="self-intro-tab-btn px-3 py-1.5 text-body-sm font-semibold rounded hover:bg-surface-container" data-intro-tab="hook">Cover Letter Hook</button>
+                                    </div>
+
+                                    <div class="bg-surface-container-low p-6 rounded-lg relative min-h-[120px]">
+                                        <p class="text-body-md text-on-surface leading-relaxed" id="self-intro-text">
+                                            Upload your resume and click <strong>Generate Pitch</strong> to get personalized elevator pitches, summaries, and cover letter hooks.
+                                        </p>
+                                        <div class="absolute top-4 right-4 flex gap-2">
+                                            <button class="btn btn-outline btn-sm bg-white hover:bg-surface-container" id="btn-practice-speak" style="display: none;">🎤 Practice Speaking</button>
+                                            <button class="btn btn-outline btn-sm bg-white hover:bg-surface-container" id="btn-copy-self-intro" style="display: none;">Copy</button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Speech Practice Panel -->
+                                    <div class="mt-4 p-6 bg-amber-50 border border-amber-200 rounded-lg hidden flex-col gap-3" id="speech-practice-panel">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-amber-800 font-semibold flex items-center">
+                                                <span class="w-2.5 h-2.5 bg-red-500 rounded-full animate-ping mr-2"></span>
+                                                Practice Speaking Now:
+                                            </span>
+                                            <button class="px-2 py-1 text-xs border border-amber-300 rounded text-amber-700 hover:bg-amber-100" id="btn-stop-speak">Stop Practice</button>
+                                        </div>
+                                        <p class="italic text-amber-900" id="speech-transcript-text">Listening... Start speaking your pitch.</p>
+                                        <div class="hidden justify-between items-center border-t border-amber-200 pt-3" id="speech-score-box">
+                                            <div>
+                                                <strong class="block text-amber-900 font-bold" id="speech-grade-title">Evaluation Complete</strong>
+                                                <span class="text-xs text-amber-700" id="speech-score-feedback">Keep practicing!</span>
+                                            </div>
+                                            <div class="w-12 h-12 rounded-full border-4 border-amber-400 bg-white flex items-center justify-center font-bold text-amber-700" id="speech-score-circle">0%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right 4 Columns -->
+                            <div class="lg:col-span-4 space-y-6">
+                                <!-- Candidacy Profile Details -->
+                                <div class="bg-white p-8 rounded-xl shadow-sm border border-outline-variant/30">
+                                    <h3 class="font-headline-md text-headline-md text-primary mb-4">Candidacy Profile</h3>
+                                    <div class="space-y-3 text-body-sm text-on-surface-variant">
+                                        <p><strong>Name:</strong> <span id="cand-name" class="text-on-surface font-semibold"></span></p>
+                                        <p><strong>Email:</strong> <span id="cand-email" class="text-on-surface"></span></p>
+                                        <p><strong>Phone:</strong> <span id="cand-phone" class="text-on-surface"></span></p>
+                                        <p><strong>Experience:</strong> <span id="cand-exp" class="text-on-surface"></span></p>
+                                        <p><strong>Skills:</strong> <span id="cand-skills" class="text-on-surface"></span></p>
+                                    </div>
+                                    <div class="mt-6 pt-4 border-t border-outline-variant/30 flex items-center justify-between">
+                                        <span id="cand-resume-file" class="text-xs text-on-surface-variant truncate max-w-[150px] font-mono">No resume</span>
+                                        <button class="text-primary hover:text-secondary font-semibold text-xs flex items-center gap-1" id="btn-view-my-resume">
+                                            <span class="material-symbols-outlined text-[16px]">visibility</span> View Resume
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Evaluate urself -->
+                                <div class="bg-white p-8 rounded-xl shadow-sm border border-outline-variant/30">
+                                    <h3 class="font-headline-md text-headline-md text-primary mb-4">Evaluate Yourself</h3>
+                                    <div class="mb-4">
+                                        <label class="text-label-sm text-on-surface-variant font-semibold block mb-1" for="eval-job-select">Target Role for Practice:</label>
+                                        <select class="w-full px-3 py-2 border border-outline-variant rounded-lg text-body-sm focus:ring-2 focus:ring-secondary outline-none" id="eval-job-select">
+                                            <option value="" disabled selected>Select a job role...</option>
+                                        </select>
+                                    </div>
+                                    <div class="space-y-3">
+                                        <button class="w-full py-3 px-4 bg-surface-container hover:bg-surface-container-high rounded-xl flex items-center justify-between text-left text-primary font-medium transition-colors" id="btn-evaluate-resume-compat">
+                                            <span class="flex items-center"><span class="material-symbols-outlined mr-2">check_circle</span>Resume Compatibility</span>
+                                            <span class="material-symbols-outlined">arrow_forward</span>
+                                        </button>
+                                        <button class="w-full py-3 px-4 bg-surface-container hover:bg-surface-container-high rounded-xl flex items-center justify-between text-left text-primary font-medium transition-colors" id="btn-evaluate-evaluation">
+                                            <span class="flex items-center"><span class="material-symbols-outlined mr-2">assignment</span>NOVA Evaluation</span>
+                                            <span class="material-symbols-outlined">arrow_forward</span>
+                                        </button>
+                                        <button class="w-full py-3 px-4 bg-surface-container hover:bg-surface-container-high rounded-xl flex items-center justify-between text-left text-primary font-medium transition-colors" id="btn-evaluate-interviews">
+                                            <span class="flex items-center"><span class="material-symbols-outlined mr-2">mic</span>AI Interview</span>
+                                            <span class="material-symbols-outlined">arrow_forward</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Daily Tasks -->
+                                <div class="bg-white p-8 rounded-xl shadow-sm border border-outline-variant/30 flex flex-col">
+                                    <h3 class="font-headline-md text-headline-md text-primary mb-4">Daily Tasks</h3>
+                                    <p class="text-body-sm text-on-surface-variant mb-4">Complete these checklist items to maximize your selection rates.</p>
+                                    <ul class="space-y-3 flex-1" id="prep-todo-list">
+                                        <!-- Populated dynamically -->
+                                    </ul>
+                                    <div class="mt-6 pt-4 border-t border-outline-variant/30">
+                                        <strong class="text-label-md text-primary uppercase tracking-wider block mb-2">💡 Daily Tip & Trick</strong>
+                                        <p class="text-body-sm text-on-surface-variant italic" id="prep-tip-box">
+                                            Focus on structuring your answers using the STAR method (Situation, Task, Action, Result) during the AI interview.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: EXPLORE JOBS -->
+                    <div class="db-tab-content space-y-6" id="cand-jobs-view" style="display: none;">
+                        <div>
+                            <h1 class="font-headline-xl text-headline-xl text-primary">Find your next opportunity</h1>
+                            <p class="text-body-lg text-on-surface-variant mt-1">Discover roles tailored to your skills and experience using our AI-driven matching engine.</p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-white p-4 rounded-xl border border-outline-variant/30 shadow-sm">
+                            <input class="px-4 py-2 border border-outline-variant rounded-lg outline-none focus:ring-2 focus:ring-secondary text-body-sm" id="jobs-search-input" placeholder="Search by job title or keyword..." type="text"/>
+                            <button class="bg-secondary text-white font-medium py-2 rounded-lg hover:bg-secondary/90 transition-colors" id="btn-search-jobs">Search matched jobs</button>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4" id="jobs-list-container">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: HIRING STATUS -->
+                    <div class="db-tab-content space-y-6" id="cand-hiring-view" style="display: none;">
+                        <div>
+                            <h1 class="font-headline-xl text-headline-xl text-primary">Active Applications</h1>
+                            <p class="text-body-lg text-on-surface-variant mt-1">Track the real-time status of your job applications.</p>
+                        </div>
+                        <div class="bg-white rounded-xl border border-outline-variant/30 p-6 shadow-sm">
+                            <div class="space-y-4" id="hiring-status-container">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. RECRUITER / HR PANEL -->
+                <div class="w-full" id="panel-hr" style="display: none;">
+                    <div class="mb-6">
+                        <h1 class="font-headline-xl text-headline-xl text-primary">Recruiter Workspace</h1>
+                        <p class="text-body-lg text-on-surface-variant mt-1">Welcome back, Alex. Here is the pulse of your recruitment pipeline.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white p-6 rounded-xl border border-outline-variant/30 shadow-sm">
+                            <p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-2">Total Applicants</p>
+                            <span class="font-headline-lg text-headline-lg text-primary" id="hr-count-applicants">0</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden">
+                        <div class="p-6 border-b border-outline-variant/30">
+                            <h3 class="font-headline-md text-headline-md text-primary">Top Candidates</h3>
+                        </div>
+                        <div class="overflow-x-auto w-full">
+                            <table class="w-full text-left text-body-sm">
+                                <thead class="bg-surface border-b border-outline-variant/30 text-on-surface-variant font-semibold">
+                                    <tr>
+                                        <th class="p-4">Name</th>
+                                        <th class="p-4">Job Title</th>
+                                        <th class="p-4">Experience</th>
+                                        <th class="p-4">Skills</th>
+                                        <th class="p-4">Date</th>
+                                        <th class="p-4 text-right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="applicants-table-body">
+                                    <!-- Populated dynamically by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+
+    <!-- Email Notification Modal (Simulated) -->
+    <div class="modal-overlay" id="email-notification-modal">
+        <div class="modal-card" style="max-width: 100%; width: 100vw; height: 100vh; margin: 0; border-radius: 0; padding: 3rem; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+            <div style="background: #E0E7FF; width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 8L10.89 13.26C11.56 13.71 12.44 13.71 13.11 13.26L21 8M5 19H19C20.1 19 21 18.1 21 17V7C21 5.9 20.1 5 19 5H5C3.9 5 3 5.9 3 7V17C3 18.1 3.9 19 5 19Z" stroke="#4338CA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h2 style="margin-bottom: 0.5rem; color: var(--dark);">Inbox: New Test Invitation</h2>
+            <p style="color: var(--dark-muted); margin-bottom: 1.5rem; max-width: 500px;">
+                Congratulations! Your resume scored <strong id="email-ats-score" style="color: var(--primary);">86%</strong> on our ATS evaluation. You have been selected to proceed to the next round.
+            </p>
+            <div style="background: var(--surface); padding: 1.5rem; border-radius: 0.5rem; border: 1px solid var(--border); margin-bottom: 2rem; text-align: left; max-width: 500px; width: 100%;">
+                <p style="font-size: 0.9rem; margin-bottom: 0.75rem;"><strong>From:</strong> RecruitEase Careers</p>
+                <p style="font-size: 0.9rem; margin-bottom: 0.75rem;"><strong>Subject:</strong> Invitation to NOVA Evaluation Test</p>
+                <p style="font-size: 0.9rem; margin-bottom: 0; color: var(--dark-muted); line-height: 1.5;">
+                    Please complete the NOVA AI-driven assessment to demonstrate your skills. The test will take approximately 15 minutes.
+                </p>
+            </div>
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <button class="btn btn-outline" id="btn-close-email" onclick="document.getElementById('email-notification-modal').classList.remove('active'); document.body.style.overflow = '';">Dismiss</button>
+                <a href="/nova/test-setup" class="btn btn-primary" id="btn-start-nova-test">Start NOVA Test</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Logic -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,530 @@
+<html lang="en"><head>
+  <script src="auth_guard.js"></script>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Poppins:wght@600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-dim":"#cfdce5","surface-container-low":"#e8f6ff","error-container":"#ffdad6","surface-variant":"#d7e4ee","on-primary-container":"#84a5c4","secondary-fixed-dim":"#5ed9d6","on-background":"#111d24","background":"#f4faff","surface-bright":"#f4faff","primary":"#00253c","primary-fixed-dim":"#a9caea","outline":"#73777e","on-secondary-fixed-variant":"#00504f","on-tertiary":"#ffffff","secondary-fixed":"#7df5f3","on-secondary":"#ffffff","surface-tint":"#41627d","secondary-container":"#7df5f3","on-tertiary-fixed-variant":"#004f51","primary-container":"#173b55","error":"#ba1a1a","on-primary":"#ffffff","inverse-primary":"#a9caea","inverse-surface":"#263239","primary-fixed":"#cce5ff","on-tertiary-container":"#51afb2","on-tertiary-fixed":"#002021","on-surface-variant":"#42474d","surface":"#f4faff","on-error-container":"#93000a","on-error":"#ffffff","inverse-on-surface":"#e5f3fc","on-secondary-container":"#00706f","tertiary":"#002729","surface-container":"#e2f0f9","surface-container-highest":"#d7e4ee","on-secondary-fixed":"#00201f","surface-container-high":"#ddeaf3","tertiary-container":"#003f41","on-primary-fixed":"#001e31","on-surface":"#111d24","outline-variant":"#c2c7ce","surface-container-lowest":"#ffffff","on-primary-fixed-variant":"#284a64","tertiary-fixed-dim":"#79d5d8","secondary":"#006a68","tertiary-fixed":"#95f2f5"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"sidebar_width":"260px","margin_page":"40px","stack_md":"16px","header_height":"72px","gutter":"24px","stack_sm":"8px","stack_lg":"32px"},"fontFamily":{"headline-md":["Poppins"],"headline-lg":["Poppins"],"headline-xl":["Poppins"],"body-lg":["Inter"],"body-sm":["Inter"],"label-sm":["Inter"],"headline-sm":["Poppins"],"body-md":["Inter"],"label-md":["Inter"]},"fontSize":{"headline-md":["24px",{"lineHeight":"32px","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-xl":["40px",{"lineHeight":"52px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"body-sm":["14px",{"lineHeight":"20px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","fontWeight":"500"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"600"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-[240px] bg-surface-container-lowest border-r border-outline-variant z-50 flex flex-col overflow-y-auto">
+  <div class="h-[72px] flex items-center px-6 mb-stack-md">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-sm">RE</div>
+      <span class="font-bold text-lg text-primary">Recruit<span class="text-secondary">Ease</span></span>
+    </div>
+  </div>
+  <nav class="flex-1 px-4 space-y-6 pb-8">
+    <section>
+      <p class="px-4 mb-2 text-label-md text-on-surface-variant uppercase tracking-wider">CANDIDATE PORTAL</p>
+      <div class="space-y-1">
+        <a href="dashboard.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">grid_view</span>Dashboard</a>
+        <a href="explore_jobs.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">work</span>Explore Jobs</a>
+        <a href="applications.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">assignment</span>Applications & Status</a>
+        <a href="self_development.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">psychology</span>Self Development</a>
+        <a href="ai_interview.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">mic</span>AI Mock Interview</a>
+        <a href="behavioral_assessment.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">quiz</span>Behavioral Test</a>
+        <a href="proctored_assessment.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">verified_user</span>NOVA Assessment</a>
+      </div>
+    </section>
+  </nav>
+</aside><div class="pl-[240px]"><header class="fixed top-0 left-[240px] right-0 h-[64px] bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant z-40 flex items-center px-8 justify-between"><div class="flex-1 flex items-center gap-8"><div class="relative w-full max-w-md"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span><input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-transparent focus:border-secondary rounded-lg text-body-sm outline-none transition-all" placeholder="Search candidates, jobs, interviews..." type="text"/></div></div><div class="flex items-center gap-6"><button class="relative p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors"><span class="material-symbols-outlined">notifications</span><span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span></button><div class="flex items-center gap-3 pl-4 border-l border-outline-variant"><div class="text-right"><p class="text-label-md text-on-surface">Alex Morgan</p><p class="text-label-sm text-on-surface-variant">HR Manager</p></div><img alt="Alex Morgan" class="w-10 h-10 rounded-full border border-outline-variant object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLtoBxNwdhyR7o6UBzYFqLcQCDkvWs0LOfafjpdc87Ctvs-4Q-RqDc0lkM2OhEJ7qRtR-nugUigJJbF8nbD0AUqBQ9zSpAl29xbbZl9_NfnP0C_VdF8tQ7tndwx9VsMd9qVsIpm6OJ5cXIHrjR9dEu18u_yirok3sV5CH4O-u4vYdkaWylYiShKowSuZi-P4AaoaVHVICZ6o13hRV4OoW4k2ZPhzXEDk3b7uSGKJ95fmRYhCusdW6l2n7vLf"/></div></div></header><main class="relative pt-[64px] min-h-screen"><div class="p-margin_page"><div class="flex flex-col w-full font-body-md text-on-surface">
+<div class="mb-stack-lg animate-[fade-in-up_0.6s_ease-out]">
+<h1 class="font-headline-xl text-headline-xl text-primary mb-2">
+      Good morning, Alex.
+    </h1>
+<p class="font-headline-sm text-headline-sm text-on-surface-variant max-w-2xl">
+      Let's get you interview ready. Here is a comprehensive overview of your candidacy profile and actionable AI insights.
+    </p>
+</div>
+<div class="grid grid-cols-4 gap-gutter mb-stack-lg animate-[fade-in-up_0.8s_ease-out_both]">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary-fixed-dim/20 rounded-full blur-2xl group-hover:bg-primary-fixed-dim/40 transition-colors"></div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase mb-4 relative z-10">Profile Completion</p>
+<div class="flex items-end gap-3 relative z-10">
+<span id="val-profile" class="font-headline-lg text-headline-lg text-primary">87%</span>
+<span id="val-profile-inc" class="font-body-sm text-body-sm text-secondary flex items-center mb-1"><span class="material-symbols-outlined text-[16px] mr-1">trending_up</span> +5%</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full mt-4 overflow-hidden relative z-10">
+<div id="bar-profile" class="bg-primary h-full rounded-full transition-all duration-1000" style="width: 87%"></div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-secondary-fixed/20 rounded-full blur-2xl group-hover:bg-secondary-fixed/40 transition-colors"></div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase mb-4 relative z-10">AI Job Match</p>
+<div class="flex items-end gap-3 relative z-10">
+<span id="val-match" class="font-headline-lg text-headline-lg text-primary">92%</span>
+<span class="font-body-sm text-body-sm text-secondary flex items-center mb-1"><span class="material-symbols-outlined text-[16px] mr-1">check_circle</span> Top Tier</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full mt-4 overflow-hidden relative z-10">
+<div id="bar-match" class="bg-secondary h-full rounded-full transition-all duration-1000 delay-100" style="width: 92%"></div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-tertiary-fixed-dim/20 rounded-full blur-2xl group-hover:bg-tertiary-fixed-dim/40 transition-colors"></div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase mb-4 relative z-10">Applications</p>
+<div class="flex items-end gap-3 relative z-10">
+<span id="val-apps" class="font-headline-lg text-headline-lg text-primary">12</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center mb-1">Active</span>
+</div>
+<div class="flex gap-1 mt-4 relative z-10">
+<div class="flex-1 bg-secondary h-1.5 rounded-full opacity-100"></div>
+<div class="flex-1 bg-secondary h-1.5 rounded-full opacity-60"></div>
+<div class="flex-1 bg-secondary h-1.5 rounded-full opacity-30"></div>
+<div class="flex-1 bg-surface-container h-1.5 rounded-full"></div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary-container/10 rounded-full blur-2xl group-hover:bg-primary-container/20 transition-colors"></div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase mb-4 relative z-10">Interview Readiness</p>
+<div class="flex items-end gap-3 relative z-10">
+<span id="val-ready" class="font-headline-lg text-headline-lg text-primary">86%</span>
+<span class="font-body-sm text-body-sm text-secondary flex items-center mb-1"><span class="material-symbols-outlined text-[16px] mr-1">auto_awesome</span> Ready</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full mt-4 overflow-hidden relative z-10">
+<div id="bar-ready" class="bg-primary h-full rounded-full transition-all duration-1000 delay-300" style="width: 86%"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-gutter animate-[fade-in-up_1s_ease-out_both]">
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-gutter">
+<div class="grid grid-cols-2 gap-gutter">
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm relative overflow-hidden col-span-2 md:col-span-1">
+<div class="flex justify-between items-start mb-6">
+<h3 class="font-headline-md text-headline-md text-primary">Skill Compatibility</h3>
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">more_horiz</span></button>
+</div>
+<div class="flex items-center gap-8">
+<div class="relative w-32 h-32 flex-shrink-0">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<circle class="stroke-surface-container stroke-[8px]" cx="50" cy="50" fill="none" r="45"></circle>
+<circle id="circle-overall" class="stroke-secondary stroke-[8px] transition-all duration-1000" cx="50" cy="50" fill="none" r="45" stroke-dasharray="282.7" stroke-dashoffset="36.7" stroke-linecap="round"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center flex-col">
+<span id="val-overall" class="font-headline-md text-headline-md text-primary">87%</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Overall</span>
+</div>
+</div>
+<div class="flex-1 space-y-4">
+<div>
+<div class="flex justify-between mb-1">
+<span class="font-body-sm text-body-sm text-on-surface">Technical</span>
+<span id="val-tech" class="font-body-sm text-body-sm text-secondary font-medium">92%</span>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full"><div id="bar-tech" class="bg-secondary h-full rounded-full transition-all duration-1000 w-[92%]"></div></div>
+</div>
+<div>
+<div class="flex justify-between mb-1">
+<span class="font-body-sm text-body-sm text-on-surface">Domain</span>
+<span id="val-domain" class="font-body-sm text-body-sm text-secondary font-medium">85%</span>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full"><div id="bar-domain" class="bg-secondary h-full rounded-full transition-all duration-1000 w-[85%]"></div></div>
+</div>
+<div>
+<div class="flex justify-between mb-1">
+<span class="font-body-sm text-body-sm text-on-surface">Communication</span>
+<span id="val-comm" class="font-body-sm text-body-sm text-secondary font-medium">88%</span>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full"><div id="bar-comm" class="bg-secondary h-full rounded-full transition-all duration-1000 w-[88%]"></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-tertiary-fixed p-8 rounded-xl col-span-2 md:col-span-1 shadow-sm relative overflow-hidden text-on-tertiary-fixed">
+<div class="absolute top-0 right-0 p-6 opacity-10">
+<span class="material-symbols-outlined text-[120px]">psychology</span>
+</div>
+<div class="relative z-10 h-full flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-secondary">auto_awesome</span>
+<span class="font-label-md text-label-md uppercase tracking-wider text-on-tertiary-fixed-variant">AI Insight</span>
+</div>
+<h3 id="insight-title" class="font-headline-sm text-headline-sm mb-3">Master the STAR Method</h3>
+<p class="font-body-sm text-body-sm text-on-tertiary-fixed-variant opacity-90 leading-relaxed">
+                <span id="insight-desc">Based on your recent mock interview, structuring your answers with Situation, Task, Action, and Result will improve clarity by 40%. Focus specifically on quantifying the "Result" phase.</span>
+              </p>
+</div>
+<button class="mt-6 self-start bg-secondary text-on-secondary px-6 py-2.5 rounded-lg font-body-sm text-body-sm hover:bg-on-secondary-fixed transition-colors flex items-center gap-2">
+              Practice Now <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm flex flex-col justify-center transition-opacity duration-300" id="carousel-1-card">
+<div class="flex items-center gap-3 mb-4 text-primary">
+<span id="carousel-1-icon" class="material-symbols-outlined text-[28px]">work</span>
+<h3 id="carousel-1-title" class="font-headline-md text-headline-md">Explore Jobs</h3>
+</div>
+<p id="carousel-1-desc" class="font-body-md text-body-md text-on-surface leading-relaxed mb-6">
+  Upload your resume and let our AI parse your skills to find the perfect job matches across the globe.
+</p>
+<button id="carousel-1-btn" class="self-start px-5 py-2.5 bg-primary text-on-primary rounded-lg font-label-md hover:bg-primary-container transition-colors">
+  View Feature
+</button>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm flex flex-col justify-center transition-opacity duration-300" id="carousel-3-card">
+<div class="flex items-center gap-3 mb-4 text-primary">
+<span id="carousel-3-icon" class="material-symbols-outlined text-[28px]">mic</span>
+<h3 id="carousel-3-title" class="font-headline-md text-headline-md">AI Interview Preparation</h3>
+</div>
+<p id="carousel-3-desc" class="font-body-md text-body-md text-on-surface leading-relaxed mb-6">
+  Practice answering common behavioral and technical questions with our AI-powered mock interviewer.
+</p>
+<button id="carousel-3-btn" class="self-start px-5 py-2.5 bg-primary text-on-primary rounded-lg font-label-md hover:bg-primary-container transition-colors">
+  View Feature
+</button>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-gutter">
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm">
+<h3 class="font-headline-md text-headline-md text-primary mb-6">Feature Fit Analysis</h3>
+<div class="flex items-center justify-between mb-8">
+<div>
+<p id="val-feature" class="font-headline-lg text-headline-lg text-primary leading-none">92%</p>
+<p id="feature-title" class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-1">Problem Solving</p>
+</div>
+<div class="w-16 h-16 bg-secondary-fixed/20 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-[32px]">extension</span>
+</div>
+</div>
+<div class="space-y-5">
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-body-sm text-body-sm text-on-surface">Algorithm Design</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Strong</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden flex">
+<div class="bg-primary h-full w-[40%]"></div>
+<div class="bg-secondary h-full w-[45%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-body-sm text-body-sm text-on-surface">System Architecture</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Advanced</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden flex">
+<div class="bg-primary h-full w-[60%]"></div>
+<div class="bg-secondary h-full w-[35%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-body-sm text-body-sm text-on-surface">Debugging</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Proficient</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden flex">
+<div class="bg-primary h-full w-[30%]"></div>
+<div class="bg-secondary h-full w-[50%]"></div>
+</div>
+</div>
+</div>
+<div class="mt-6 p-4 bg-surface-container-low rounded-lg border border-surface-variant flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-[20px] mt-0.5">lightbulb</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Your problem-solving score indexes highly for the Senior Engineer roles you've applied to.</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm flex-1 flex flex-col transition-opacity duration-300 justify-center" id="carousel-2-card">
+<div class="flex items-center gap-3 mb-6">
+<span id="carousel-2-icon" class="material-symbols-outlined text-secondary text-[28px]">verified</span>
+<h3 id="carousel-2-title" class="font-headline-md text-headline-md text-primary">NOVA Assessment</h3>
+</div>
+<p id="carousel-2-desc" class="font-body-md text-body-md text-on-surface-variant flex-1 leading-relaxed">
+  Validate your technical abilities with our industry-standard proctored assessments.
+</p>
+<button id="carousel-2-btn" class="mt-4 w-full py-2.5 rounded-lg border border-outline-variant text-on-surface font-body-sm text-body-sm hover:bg-surface-container-low transition-colors">
+  Explore Feature
+</button>
+</div>
+</div>
+</div>
+</div></div></main></div>    <script src="candidate_portal.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Calculate stats based on actual user profile
+    let profileData = null;
+    try {
+        const saved = localStorage.getItem('currentUserProfile');
+        if (saved) profileData = JSON.parse(saved);
+    } catch(e) {}
+    
+    // Hash function to make numbers deterministic based on string
+    function hashString(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            hash = str.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        return Math.abs(hash);
+    }
+    
+    // Default fallback values if no profile
+    let profile = 45;
+    let match = 65;
+    let apps = 2;
+    let ready = 50;
+    let overall = 60;
+    let tech = 55;
+    let domain = 50;
+    let comm = 70;
+    let featureFit = 60;
+    
+    if (profileData) {
+        // Calculate profile completion
+        profile = 20; // Base
+        if (profileData.phone) profile += 15;
+        if (profileData.jobTitle) profile += 15;
+        if (profileData.experienceLevel) profile += 15;
+        
+        let skillsCount = 0;
+        if (profileData.skills) {
+            skillsCount = Array.isArray(profileData.skills) ? profileData.skills.length : profileData.skills.split(',').length;
+            if (skillsCount > 0 && skillsCount <= 3) profile += 15;
+            if (skillsCount > 3) profile += 20;
+        }
+        if (profileData.resumeFile) profile += 15;
+        
+        // Calculate other metrics deterministically based on email hash
+        const hash = hashString(profileData.email || 'default');
+        
+        // AI Job Match (65 - 98)
+        match = 65 + (hash % 34);
+        
+        // Applications (1 - 15)
+        apps = 1 + (hash % 15);
+        
+        // Interview Readiness depends heavily on profile completion
+        ready = Math.min(99, Math.floor(profile * 0.9) + (hash % 10));
+        
+        // Overall Compatibility (70 - 95)
+        overall = 70 + (hash % 26);
+        
+        // Breakdowns
+        tech = Math.min(99, 60 + (hash % 40));
+        domain = Math.min(99, 50 + ((hash >> 1) % 50));
+        comm = Math.min(99, 70 + ((hash >> 2) % 30));
+        featureFit = Math.min(99, 75 + ((hash >> 3) % 25));
+    }
+    
+    const valProfile = document.getElementById('val-profile');
+    if(valProfile) valProfile.innerText = profile + '%';
+    const barProfile = document.getElementById('bar-profile');
+    if(barProfile) barProfile.style.width = profile + '%';
+    const valProfileInc = document.getElementById('val-profile-inc');
+    if(valProfileInc) valProfileInc.innerHTML = `<span class="material-symbols-outlined text-[16px] mr-1">${profile > 80 ? 'trending_up' : 'trending_flat'}</span> +${(hashString(profileData?.email||'x')%8)+1}%`;
+    
+    const valMatch = document.getElementById('val-match');
+    if(valMatch) valMatch.innerText = match + '%';
+    const barMatch = document.getElementById('bar-match');
+    if(barMatch) barMatch.style.width = match + '%';
+    
+    const valApps = document.getElementById('val-apps');
+    if(valApps) valApps.innerText = apps;
+    
+    const valReady = document.getElementById('val-ready');
+    if(valReady) valReady.innerText = ready + '%';
+    const barReady = document.getElementById('bar-ready');
+    if(barReady) barReady.style.width = ready + '%';
+    
+    const valOverall = document.getElementById('val-overall');
+    if(valOverall) valOverall.innerText = overall + '%';
+    const circleOverall = document.getElementById('circle-overall');
+    if(circleOverall) circleOverall.style.strokeDashoffset = 282.7 * (1 - (overall / 100));
+    
+    const valTech = document.getElementById('val-tech');
+    if(valTech) valTech.innerText = tech + '%';
+    const barTech = document.getElementById('bar-tech');
+    if(barTech) {
+        barTech.className = `bg-secondary h-full rounded-full transition-all duration-1000 w-[${tech}%]`;
+        barTech.style.width = tech + '%';
+    }
+    
+    const valDomain = document.getElementById('val-domain');
+    if(valDomain) valDomain.innerText = domain + '%';
+    const barDomain = document.getElementById('bar-domain');
+    if(barDomain) {
+        barDomain.className = `bg-secondary h-full rounded-full transition-all duration-1000 w-[${domain}%]`;
+        barDomain.style.width = domain + '%';
+    }
+    
+    const valComm = document.getElementById('val-comm');
+    if(valComm) valComm.innerText = comm + '%';
+    const barComm = document.getElementById('bar-comm');
+    if(barComm) {
+        barComm.className = `bg-secondary h-full rounded-full transition-all duration-1000 w-[${comm}%]`;
+        barComm.style.width = comm + '%';
+    }
+
+    const valFeature = document.getElementById('val-feature');
+    if(valFeature) valFeature.innerText = featureFit + '%';
+    const featureTitles = ["Problem Solving", "Code Quality", "Architecture", "Agile Mindset"];
+    const featureTitle = document.getElementById('feature-title');
+    if(featureTitle) {
+        const hash = hashString(profileData?.email || 'default');
+        featureTitle.innerText = featureTitles[hash % featureTitles.length];
+    }
+
+    // 2. Feature spotlight auto-rotation
+    const features = [
+        {
+            category: "Self Development",
+            icon: "psychology",
+            title: "Grow Your Skills",
+            desc: "Access AI-guided learning paths and resources to improve your interview performance.",
+            btnText: "Explore Courses",
+            link: "self_development.html"
+        },
+        {
+            category: "AI Mock Interview",
+            icon: "mic",
+            title: "Practice with Groq AI",
+            desc: "Simulate real interviews with our advanced AI and get instant feedback on your answers.",
+            btnText: "Start Mock Interview",
+            link: "ai_interview.html"
+        },
+        {
+            category: "Job Matches",
+            icon: "work",
+            title: "Top-Tier Recommendations",
+            desc: "Discover roles that perfectly align with your parsed resume and skill profile.",
+            btnText: "View Matches",
+            link: "explore_jobs.html"
+        },
+        {
+            category: "Behavioral Test",
+            icon: "quiz",
+            title: "Understand Your Style",
+            desc: "Take our behavioral assessment to see how you fit into different company cultures.",
+            btnText: "Take Assessment",
+            link: "behavioral_assessment.html"
+        }
+    ];
+    
+    const insightTitle = document.getElementById('insight-title');
+    const card = insightTitle ? insightTitle.closest('.bg-tertiary-fixed') : null;
+    
+    if (card) {
+        let currentFeatureIndex = 0;
+        
+        function updateFeature(feature) {
+            // Add a quick fade effect
+            card.style.opacity = '0.7';
+            setTimeout(() => {
+                const bgIcon = card.querySelector('.absolute.top-0.right-0 span');
+                if (bgIcon) bgIcon.innerText = feature.icon;
+                
+                const catIcon = card.querySelector('.flex.items-center.gap-2.mb-4 span.text-secondary');
+                const catText = card.querySelector('.flex.items-center.gap-2.mb-4 span.uppercase');
+                if (catIcon) catIcon.innerText = feature.icon;
+                if (catText) catText.innerText = feature.category;
+                
+                document.getElementById('insight-title').innerText = feature.title;
+                document.getElementById('insight-desc').innerText = feature.desc;
+                
+                const btn = card.querySelector('button');
+                if (btn) {
+                    btn.innerHTML = feature.btnText + ' <span class="material-symbols-outlined text-[18px]">arrow_forward</span>';
+                    btn.onclick = () => window.location.href = feature.link;
+                }
+                card.style.transition = 'opacity 0.3s ease';
+                card.style.opacity = '1';
+            }, 150);
+        }
+        
+        // Initial random feature
+        currentFeatureIndex = Math.floor(Math.random() * features.length);
+        updateFeature(features[currentFeatureIndex]);
+        
+        // Auto rotate every 4.5 seconds
+        setInterval(() => {
+            currentFeatureIndex = (currentFeatureIndex + 1) % features.length;
+            updateFeature(features[currentFeatureIndex]);
+        }, 4500);
+    }
+    
+    // 3. Additional Carousels
+    const c1Features = [
+        { icon: "assignment", title: "Applications & Status", desc: "Keep track of every application you've submitted in one organized view.", link: "applications.html" },
+        { icon: "work", title: "Explore Jobs", desc: "Upload your resume and let our AI parse your skills to find the perfect job matches.", link: "explore_jobs.html" },
+        { icon: "edit_document", title: "Cover Letters", desc: "Automatically generate tailored cover letters based on the job description.", link: "explore_jobs.html" }
+    ];
+    
+    const c2Features = [
+        { icon: "verified", title: "NOVA Assessment", desc: "Validate your technical abilities with our industry-standard proctored assessments.", link: "nova_assessment.html" },
+        { icon: "school", title: "Targeted Learning", desc: "Discover self-development resources directly linked to your skill gaps.", link: "self_development.html" },
+        { icon: "groups", title: "Culture Fit", desc: "Understand your working style and how it aligns with top tech companies.", link: "behavioral_assessment.html" }
+    ];
+    
+    const c1Card = document.getElementById('carousel-1-card');
+    if (c1Card) {
+        let c1Index = Math.floor(Math.random() * c1Features.length);
+        const updateC1 = (feature) => {
+            c1Card.style.opacity = '0.7';
+            setTimeout(() => {
+                document.getElementById('carousel-1-icon').innerText = feature.icon;
+                document.getElementById('carousel-1-title').innerText = feature.title;
+                document.getElementById('carousel-1-desc').innerText = feature.desc;
+                const btn = document.getElementById('carousel-1-btn');
+                if(btn) btn.onclick = () => window.location.href = feature.link;
+                
+                c1Card.style.transition = 'opacity 0.3s ease';
+                c1Card.style.opacity = '1';
+            }, 150);
+        };
+        updateC1(c1Features[c1Index]);
+        setInterval(() => {
+            c1Index = (c1Index + 1) % c1Features.length;
+            updateC1(c1Features[c1Index]);
+        }, 5000);
+    }
+    
+    const c2Card = document.getElementById('carousel-2-card');
+    if (c2Card) {
+        let c2Index = Math.floor(Math.random() * c2Features.length);
+        const updateC2 = (feature) => {
+            c2Card.style.opacity = '0.7';
+            setTimeout(() => {
+                document.getElementById('carousel-2-icon').innerText = feature.icon;
+                document.getElementById('carousel-2-title').innerText = feature.title;
+                document.getElementById('carousel-2-desc').innerText = feature.desc;
+                const btn = document.getElementById('carousel-2-btn');
+                if(btn) btn.onclick = () => window.location.href = feature.link;
+                
+                c2Card.style.transition = 'opacity 0.3s ease';
+                c2Card.style.opacity = '1';
+            }, 150);
+        };
+        updateC2(c2Features[c2Index]);
+        setInterval(() => {
+            c2Index = (c2Index + 1) % c2Features.length;
+            updateC2(c2Features[c2Index]);
+        }, 5500);
+    }
+    
+    const c3Features = [
+        { icon: "mic", title: "AI Interview Preparation", desc: "Practice answering common behavioral and technical questions with our AI-powered mock interviewer.", link: "ai_interview.html" },
+        { icon: "description", title: "Resume Optimization", desc: "Get actionable feedback on your resume based on modern ATS parsing algorithms.", link: "self_development.html" },
+        { icon: "event_note", title: "Application Tracking", desc: "Never lose sight of where you applied with our integrated job application tracker.", link: "applications.html" }
+    ];
+    
+    const c3Card = document.getElementById('carousel-3-card');
+    if (c3Card) {
+        let c3Index = Math.floor(Math.random() * c3Features.length);
+        const updateC3 = (feature) => {
+            c3Card.style.opacity = '0.7';
+            setTimeout(() => {
+                document.getElementById('carousel-3-icon').innerText = feature.icon;
+                document.getElementById('carousel-3-title').innerText = feature.title;
+                document.getElementById('carousel-3-desc').innerText = feature.desc;
+                const btn = document.getElementById('carousel-3-btn');
+                if(btn) btn.onclick = () => window.location.href = feature.link;
+                
+                c3Card.style.transition = 'opacity 0.3s ease';
+                c3Card.style.opacity = '1';
+            }, 150);
+        };
+        updateC3(c3Features[c3Index]);
+        setInterval(() => {
+            c3Index = (c3Index + 1) % c3Features.length;
+            updateC3(c3Features[c3Index]);
+        }, 4800);
+    }
+});
+</script>
+</body>
+</html>

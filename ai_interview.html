@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="auth_guard.js"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>AI Mock Interview — RecruitEase</title>
+  <meta name="description" content="Practice AI-powered scenario interviews tailored to your applied job."/>
+  <style>
+    @layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}::-webkit-scrollbar{display:none;}}
+    @keyframes wave{0%,100%{transform:scaleY(0.4)}50%{transform:scaleY(1)}}
+    .wavebar{display:inline-block;width:4px;border-radius:2px;animation:wave 1.2s ease-in-out infinite;}
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-dim":"#cfdce5","surface-container-low":"#e8f6ff","error-container":"#ffdad6","surface-variant":"#d7e4ee","on-primary-container":"#84a5c4","secondary-fixed-dim":"#5ed9d6","on-background":"#111d24","background":"#f4faff","surface-bright":"#f4faff","primary":"#00253c","primary-fixed-dim":"#a9caea","outline":"#73777e","on-secondary-fixed-variant":"#00504f","on-tertiary":"#ffffff","secondary-fixed":"#7df5f3","on-secondary":"#ffffff","surface-tint":"#41627d","secondary-container":"#7df5f3","on-tertiary-fixed-variant":"#004f51","primary-container":"#173b55","error":"#ba1a1a","on-primary":"#ffffff","inverse-primary":"#a9caea","inverse-surface":"#263239","primary-fixed":"#cce5ff","on-tertiary-container":"#51afb2","on-tertiary-fixed":"#002021","on-surface-variant":"#42474d","surface":"#f4faff","on-error-container":"#93000a","on-error":"#ffffff","inverse-on-surface":"#e5f3fc","on-secondary-container":"#00706f","tertiary":"#002729","surface-container":"#e2f0f9","surface-container-highest":"#d7e4ee","on-secondary-fixed":"#00201f","surface-container-high":"#ddeaf3","tertiary-container":"#003f41","on-primary-fixed":"#001e31","on-surface":"#111d24","outline-variant":"#c2c7ce","surface-container-lowest":"#ffffff","on-primary-fixed-variant":"#284a64","tertiary-fixed-dim":"#79d5d8","secondary":"#006a68","tertiary-fixed":"#95f2f5"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"sidebar_width":"260px","margin_page":"40px","stack_md":"16px","header_height":"72px","gutter":"24px","stack_sm":"8px","stack_lg":"32px"},"fontFamily":{"headline-md":["Poppins"],"headline-lg":["Poppins"],"headline-xl":["Poppins"],"body-lg":["Inter"],"body-sm":["Inter"],"label-sm":["Inter"],"headline-sm":["Poppins"],"body-md":["Inter"],"label-md":["Inter"]},"fontSize":{"headline-md":["24px",{"lineHeight":"32px","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-xl":["40px",{"lineHeight":"52px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"body-sm":["14px",{"lineHeight":"20px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","fontWeight":"500"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"600"}]}}}}</script>
+</head>
+<body class="bg-surface font-body-md text-on-surface">
+
+<!-- ─── SIDEBAR (candidate_portal.js injects nav items into <nav>) ─── -->
+<aside class="fixed left-0 top-0 h-full w-[240px] bg-surface-container-lowest border-r border-outline-variant z-50 flex flex-col overflow-y-auto">
+  <div class="h-[72px] flex items-center px-6 mb-stack-md">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-sm">RE</div>
+      <span class="font-bold text-lg text-primary">Recruit<span class="text-secondary">Ease</span></span>
+    </div>
+  </div>
+  <nav class="flex-1 px-4 space-y-6 pb-8"></nav>
+</aside>
+
+<!-- ─── MAIN WRAPPER ─── -->
+<div class="pl-[240px]">
+
+  <!-- TOPBAR — NOTE: candidate_portal.js replaces .border-l contents, so we keep only left side here -->
+  <header class="fixed top-0 left-[240px] right-0 h-[64px] bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant z-40 flex items-center px-8 justify-between">
+    <div class="flex items-center gap-3">
+      <span class="material-symbols-outlined text-secondary text-[22px]">mic</span>
+      <h1 class="font-headline-sm text-headline-sm text-on-surface">AI Mock Interview</h1>
+      <span id="demo-badge" class="hidden ml-2 text-label-sm font-label-sm bg-error-container text-on-error-container px-2 py-0.5 rounded-full">Demo Mode</span>
+      <!-- live timer (shown during interview) -->
+      <div id="timer-pill" class="hidden ml-4 items-center gap-2 bg-error-container/30 px-3 py-1 rounded-full border border-error-container">
+        <span class="material-symbols-outlined text-error text-[16px]">timer</span>
+        <span class="font-label-md text-label-md text-error tabular-nums" id="interview-timer">15:00</span>
+      </div>
+    </div>
+    <!-- candidate_portal.js fills in .border-l with user info -->
+    <div class="flex items-center gap-6">
+      <div class="border-l border-outline-variant pl-4"></div>
+    </div>
+  </header>
+
+  <main class="relative pt-[64px] min-h-screen">
+
+    <!-- ══════════════════ SETUP / WELCOME VIEW ══════════════════ -->
+    <div id="view-setup" class="max-w-3xl mx-auto p-8">
+
+      <!-- Hero -->
+      <div class="relative overflow-hidden rounded-2xl bg-primary text-on-primary p-10 mb-8 shadow-xl">
+        <div class="absolute -top-12 -right-12 w-56 h-56 rounded-full bg-white/5"></div>
+        <div class="absolute -bottom-16 -right-4 w-40 h-40 rounded-full bg-secondary-fixed/10"></div>
+        <div class="relative z-10">
+          <span class="inline-flex items-center gap-1.5 bg-white/10 text-secondary-fixed text-label-md font-label-md px-3 py-1 rounded-full mb-4">
+            <span class="material-symbols-outlined text-[14px]">smart_toy</span> Groq AI Powered
+          </span>
+          <h2 class="font-headline-xl text-headline-xl text-on-primary mb-3">AI Mock Interview</h2>
+          <p class="font-body-lg text-body-lg text-primary-fixed-dim max-w-xl">
+            Practice with <strong class="text-secondary-fixed">5 scenario-based questions</strong> generated by Groq AI, tailored to your applied role. Receive a detailed performance report on completion.
+          </p>
+        </div>
+      </div>
+
+      <!-- Info row -->
+      <div class="grid grid-cols-3 gap-4 mb-8">
+        <div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-5 flex flex-col items-center gap-2 shadow-sm">
+          <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center">
+            <span class="material-symbols-outlined text-on-secondary-container text-[20px]">quiz</span>
+          </div>
+          <p class="font-headline-sm text-headline-sm text-on-surface">5</p>
+          <p class="font-body-sm text-body-sm text-on-surface-variant text-center">AI Scenarios</p>
+        </div>
+        <div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-5 flex flex-col items-center gap-2 shadow-sm">
+          <div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center">
+            <span class="material-symbols-outlined text-on-surface-variant text-[20px]">schedule</span>
+          </div>
+          <p class="font-headline-sm text-headline-sm text-on-surface">15 min</p>
+          <p class="font-body-sm text-body-sm text-on-surface-variant text-center">Time Limit</p>
+        </div>
+        <div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-5 flex flex-col items-center gap-2 shadow-sm">
+          <div class="w-10 h-10 rounded-full bg-tertiary-container flex items-center justify-center">
+            <span class="material-symbols-outlined text-on-tertiary text-[20px]">auto_awesome</span>
+          </div>
+          <p class="font-headline-sm text-headline-sm text-on-surface">AI Scored</p>
+          <p class="font-body-sm text-body-sm text-on-surface-variant text-center">Detailed Report</p>
+        </div>
+      </div>
+
+      <!-- Job info card (populated by JS) -->
+      <div id="job-info-card" class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 mb-6 shadow-sm">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="material-symbols-outlined text-secondary text-[20px]">work</span>
+          <p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Target Role for Practice</p>
+        </div>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-semibold text-on-surface mb-1">Job Title</label>
+            <input type="text" id="setup-job-title" class="w-full px-4 py-2.5 rounded-lg border border-outline-variant bg-surface text-sm focus:border-secondary transition-colors" placeholder="e.g. Software Engineer">
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-on-surface mb-1">Company (Optional)</label>
+            <input type="text" id="setup-company" class="w-full px-4 py-2.5 rounded-lg border border-outline-variant bg-surface text-sm focus:border-secondary transition-colors" placeholder="e.g. Tech Corp">
+          </div>
+        </div>
+      </div>
+
+      <!-- STAR tip -->
+      <div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-5 mb-6 flex items-start gap-3 shadow-sm">
+        <span class="material-symbols-outlined text-secondary text-[20px] shrink-0 mt-0.5">tips_and_updates</span>
+        <div>
+          <p class="font-label-md text-label-md text-on-surface mb-1">💡 Pro Tip: Use the STAR Method</p>
+          <p class="font-body-sm text-body-sm text-on-surface-variant"><strong>Situation</strong> → <strong>Task</strong> → <strong>Action</strong> → <strong>Result</strong>. Be specific and quantify outcomes where possible. Aim for 150–300 words per answer.</p>
+        </div>
+      </div>
+
+      <button id="start-btn" class="w-full py-4 bg-primary text-on-primary rounded-xl font-label-md text-label-md hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2 text-base">
+        <span class="material-symbols-outlined text-[20px]">play_arrow</span>
+        Begin AI Interview
+      </button>
+    </div>
+
+    <!-- ══════════════════ LOADING (generating questions) ══════════════════ -->
+    <div id="view-loading" class="hidden flex flex-col items-center justify-center min-h-[calc(100vh-64px)] gap-6 p-8">
+      <div class="relative w-20 h-20">
+        <svg class="w-full h-full animate-spin" viewBox="0 0 100 100">
+          <circle class="stroke-outline-variant" cx="50" cy="50" fill="none" r="44" stroke-width="8"/>
+          <circle class="stroke-secondary" cx="50" cy="50" fill="none" r="44" stroke-dasharray="276" stroke-dashoffset="207" stroke-linecap="round" stroke-width="8"/>
+        </svg>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <span class="material-symbols-outlined text-secondary text-[28px]">psychology</span>
+        </div>
+      </div>
+      <div class="text-center">
+        <h2 class="font-headline-md text-headline-md text-on-surface mb-2">Generating your questions…</h2>
+        <p class="font-body-sm text-body-sm text-on-surface-variant">Groq AI is crafting scenario-based questions tailored to your role.</p>
+      </div>
+      <div class="flex gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-secondary animate-bounce" style="animation-delay:0s"></span>
+        <span class="w-2 h-2 rounded-full bg-secondary animate-bounce" style="animation-delay:.15s"></span>
+        <span class="w-2 h-2 rounded-full bg-secondary animate-bounce" style="animation-delay:.3s"></span>
+      </div>
+    </div>
+
+    <!-- ══════════════════ INTERVIEW (question + answer) ══════════════════ -->
+    <div id="view-interview" class="hidden">
+      <div class="max-w-7xl mx-auto p-8 grid grid-cols-12 gap-6">
+
+        <!-- LEFT: 8 cols -->
+        <div class="col-span-12 lg:col-span-8 flex flex-col gap-5">
+
+          <!-- Progress bar -->
+          <div class="h-1.5 bg-outline-variant rounded-full overflow-hidden">
+            <div id="q-progress-bar" class="h-full bg-secondary rounded-full transition-all duration-700" style="width:0%"></div>
+          </div>
+
+          <!-- Question card -->
+          <div class="bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant overflow-hidden">
+            <div class="h-1 bg-gradient-to-r from-secondary via-secondary-fixed to-transparent"></div>
+            <div class="flex items-center justify-between px-8 pt-7 pb-5 border-b border-outline-variant">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-secondary-container flex items-center justify-center">
+                  <span class="material-symbols-outlined text-on-secondary-container text-[20px]">record_voice_over</span>
+                </div>
+                <div>
+                  <p class="font-label-md text-label-md text-secondary uppercase tracking-wider">Scenario</p>
+                  <p class="font-headline-sm text-headline-sm text-on-surface" id="q-counter">Question 1 of 5</p>
+                </div>
+              </div>
+              <div class="flex items-end gap-0.5 h-8 opacity-40">
+                <span class="wavebar bg-secondary h-4" style="animation-delay:0s"></span>
+                <span class="wavebar bg-secondary h-6" style="animation-delay:.1s"></span>
+                <span class="wavebar bg-secondary h-8" style="animation-delay:.2s"></span>
+                <span class="wavebar bg-primary h-5" style="animation-delay:.3s"></span>
+                <span class="wavebar bg-secondary h-7" style="animation-delay:.4s"></span>
+                <span class="wavebar bg-secondary h-4" style="animation-delay:.5s"></span>
+                <span class="wavebar bg-primary h-6" style="animation-delay:.15s"></span>
+              </div>
+            </div>
+            <div class="px-8 py-7">
+              <div class="inline-flex items-center gap-1.5 bg-secondary-container/50 text-on-secondary-container px-3 py-1 rounded-full mb-4">
+                <span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+                <span class="font-label-sm text-label-sm uppercase tracking-wider">AI-Generated Scenario</span>
+              </div>
+              <h2 id="question-text" class="font-headline-md text-headline-md text-on-surface leading-snug">Loading question…</h2>
+            </div>
+            <div class="px-8 pb-8">
+              <div class="relative">
+                <textarea id="response-area"
+                  class="w-full min-h-[200px] p-5 rounded-xl border-2 border-outline-variant bg-surface font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-secondary transition-colors resize-none"
+                  placeholder="Type your detailed answer here… Use STAR: Situation → Task → Action → Result"
+                  maxlength="2500"></textarea>
+                <div class="absolute bottom-4 right-4">
+                  <span class="font-label-sm text-label-sm text-on-surface-variant" id="char-counter">0 / 2500</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between mt-4">
+                <button id="prev-btn" class="hidden items-center gap-2 px-5 py-2.5 rounded-xl border border-outline-variant text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors">
+                  <span class="material-symbols-outlined text-[18px]">arrow_back</span> Previous
+                </button>
+                <div class="flex-1"></div>
+                <button id="next-btn" class="flex items-center gap-2 px-8 py-3 rounded-xl bg-secondary text-on-secondary font-label-md text-label-md hover:bg-secondary/90 transition-colors shadow-sm">
+                  Next Question <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: 4 cols progress panel -->
+        <div class="col-span-12 lg:col-span-4">
+          <div class="bg-primary text-on-primary rounded-2xl p-7 shadow-lg relative overflow-hidden sticky top-[80px]">
+            <div class="absolute inset-0 opacity-[0.07] pointer-events-none" style="background-image:radial-gradient(circle at 2px 2px,white 1px,transparent 0);background-size:24px 24px;"></div>
+            <div class="relative z-10">
+              <h3 class="font-headline-sm text-headline-sm mb-1">Progress</h3>
+              <p class="font-body-sm text-body-sm text-primary-fixed-dim mb-5" id="progress-job-label">5 tailored scenarios</p>
+
+              <div id="q-dots" class="flex flex-wrap gap-2 mb-6"></div>
+
+              <div class="flex items-center gap-4 p-4 bg-primary-container/60 rounded-xl border border-primary-fixed/20">
+                <div class="relative w-14 h-14 shrink-0">
+                  <svg class="w-full h-full -rotate-90" viewBox="0 0 100 100">
+                    <circle class="stroke-primary-fixed/20" cx="50" cy="50" fill="none" r="44" stroke-width="10"/>
+                    <circle id="progress-ring" class="stroke-secondary-fixed transition-all duration-700" cx="50" cy="50" fill="none" r="44" stroke-dasharray="276" stroke-dashoffset="276" stroke-linecap="round" stroke-width="10"/>
+                  </svg>
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    <span class="font-label-md text-label-md text-on-primary" id="progress-pct">0%</span>
+                  </div>
+                </div>
+                <div>
+                  <p class="font-label-md text-label-md text-secondary-fixed uppercase tracking-wider mb-0.5">Completion</p>
+                  <p class="font-body-sm text-body-sm text-on-primary" id="progress-label">0 of 5 answered</p>
+                </div>
+              </div>
+
+              <div class="mt-5 space-y-2">
+                <div class="flex items-center gap-2 text-primary-fixed-dim font-body-sm text-body-sm"><span class="material-symbols-outlined text-[16px] text-secondary-fixed">check_circle</span>Be specific with real examples</div>
+                <div class="flex items-center gap-2 text-primary-fixed-dim font-body-sm text-body-sm"><span class="material-symbols-outlined text-[16px] text-secondary-fixed">check_circle</span>Quantify results where possible</div>
+                <div class="flex items-center gap-2 text-primary-fixed-dim font-body-sm text-body-sm"><span class="material-symbols-outlined text-[16px] text-secondary-fixed">check_circle</span>Aim for 150–300 words per answer</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════ EVALUATING ══════════════════ -->
+    <div id="view-evaluating" class="hidden flex flex-col items-center justify-center min-h-[calc(100vh-64px)] gap-6 p-8">
+      <div class="relative w-20 h-20">
+        <svg class="w-full h-full animate-spin" viewBox="0 0 100 100">
+          <circle class="stroke-outline-variant" cx="50" cy="50" fill="none" r="44" stroke-width="8"/>
+          <circle class="stroke-primary" cx="50" cy="50" fill="none" r="44" stroke-dasharray="276" stroke-dashoffset="207" stroke-linecap="round" stroke-width="8"/>
+        </svg>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <span class="material-symbols-outlined text-primary text-[28px]">auto_awesome</span>
+        </div>
+      </div>
+      <div class="text-center">
+        <h2 class="font-headline-md text-headline-md text-on-surface mb-2">Evaluating your performance…</h2>
+        <p class="font-body-sm text-body-sm text-on-surface-variant">Groq AI is scoring your answers on Innovation, Relevancy, Accuracy, and Tone.</p>
+      </div>
+      <div class="flex gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-primary animate-bounce" style="animation-delay:0s"></span>
+        <span class="w-2 h-2 rounded-full bg-primary animate-bounce" style="animation-delay:.15s"></span>
+        <span class="w-2 h-2 rounded-full bg-primary animate-bounce" style="animation-delay:.3s"></span>
+      </div>
+    </div>
+
+    <!-- ══════════════════ RESULTS ══════════════════ -->
+    <div id="view-results" class="hidden max-w-5xl mx-auto p-8 space-y-6">
+
+      <div class="bg-primary text-on-primary rounded-2xl p-8 shadow-xl relative overflow-hidden">
+        <div class="absolute -top-8 -right-8 w-48 h-48 rounded-full bg-white/5"></div>
+        <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-secondary-fixed text-[32px]" style="font-variation-settings:'FILL' 1">task_alt</span>
+            </div>
+            <div>
+              <span class="text-label-md text-secondary-fixed font-label-md uppercase tracking-wider block mb-1">Interview Complete</span>
+              <h2 class="font-headline-md text-headline-md text-on-primary">Your AI Evaluation Report</h2>
+            </div>
+          </div>
+          <div class="flex flex-col items-center justify-center bg-white/10 rounded-xl px-8 py-4 border border-white/20 shrink-0">
+            <span class="font-bold text-secondary-fixed leading-none" style="font-size:48px" id="overall-score">--</span>
+            <span class="font-body-sm text-body-sm text-primary-fixed-dim">/100 Overall</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Score bars -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-5 shadow-sm">
+          <div class="flex items-center gap-2 mb-3"><span class="material-symbols-outlined text-secondary text-[18px]">lightbulb</span><p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Innovation</p></div>
+          <p id="score-innovation" class="font-headline-lg text-headline-lg text-on-surface mb-2">--</p>
+          <div class="h-2 bg-surface-container rounded-full overflow-hidden"><div id="bar-innovation" class="h-full bg-secondary rounded-full transition-all duration-1000" style="width:0%"></div></div>
+        </div>
+        <div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-5 shadow-sm">
+          <div class="flex items-center gap-2 mb-3"><span class="material-symbols-outlined text-secondary text-[18px]">target</span><p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Relevancy</p></div>
+          <p id="score-relevancy" class="font-headline-lg text-headline-lg text-on-surface mb-2">--</p>
+          <div class="h-2 bg-surface-container rounded-full overflow-hidden"><div id="bar-relevancy" class="h-full bg-primary rounded-full transition-all duration-1000" style="width:0%"></div></div>
+        </div>
+        <div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-5 shadow-sm">
+          <div class="flex items-center gap-2 mb-3"><span class="material-symbols-outlined text-secondary text-[18px]">verified</span><p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Accuracy</p></div>
+          <p id="score-accuracy" class="font-headline-lg text-headline-lg text-on-surface mb-2">--</p>
+          <div class="h-2 bg-surface-container rounded-full overflow-hidden"><div id="bar-accuracy" class="h-full bg-secondary rounded-full transition-all duration-1000" style="width:0%"></div></div>
+        </div>
+        <div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-5 shadow-sm">
+          <div class="flex items-center gap-2 mb-3"><span class="material-symbols-outlined text-secondary text-[18px]">record_voice_over</span><p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Tone</p></div>
+          <p id="score-tone" class="font-headline-lg text-headline-lg text-on-surface mb-2">--</p>
+          <div class="h-2 bg-surface-container rounded-full overflow-hidden"><div id="bar-tone" class="h-full bg-primary rounded-full transition-all duration-1000" style="width:0%"></div></div>
+        </div>
+      </div>
+
+      <!-- Strengths / Weaknesses -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm">
+          <div class="flex items-center gap-2 mb-3"><span class="material-symbols-outlined text-secondary text-[20px]">thumb_up</span><h3 class="font-headline-sm text-headline-sm text-on-surface">Strengths</h3></div>
+          <p id="feedback-strengths" class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">—</p>
+        </div>
+        <div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm">
+          <div class="flex items-center gap-2 mb-3"><span class="material-symbols-outlined text-error text-[20px]">construction</span><h3 class="font-headline-sm text-headline-sm text-on-surface">Areas to Improve</h3></div>
+          <p id="feedback-weaknesses" class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">—</p>
+        </div>
+      </div>
+
+      <!-- Detailed analysis -->
+      <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant p-7 shadow-sm">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center">
+            <span class="material-symbols-outlined text-on-secondary-container text-[20px]">auto_awesome</span>
+          </div>
+          <h3 class="font-headline-sm text-headline-sm text-on-surface">Detailed AI Analysis</h3>
+        </div>
+        <p id="feedback-analysis" class="font-body-md text-body-md text-on-surface-variant leading-relaxed">—</p>
+      </div>
+
+      <!-- Q&A Breakdown -->
+      <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant p-7 shadow-sm">
+        <h3 class="font-headline-sm text-headline-sm text-on-surface mb-5">Your Answers</h3>
+        <div id="qa-breakdown" class="space-y-4"></div>
+      </div>
+
+      <!-- Integrity -->
+      <div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="material-symbols-outlined text-primary text-[20px]">shield</span>
+          <h3 class="font-headline-sm text-headline-sm text-on-surface">Integrity Report</h3>
+          <span id="risk-badge" class="ml-auto text-label-sm font-label-sm px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container">—</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
+          <div>
+            <p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Integrity Score</p>
+            <div class="flex items-center gap-3">
+              <p id="integrity-score" class="font-headline-md text-headline-md text-on-surface">--</p>
+              <div class="flex-1 h-2 bg-surface-container rounded-full overflow-hidden">
+                <div id="bar-integrity" class="h-full bg-secondary rounded-full transition-all duration-1000" style="width:0%"></div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-1">AI / Plagiarism Check</p>
+            <p id="plagiarism-text" class="font-body-sm text-body-sm text-on-surface-variant">—</p>
+          </div>
+        </div>
+        <p class="font-body-sm text-body-sm text-on-surface-variant pt-3 border-t border-outline-variant" id="proctoring-summary">—</p>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex gap-4">
+        <button onclick="location.reload()" class="flex-1 py-3 rounded-xl border border-outline-variant text-on-surface font-label-md text-label-md hover:bg-surface-container-low transition-colors flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-[18px]">refresh</span> Retake Interview
+        </button>
+        <button onclick="window.location.href='dashboard.html'" class="flex-1 py-3 rounded-xl bg-primary text-on-primary font-label-md text-label-md hover:bg-primary/90 transition-colors shadow-sm flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-[18px]">home</span> Return to Dashboard
+        </button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// ─── STATE ────────────────────────────────────────────────────────────────────
+let questions    = [];
+let answers      = [];
+let currentIndex = 0;
+let jobId        = null;
+let jobTitle     = 'Software Engineer';
+let company      = 'Tech Corp';
+let skills       = [];
+let isMockMode   = true;   // true = use /start-mock, false = use /start (real jobId)
+let timerInt     = null;
+let secondsLeft  = 15 * 60;
+
+// ─── DOM (safe getters) ───────────────────────────────────────────────────────
+const $  = id => document.getElementById(id);
+const el = {
+  viewSetup      : () => $('view-setup'),
+  viewLoading    : () => $('view-loading'),
+  viewInterview  : () => $('view-interview'),
+  viewEvaluating : () => $('view-evaluating'),
+  viewResults    : () => $('view-results'),
+  questionText   : () => $('question-text'),
+  responseArea   : () => $('response-area'),
+  charCounter    : () => $('char-counter'),
+  qCounter       : () => $('q-counter'),
+  qProgressBar   : () => $('q-progress-bar'),
+  nextBtn        : () => $('next-btn'),
+  prevBtn        : () => $('prev-btn'),
+  timerDisplay   : () => $('interview-timer'),
+  timerPill      : () => $('timer-pill'),
+  demoBadge      : () => $('demo-badge'),
+  progressRing   : () => $('progress-ring'),
+  progressPct    : () => $('progress-pct'),
+  progressLabel  : () => $('progress-label'),
+  qDots          : () => $('q-dots'),
+};
+
+// ─── VIEW SWITCHER ────────────────────────────────────────────────────────────
+function show(id) {
+  ['view-setup','view-loading','view-interview','view-evaluating','view-results'].forEach(v => {
+    const el = $(v);
+    if (!el) return;
+    el.classList.add('hidden');
+    el.classList.remove('flex');
+  });
+  const target = $(id);
+  if (!target) return;
+  target.classList.remove('hidden');
+  if (['view-loading','view-evaluating'].includes(id)) target.classList.add('flex');
+}
+
+// ─── HELPERS ──────────────────────────────────────────────────────────────────
+function setText(id, val) { const e = $(id); if (e) e.textContent = val; }
+function setHTML(id, val) { const e = $(id); if (e) e.innerHTML  = val; }
+function setWidth(id, pct){ const e = $(id); if (e) e.style.width = `${pct}%`; }
+
+function animateScore(scoreId, barId, target) {
+  const scoreEl = $(scoreId), barEl = $(barId);
+  let cur = 0;
+  const step = target / (1000 / 15);
+  const t = setInterval(() => {
+    cur += step;
+    if (cur >= target) { cur = target; clearInterval(t); }
+    if (scoreEl) scoreEl.textContent = Math.round(cur);
+    if (barEl)   barEl.style.width   = `${cur}%`;
+  }, 15);
+}
+
+function buildDots(total) {
+  const container = el.qDots();
+  if (!container) return;
+  container.innerHTML = '';
+  for (let i = 0; i < total; i++) {
+    const d = document.createElement('div');
+    d.id = `dot-${i}`;
+    d.className = 'w-7 h-7 rounded-full border-2 flex items-center justify-center text-label-sm font-label-sm transition-all duration-300 border-primary-fixed/40 text-primary-fixed-dim';
+    d.textContent = i + 1;
+    container.appendChild(d);
+  }
+}
+
+function updateDots(current, total) {
+  for (let i = 0; i < total; i++) {
+    const d = $(`dot-${i}`);
+    if (!d) continue;
+    if (answers[i] && answers[i].trim()) {
+      d.className = 'w-7 h-7 rounded-full border-2 flex items-center justify-center text-label-sm font-label-sm transition-all duration-300 bg-secondary border-secondary text-on-secondary';
+    } else if (i === current) {
+      d.className = 'w-7 h-7 rounded-full border-2 flex items-center justify-center text-label-sm font-label-sm transition-all duration-300 bg-surface border-secondary text-secondary ring-2 ring-secondary/30';
+    } else {
+      d.className = 'w-7 h-7 rounded-full border-2 flex items-center justify-center text-label-sm font-label-sm transition-all duration-300 border-primary-fixed/40 text-primary-fixed-dim';
+    }
+  }
+}
+
+function updateRing(answered, total) {
+  const pct  = total > 0 ? answered / total : 0;
+  const ring = el.progressRing();
+  if (ring) ring.style.strokeDashoffset = 276 - pct * 276;
+  setText('progress-pct',   `${Math.round(pct * 100)}%`);
+  setText('progress-label', `${answered} of ${total} answered`);
+}
+
+// ─── RENDER QUESTION ──────────────────────────────────────────────────────────
+function renderQuestion(index) {
+  currentIndex = index;
+  const q   = questions[index];
+  const tot = questions.length;
+  const ra  = el.responseArea();
+  const pb  = el.qProgressBar();
+
+  setText('question-text', `"${q}"`);
+  if (ra) { ra.value = answers[index] || ''; setText('char-counter', `${ra.value.length} / 2500`); }
+  setText('q-counter', `Question ${index + 1} of ${tot}`);
+  if (pb) pb.style.width = `${(index / tot) * 100}%`;
+
+  const prevBtn = el.prevBtn();
+  if (prevBtn) { prevBtn.classList.toggle('hidden', index === 0); prevBtn.classList.toggle('flex', index > 0); }
+
+  const nextBtn = el.nextBtn();
+  if (nextBtn) {
+    nextBtn.innerHTML = index === tot - 1
+      ? `Submit Answers <span class="material-symbols-outlined text-[18px]">send</span>`
+      : `Next Question <span class="material-symbols-outlined text-[18px]">arrow_forward</span>`;
+  }
+
+  const answered = answers.filter(a => a && a.trim()).length;
+  updateDots(index, tot);
+  updateRing(answered, tot);
+}
+
+// ─── TIMER ────────────────────────────────────────────────────────────────────
+function startTimer() {
+  const pill = el.timerPill();
+  if (pill) { pill.classList.remove('hidden'); pill.classList.add('flex'); }
+  timerInt = setInterval(() => {
+    if (secondsLeft > 0) {
+      secondsLeft--;
+      const m = Math.floor(secondsLeft / 60), s = secondsLeft % 60;
+      setText('interview-timer', `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`);
+    } else {
+      clearInterval(timerInt);
+      submitAnswers();
+    }
+  }, 1000);
+}
+
+// ─── CHAR COUNTER ─────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  const ra = el.responseArea();
+  if (ra) ra.addEventListener('input', () => setText('char-counter', `${ra.value.length} / 2500`));
+
+  // Setup: detect job from localStorage
+  try {
+    const applied = JSON.parse(localStorage.getItem('appliedJobs') || '[]');
+    if (applied.length > 0) {
+      jobId    = applied[0].jobId    || null;
+      jobTitle = applied[0].title    || 'Software Engineer';
+      company  = applied[0].company  || 'Tech Corp';
+      skills   = applied[0].skills   || [];
+      isMockMode = !jobId;
+    }
+  } catch(e) {}
+
+  const jobTitleInput = document.getElementById('setup-job-title');
+  const companyInput = document.getElementById('setup-company');
+  if (jobTitleInput) jobTitleInput.value = jobTitle;
+  if (companyInput) companyInput.value = company || (isMockMode ? '' : '');
+  setText('progress-job-label', `5 tailored scenarios`);
+
+  // Start button
+  const startBtn = $('start-btn');
+  if (startBtn) startBtn.addEventListener('click', startInterview);
+
+  // Next / Submit
+  const nextBtn = el.nextBtn();
+  if (nextBtn) nextBtn.addEventListener('click', () => {
+    const ra = el.responseArea();
+    if (ra) answers[currentIndex] = ra.value;
+    if (currentIndex < questions.length - 1) {
+      renderQuestion(currentIndex + 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      submitAnswers();
+    }
+  });
+
+  // Prev
+  const prevBtn = el.prevBtn();
+  if (prevBtn) prevBtn.addEventListener('click', () => {
+    const ra = el.responseArea();
+    if (ra) answers[currentIndex] = ra.value;
+    if (currentIndex > 0) renderQuestion(currentIndex - 1);
+  });
+});
+
+// ─── API: START ───────────────────────────────────────────────────────────────
+async function startInterview() {
+  show('view-loading');
+  try {
+    // Read values from inputs
+    const currentJobTitle = document.getElementById('setup-job-title').value.trim() || 'Software Engineer';
+    const currentCompany = document.getElementById('setup-company').value.trim() || '';
+
+    let endpoint, body;
+    if (!isMockMode && jobId) {
+      // Real mode: jobId maps to a Supabase job
+      endpoint = '/api/interview/start';
+      body     = { jobId };
+    } else {
+      // Mock/practice mode: pass job info directly, no Supabase needed
+      endpoint = '/api/interview/start-mock';
+      body     = { jobTitle: currentJobTitle, company: currentCompany, skills };
+    }
+
+    const res = await fetch(endpoint, {
+      method : 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body   : JSON.stringify(body)
+    });
+
+    if (!res.ok) {
+      // Real mode failed (e.g. job not in Supabase) → fall back to mock
+      if (!isMockMode) {
+        isMockMode = true;
+        return startInterview();
+      }
+      throw new Error(`Server ${res.status}`);
+    }
+
+    const data = await res.json();
+    questions  = data.questions;
+    answers    = new Array(questions.length).fill('');
+
+    if (data.isDemoMode) { const b = el.demoBadge(); if (b) b.classList.remove('hidden'); }
+
+    buildDots(questions.length);
+    renderQuestion(0);
+    startTimer();
+    show('view-interview');
+
+  } catch(err) {
+    console.error('startInterview failed:', err);
+    // Last resort: use built-in fallback questions and show interview anyway
+    questions = [
+      `You are a ${jobTitle} at ${company}. A critical bug hits production before a major launch. How do you lead the team and handle stakeholder communication under pressure?`,
+      `Describe a time you had to learn a brand-new technology quickly to meet a deadline. What was your approach and what was the outcome?`,
+      `Tell us about a time you disagreed with a technical decision made by senior leadership. How did you handle it professionally?`,
+      `How would you diagnose and resolve a sudden performance degradation in a production system?`,
+      `Describe how you collaborate across product, design, and engineering teams to deliver a complex feature with conflicting priorities.`
+    ];
+    answers = new Array(questions.length).fill('');
+    const b = el.demoBadge(); if (b) b.classList.remove('hidden');
+    buildDots(questions.length);
+    renderQuestion(0);
+    startTimer();
+    show('view-interview');
+  }
+}
+
+// ─── API: SUBMIT ──────────────────────────────────────────────────────────────
+async function submitAnswers() {
+  clearInterval(timerInt);
+  const ra = el.responseArea();
+  if (ra) answers[currentIndex] = ra.value;
+  show('view-evaluating');
+
+  try {
+    let endpoint, body;
+    if (!isMockMode && jobId) {
+      endpoint = '/api/interview/submit';
+      body     = { jobId, questions, answers, violations: [], spokenTranscripts: [], candidateEmail: '' };
+    } else {
+      endpoint = '/api/interview/submit-mock';
+      body     = { jobTitle, company, questions, answers, violations: [], spokenTranscripts: [] };
+    }
+
+    const res = await fetch(endpoint, {
+      method : 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body   : JSON.stringify(body)
+    });
+
+    if (!res.ok) {
+      if (!isMockMode) { isMockMode = true; return submitAnswers(); }
+      throw new Error(`Server ${res.status}`);
+    }
+
+    const data = await res.json();
+    showResults(data.evaluation, data.isDemoMode);
+
+  } catch(err) {
+    console.error('submitAnswers failed:', err);
+    // Fallback local scoring
+    const totalLen = answers.reduce((a,c) => a + (c||'').length, 0);
+    const bonus = Math.min(10, Math.floor(totalLen / 80));
+    const ev = {
+      scores: { innovation: 70+bonus, relevancy: 75+bonus, accuracy: 68+bonus, tone: 80+bonus },
+      overallScore: Math.round((70+75+68+80+bonus*4) / 4),
+      feedback: { strengths: 'Good effort in structuring responses.', weaknesses: 'Add more quantifiable outcomes.', detailedAnalysis: 'Local fallback evaluation (server unreachable).' },
+      proctoring: { integrityScore: 95, riskRating: 'Low', summary: 'No violations.', plagiarismDetection: 'Not checked (offline).', spokenAudit: 'N/A' }
+    };
+    showResults(ev, true);
+  }
+}
+
+// ─── SHOW RESULTS ─────────────────────────────────────────────────────────────
+function showResults(ev, isDemoMode) {
+  show('view-results');
+  if (isDemoMode) { const b = el.demoBadge(); if (b) b.classList.remove('hidden'); }
+
+  setText('overall-score', ev.overallScore ?? '--');
+
+  const sc = ev.scores || {};
+  animateScore('score-innovation', 'bar-innovation', sc.innovation || 0);
+  animateScore('score-relevancy',  'bar-relevancy',  sc.relevancy  || 0);
+  animateScore('score-accuracy',   'bar-accuracy',   sc.accuracy   || 0);
+  animateScore('score-tone',       'bar-tone',       sc.tone       || 0);
+
+  const fb = ev.feedback || {};
+  setText('feedback-strengths',  fb.strengths        || 'N/A');
+  setText('feedback-weaknesses', fb.weaknesses       || 'N/A');
+  setText('feedback-analysis',   fb.detailedAnalysis || 'N/A');
+
+  // Q&A breakdown
+  const qaEl = $('qa-breakdown');
+  if (qaEl) {
+    qaEl.innerHTML = '';
+    questions.forEach((q, i) => {
+      const div = document.createElement('div');
+      div.className = 'p-5 rounded-xl border border-outline-variant bg-surface';
+      div.innerHTML = `
+        <p class="font-label-md text-label-md text-secondary uppercase tracking-wider mb-2">Q${i+1}</p>
+        <p class="font-body-sm text-body-sm text-on-surface font-medium mb-3">${q}</p>
+        <p class="font-body-sm text-body-sm text-on-surface-variant italic leading-relaxed">${answers[i] || '<span class="text-error">No answer provided</span>'}</p>
+      `;
+      qaEl.appendChild(div);
+    });
+  }
+
+  // Integrity
+  const pr  = ev.proctoring || {};
+  const int = pr.integrityScore ?? 95;
+  const risk= pr.riskRating    || 'Low';
+  setText('integrity-score',    int);
+  setTimeout(() => setWidth('bar-integrity', int), 300);
+  setText('plagiarism-text',    pr.plagiarismDetection || 'Not checked.');
+  setText('proctoring-summary', pr.summary             || '');
+
+  const rb = $('risk-badge');
+  if (rb) {
+    rb.textContent = `${risk} Risk`;
+    rb.className = risk === 'Low'
+      ? 'ml-auto text-label-sm font-label-sm px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container'
+      : risk === 'Medium'
+      ? 'ml-auto text-label-sm font-label-sm px-3 py-1 rounded-full bg-error-container text-on-error-container'
+      : 'ml-auto text-label-sm font-label-sm px-3 py-1 rounded-full bg-error text-on-error';
+  }
+}
+</script>
+
+<script src="candidate_portal.js"></script>
+</body>
+</html>

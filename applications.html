@@ -1,0 +1,796 @@
+<html lang="en"><head>
+  <script src="auth_guard.js"></script>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>Applications &amp; Status – RecruitEase</title><meta name="description" content="Track and manage your active job applications across all stages."/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600&display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-dim":"#cfdce5","surface-container-low":"#e8f6ff","error-container":"#ffdad6","surface-variant":"#d7e4ee","on-primary-container":"#84a5c4","secondary-fixed-dim":"#5ed9d6","on-background":"#111d24","background":"#f4faff","surface-bright":"#f4faff","primary":"#00253c","primary-fixed-dim":"#a9caea","outline":"#73777e","on-secondary-fixed-variant":"#00504f","on-tertiary":"#ffffff","secondary-fixed":"#7df5f3","on-secondary":"#ffffff","surface-tint":"#41627d","secondary-container":"#7df5f3","on-tertiary-fixed-variant":"#004f51","primary-container":"#173b55","error":"#ba1a1a","on-primary":"#ffffff","inverse-primary":"#a9caea","inverse-surface":"#263239","primary-fixed":"#cce5ff","on-tertiary-container":"#51afb2","on-tertiary-fixed":"#002021","on-surface-variant":"#42474d","surface":"#f4faff","on-error-container":"#93000a","on-error":"#ffffff","inverse-on-surface":"#e5f3fc","on-secondary-container":"#00706f","tertiary":"#002729","surface-container":"#e2f0f9","surface-container-highest":"#d7e4ee","on-secondary-fixed":"#00201f","surface-container-high":"#ddeaf3","tertiary-container":"#003f41","on-primary-fixed":"#001e31","on-surface":"#111d24","outline-variant":"#c2c7ce","surface-container-lowest":"#ffffff","on-primary-fixed-variant":"#284a64","tertiary-fixed-dim":"#79d5d8","secondary":"#006a68","tertiary-fixed":"#95f2f5"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"sidebar_width":"260px","margin_page":"40px","stack_md":"16px","header_height":"72px","gutter":"24px","stack_sm":"8px","stack_lg":"32px"},"fontFamily":{"headline-md":["Poppins"],"headline-lg":["Poppins"],"headline-xl":["Poppins"],"body-lg":["Inter"],"body-sm":["Inter"],"label-sm":["Inter"],"headline-sm":["Poppins"],"body-md":["Inter"],"label-md":["Inter"]},"fontSize":{"headline-md":["24px",{"lineHeight":"32px","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-xl":["40px",{"lineHeight":"52px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"body-sm":["14px",{"lineHeight":"20px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","fontWeight":"500"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"600"}]}}}}</script>
+</head>
+<body class="bg-surface font-body-md text-on-surface">
+
+<!-- Sidebar -->
+<aside class="fixed left-0 top-0 h-full w-[240px] bg-surface-container-lowest border-r border-outline-variant z-50 flex flex-col overflow-y-auto">
+  <div class="h-[72px] flex items-center px-6 mb-stack-md">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-sm">RE</div>
+      <span class="font-bold text-lg text-primary">Recruit<span class="text-secondary">Ease</span></span>
+    </div>
+  </div>
+  <nav class="flex-1 px-4 space-y-6 pb-8">
+    <section>
+      <p class="px-4 mb-2 text-label-md text-on-surface-variant uppercase tracking-wider">CANDIDATE PORTAL</p>
+      <div class="space-y-1">
+        <a href="dashboard.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">grid_view</span>Dashboard</a>
+        <a href="explore_jobs.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">work</span>Explore Jobs</a>
+        <a href="applications.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm bg-primary-container text-on-primary-container font-medium transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">assignment</span>Applications &amp; Status</a>
+        <a href="self_development.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">psychology</span>Self Development</a>
+        <a href="ai_interview.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">mic</span>AI Mock Interview</a>
+        <a href="behavioral_assessment.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">quiz</span>Behavioral Test</a>
+        <a href="proctored_assessment.html" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">verified_user</span>NOVA Assessment</a>
+      </div>
+    </section>
+    <section class="pt-4 border-t border-outline-variant">
+      <div class="space-y-1">
+        <a href="app.html" id="btn-logout" class="flex items-center px-4 py-2.5 rounded-lg text-body-sm text-on-surface-variant hover:bg-error-container hover:text-on-error-container transition-all"><span class="material-symbols-outlined mr-3 text-[20px]">logout</span>Sign Out</a>
+      </div>
+    </section>
+  </nav>
+</aside>
+
+<div class="pl-[240px]">
+  <!-- Top Header -->
+  <header class="fixed top-0 left-[240px] right-0 h-[64px] bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant z-40 flex items-center px-8 justify-between">
+    <div class="flex-1 flex items-center gap-8">
+      <div class="relative w-full max-w-md">
+        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+        <input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-transparent focus:border-secondary rounded-lg text-body-sm outline-none transition-all" placeholder="Search applications..." type="text" id="app-search-input"/>
+      </div>
+    </div>
+    <div class="flex items-center gap-6">
+      <button class="relative p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
+        <span class="material-symbols-outlined">notifications</span>
+        <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+      </button>
+      <div class="flex items-center gap-3 pl-4 border-l border-outline-variant">
+        <div class="text-right">
+          <p class="text-label-md text-on-surface" id="db-username">Candidate</p>
+          <p class="text-label-sm text-on-surface-variant" id="db-user-role">Job Seeker</p>
+        </div>
+        <div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm border border-outline-variant overflow-hidden" id="db-user-avatar">?</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative pt-[64px] min-h-screen">
+    <div class="p-margin_page flex flex-col gap-stack_lg">
+
+      <!-- Page Header -->
+      <div>
+        <h1 class="font-headline-xl text-headline-xl text-on-surface mb-1">Your Applications</h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant">Track and manage your active job applications across all stages.</p>
+      </div>
+
+      <!-- Pipeline Overview -->
+      <div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/30">
+        <h2 class="font-headline-sm text-headline-sm text-on-surface mb-6">Pipeline Overview</h2>
+        <div class="flex items-center justify-between relative max-w-3xl">
+          <div class="absolute top-5 left-0 w-full h-[2px] bg-outline-variant z-0"></div>
+          <!-- Applied -->
+          <div class="relative z-10 flex flex-col items-center gap-2">
+            <div class="w-11 h-11 rounded-full bg-primary flex items-center justify-center shadow-md">
+              <span class="material-symbols-outlined text-on-primary text-[20px]">draft</span>
+            </div>
+            <span class="font-label-md text-label-md text-primary">Applied</span>
+            <span class="font-headline-sm text-headline-sm text-primary" id="stage-applied">0</span>
+          </div>
+          <!-- ATS Screening -->
+          <div class="relative z-10 flex flex-col items-center gap-2">
+            <div class="w-11 h-11 rounded-full bg-surface-container-lowest border-2 border-secondary flex items-center justify-center shadow-sm">
+              <span class="material-symbols-outlined text-secondary text-[20px]">manage_search</span>
+            </div>
+            <span class="font-label-md text-label-md text-on-surface-variant">ATS Screening</span>
+            <span class="font-headline-sm text-headline-sm text-on-surface-variant" id="stage-screening">0</span>
+          </div>
+          <!-- Behavioral Assessment -->
+          <div class="relative z-10 flex flex-col items-center gap-2">
+            <div class="w-11 h-11 rounded-full bg-surface-container-lowest border-2 border-outline-variant flex items-center justify-center">
+              <span class="material-symbols-outlined text-outline text-[20px]">quiz</span>
+            </div>
+            <span class="font-label-md text-label-md text-on-surface-variant">Behavioral Assessment</span>
+            <span class="font-headline-sm text-headline-sm text-on-surface-variant" id="stage-behavioral">0</span>
+          </div>
+          <!-- NOVA Test -->
+          <div class="relative z-10 flex flex-col items-center gap-2">
+            <div class="w-11 h-11 rounded-full bg-surface-container-lowest border-2 border-outline-variant flex items-center justify-center">
+              <span class="material-symbols-outlined text-outline text-[20px]">verified_user</span>
+            </div>
+            <span class="font-label-md text-label-md text-on-surface-variant">NOVA Test</span>
+            <span class="font-headline-sm text-headline-sm text-on-surface-variant" id="stage-nova">0</span>
+          </div>
+          <!-- AI Interviewer -->
+          <div class="relative z-10 flex flex-col items-center gap-2">
+            <div class="w-11 h-11 rounded-full bg-surface-container-lowest border-2 border-outline-variant flex items-center justify-center">
+              <span class="material-symbols-outlined text-outline text-[20px]">mic</span>
+            </div>
+            <span class="font-label-md text-label-md text-on-surface-variant">AI Interviewer</span>
+            <span class="font-headline-sm text-headline-sm text-on-surface-variant" id="stage-ai">0</span>
+          </div>
+          <!-- Interview Scheduling -->
+          <div class="relative z-10 flex flex-col items-center gap-2">
+            <div class="w-11 h-11 rounded-full bg-surface-container-lowest border-2 border-outline-variant flex items-center justify-center">
+              <span class="material-symbols-outlined text-outline text-[20px]">calendar_month</span>
+            </div>
+            <span class="font-label-md text-label-md text-on-surface-variant">Interview Scheduling</span>
+            <span class="font-headline-sm text-headline-sm text-on-surface-variant" id="stage-scheduling">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Applications Table -->
+      <div class="bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/30 overflow-hidden mb-8">
+        <!-- Table Header -->
+        <div class="grid grid-cols-12 gap-4 px-6 py-4 bg-surface-container border-b border-outline-variant items-center">
+          <div class="col-span-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Company &amp; Role</div>
+          <div class="col-span-2 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Stage</div>
+          <div class="col-span-2 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Applied</div>
+          <div class="col-span-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider text-right">Actions</div>
+        </div>
+        <!-- Table Body -->
+        <div id="applications-table-body" class="flex flex-col divide-y divide-outline-variant/30">
+          <!-- Dynamically populated -->
+          <div id="empty-state" class="flex flex-col items-center justify-center py-20 text-on-surface-variant">
+            <span class="material-symbols-outlined text-[64px] mb-4 text-outline">assignment</span>
+            <p class="font-headline-sm text-headline-sm text-on-surface mb-2">No applications yet</p>
+            <p class="font-body-sm text-body-sm text-center max-w-xs">Head over to <a href="explore_jobs.html" class="text-secondary underline">Explore Jobs</a> and hit Apply to start tracking your applications here.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calendar / Interview Scheduling Section (Teams Style) -->
+      <div class="mb-8">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="material-symbols-outlined text-secondary text-[24px]">event_available</span>
+          <h2 class="font-headline-sm text-headline-sm text-on-surface">Interview Schedule</h2>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-sm border border-outline-variant overflow-hidden flex flex-col md:flex-row h-[450px]">
+          <!-- Left Sidebar: Mini Calendar -->
+          <div class="w-full md:w-64 bg-[#f5f5f5] border-r border-outline-variant p-4 flex flex-col">
+            <div class="flex justify-between items-center mb-4">
+              <span class="font-semibold text-[#242424]">August 2026</span>
+              <div class="flex gap-1">
+                <button class="material-symbols-outlined text-gray-500 hover:text-gray-800 text-sm">chevron_left</button>
+                <button class="material-symbols-outlined text-gray-500 hover:text-gray-800 text-sm">chevron_right</button>
+              </div>
+            </div>
+            
+            <!-- Grid for days -->
+            <div class="grid grid-cols-7 gap-1 text-center text-xs font-semibold text-gray-500 mb-2">
+              <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
+            </div>
+            <div class="grid grid-cols-7 gap-1 text-center text-sm text-[#242424]">
+              <div class="p-1 text-gray-400">26</div><div class="p-1 text-gray-400">27</div><div class="p-1 text-gray-400">28</div><div class="p-1 text-gray-400">29</div><div class="p-1 text-gray-400">30</div><div class="p-1 text-gray-400">31</div><div class="p-1">1</div>
+              <div class="p-1">2</div><div class="p-1">3</div><div class="p-1">4</div><div class="p-1">5</div><div class="p-1">6</div><div class="p-1">7</div><div class="p-1">8</div>
+              <div class="p-1">9</div><div class="p-1">10</div><div class="p-1">11</div><div class="p-1 bg-[#5b5fc7] text-white rounded-full font-bold">12</div><div class="p-1">13</div><div class="p-1">14</div><div class="p-1">15</div>
+              <div class="p-1">16</div><div class="p-1">17</div><div class="p-1">18</div><div class="p-1">19</div><div class="p-1">20</div><div class="p-1">21</div><div class="p-1">22</div>
+            </div>
+          </div>
+          
+          <!-- Right Side: Daily Agenda/Timeline -->
+          <div class="flex-1 flex flex-col bg-white">
+            <div class="border-b border-outline-variant p-4 flex justify-between items-center bg-white">
+              <h3 class="font-bold text-[#242424] text-lg" id="cand-int-date">No Upcoming Interviews</h3>
+              <div class="flex items-center gap-2">
+                <span class="px-3 py-1 bg-gray-100 rounded-md text-sm font-medium text-gray-700 border border-gray-200">Day</span>
+                <span class="px-3 py-1 bg-white rounded-md text-sm font-medium text-gray-500 hover:bg-gray-50 cursor-pointer">Work week</span>
+              </div>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto p-4 bg-gray-50/30 relative">
+              <!-- Timeline grid lines -->
+              <div class="absolute inset-0 pt-4 px-4 pointer-events-none">
+                <div class="h-16 border-t border-gray-200 flex items-start -mt-2"><span class="text-xs text-gray-400 bg-white pr-2 -ml-2">9 AM</span></div>
+                <div class="h-16 border-t border-gray-200 flex items-start -mt-2"><span class="text-xs text-gray-400 bg-white pr-2 -ml-2">10 AM</span></div>
+                <div class="h-16 border-t border-gray-200 flex items-start -mt-2"><span class="text-xs text-gray-400 bg-white pr-2 -ml-2">11 AM</span></div>
+                <div class="h-16 border-t border-gray-200 flex items-start -mt-2"><span class="text-xs text-gray-400 bg-white pr-2 -ml-2">12 PM</span></div>
+                <div class="h-16 border-t border-gray-200 flex items-start -mt-2"><span class="text-xs text-gray-400 bg-white pr-2 -ml-2">1 PM</span></div>
+                <div class="h-16 border-t border-gray-200 flex items-start -mt-2"><span class="text-xs text-gray-400 bg-white pr-2 -ml-2">2 PM</span></div>
+              </div>
+              
+              <!-- Event block container -->
+              <div id="candidate-interview-event" class="hidden relative z-10 ml-12 mt-[64px] bg-[#eef1fc] border-l-4 border-[#5b5fc7] p-3 rounded-r-md shadow-sm cursor-pointer hover:bg-[#e4e8f7] transition-colors min-h-[90px]">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <h4 class="font-bold text-[#242424] text-sm">Scheduled Interview</h4>
+                    <p class="text-xs text-gray-600 mt-1" id="cand-int-time"></p>
+                    <div class="flex items-center gap-1 mt-2 text-[#5b5fc7]">
+                      <span class="material-symbols-outlined text-[16px]">location_on</span>
+                      <span class="text-xs font-semibold" id="cand-int-location"></span>
+                    </div>
+                    <div class="flex items-center gap-1 mt-1 text-gray-500">
+                      <span class="material-symbols-outlined text-[14px]">description</span>
+                      <span class="text-[11px]" id="cand-int-docs"></span>
+                    </div>
+                  </div>
+                  <div class="flex -space-x-2">
+                    <div class="w-7 h-7 rounded-full bg-[#5b5fc7] text-white flex items-center justify-center text-[10px] font-bold border-2 border-white z-20">RE</div>
+                    <div class="w-7 h-7 rounded-full bg-secondary text-white flex items-center justify-center text-[10px] font-bold border-2 border-white z-10">YOU</div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- ATS Screening Result Modal -->
+<div id="ats-modal" class="fixed inset-0 z-[9999] bg-black/60 backdrop-blur-sm items-center justify-center p-4" style="display:none;">
+  <div class="bg-surface rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
+    <!-- Modal Header -->
+    <div class="flex items-center justify-between p-6 border-b border-outline-variant bg-primary text-on-primary">
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-secondary">manage_search</span>
+        <div>
+          <h3 class="font-headline-sm text-headline-sm" id="ats-modal-title">ATS Resume Screening</h3>
+          <p class="font-label-sm text-label-sm text-on-primary/70" id="ats-modal-subtitle">Analyzing your resume...</p>
+        </div>
+      </div>
+      <button id="ats-modal-close" class="w-9 h-9 rounded-full bg-on-primary/10 flex items-center justify-center hover:bg-on-primary/20 transition-colors">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+    </div>
+    <!-- Modal Body -->
+    <div class="p-6 overflow-y-auto flex-1" id="ats-modal-body">
+      <div class="flex items-center justify-center gap-3 py-12 text-on-surface-variant">
+        <div class="w-6 h-6 border-2 border-secondary border-t-transparent rounded-full animate-spin"></div>
+        <span class="font-body-md text-body-md">Running ATS analysis... This may take a moment.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="candidate_portal.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // ── Load Applications from localStorage ────────────────────────────
+  let appliedJobs = [];
+  try { appliedJobs = JSON.parse(localStorage.getItem('appliedJobs') || '[]'); } catch(e) {}
+
+  // Update pipeline counts
+  const stageCounts = { Applied: 0, Behavioral: 0, Screening: 0, Nova: 0, AI: 0, Scheduling: 0 };
+  appliedJobs.forEach(j => {
+    const s = j.status || 'Applied';
+    if (stageCounts.hasOwnProperty(s)) stageCounts[s]++;
+    else stageCounts.Applied++;
+  });
+  document.getElementById('stage-applied').textContent = stageCounts.Applied;
+  document.getElementById('stage-screening').textContent = stageCounts.Screening;
+  document.getElementById('stage-behavioral').textContent = stageCounts.Behavioral;
+  document.getElementById('stage-nova').textContent = stageCounts.Nova;
+  document.getElementById('stage-ai').textContent = stageCounts.AI;
+  document.getElementById('stage-scheduling').textContent = stageCounts.Scheduling;
+
+  // ── Render Applications Table ──────────────────────────────────────
+  const tbody = document.getElementById('applications-table-body');
+  const emptyState = document.getElementById('empty-state');
+
+  function renderTable(jobs) {
+    tbody.innerHTML = '';
+    if (jobs.length === 0) {
+      tbody.appendChild(emptyState);
+      return;
+    }
+
+    jobs.forEach((app, idx) => {
+      const appliedDate = app.appliedAt
+        ? new Date(app.appliedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+        : 'Today';
+
+      const statusColors = {
+        Applied:    'bg-blue-100 text-blue-700',
+        Behavioral: 'bg-teal-100 text-teal-700',
+        Screening:  'bg-purple-100 text-purple-700',
+        Nova:       'bg-indigo-100 text-indigo-700',
+        AI:         'bg-pink-100 text-pink-700',
+        Scheduling: 'bg-amber-100 text-amber-700',
+        Rejected:   'bg-red-100 text-red-700'
+      };
+      const statusDots = {
+        Applied: 'bg-blue-500', Behavioral: 'bg-teal-500',
+        Screening: 'bg-purple-500', Nova: 'bg-indigo-500',
+        AI: 'bg-pink-500', Scheduling: 'bg-amber-500', Rejected: 'bg-red-500'
+      };
+      const status = app.status || 'Applied';
+      const dotColor = statusDots[status] || 'bg-outline';
+
+      const initials = (app.company || 'CO').split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+      const companyColors = ['bg-blue-100 text-blue-700','bg-emerald-100 text-emerald-700','bg-purple-100 text-purple-700','bg-orange-100 text-orange-700','bg-teal-100 text-teal-700'];
+      const companyColor = companyColors[idx % companyColors.length];
+
+      const atsResult = app.atsResult || null;
+
+      const row = document.createElement('div');
+      row.className = 'grid grid-cols-12 gap-4 px-6 py-5 items-center bg-surface-container-lowest hover:bg-surface-container-low transition-colors';
+      row.dataset.idx = idx;
+
+      row.innerHTML = `
+        <!-- Company & Role -->
+        <div class="col-span-4 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center font-bold text-sm shrink-0 ${companyColor}">
+            ${initials}
+          </div>
+          <div class="min-w-0">
+            <div class="font-headline-sm text-headline-sm text-on-surface truncate">${app.title}</div>
+            <div class="font-body-sm text-body-sm text-on-surface-variant truncate">${app.company} • ${app.location || 'Remote'}</div>
+          </div>
+        </div>
+
+        <!-- Stage -->
+        <div class="col-span-2">
+          <div class="inline-flex items-center gap-2">
+            <div class="w-2 h-2 rounded-full ${dotColor}"></div>
+            <span class="font-body-md text-body-md text-on-surface">${status}</span>
+          </div>
+        </div>
+
+        <!-- Applied Date -->
+        <div class="col-span-2">
+          <span class="font-body-sm text-body-sm text-on-surface-variant">${appliedDate}</span>
+        </div>
+
+        <!-- Actions -->
+        <div class="col-span-4 flex items-center justify-end gap-2 flex-wrap">
+          ${app.applicationUrl
+            ? `<a href="${app.applicationUrl}" target="_blank" rel="noopener"
+                  class="px-3 py-1.5 bg-surface-container border border-outline-variant text-on-surface-variant rounded-lg font-label-md text-label-md hover:bg-surface-container-high transition-colors flex items-center gap-1 shrink-0">
+                <span class="material-symbols-outlined text-[14px]">open_in_new</span>View Post
+               </a>`
+            : ''
+          }
+          <button
+            class="ats-screen-btn px-3 py-1.5 rounded-lg font-label-md text-label-md flex items-center gap-1 transition-colors shrink-0 ${
+              atsResult
+                ? 'bg-emerald-100 text-emerald-700 border border-emerald-200'
+                : 'bg-secondary text-on-secondary hover:bg-secondary-container hover:text-on-secondary-container'
+            }"
+            data-idx="${idx}">
+            <span class="material-symbols-outlined text-[14px]">${atsResult ? 'check_circle' : 'manage_search'}</span>
+            ${atsResult ? 'See ATS Results' : 'ATS Screening'}
+          </button>
+          ${atsResult && status !== 'Rejected' ? `
+          <button
+            class="start-behavioral-btn px-3 py-1.5 rounded-lg font-label-md text-label-md flex items-center gap-1 transition-colors shrink-0 bg-teal-100 text-teal-700 border border-teal-200 hover:bg-teal-200"
+            data-idx="${idx}">
+            <span class="material-symbols-outlined text-[14px]">play_circle</span>
+            Start Behavioral Assessment
+          </button>
+          <button
+            class="start-ai-btn px-3 py-1.5 rounded-lg font-label-md text-label-md flex items-center gap-1 transition-colors shrink-0 bg-purple-100 text-purple-700 border border-purple-200 hover:bg-purple-200"
+            data-idx="${idx}">
+            <span class="material-symbols-outlined text-[14px]">mic</span>
+            Start AI Interview
+          </button>` : ''}
+          <button
+            class="remove-app-btn p-1.5 text-on-surface-variant hover:text-error hover:bg-error-container rounded-lg transition-colors"
+            data-idx="${idx}"
+            title="Remove application">
+            <span class="material-symbols-outlined text-[18px]">delete</span>
+          </button>
+        </div>
+      `;
+
+      tbody.appendChild(row);
+    });
+
+    // Bind ATS buttons
+    tbody.querySelectorAll('.ats-screen-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.idx);
+        const app = appliedJobs[idx];
+        if (app.atsResult) {
+          showAtsModal(app, app.atsResult, false);
+        } else {
+          runAtsScreening(idx, app, btn);
+        }
+      });
+    });
+
+    // Bind Behavioral Assessment buttons
+    tbody.querySelectorAll('.start-behavioral-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        window.location.href = 'behavioral_assessment.html';
+      });
+    });
+
+    // Bind AI Interview buttons
+    tbody.querySelectorAll('.start-ai-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        window.location.href = 'ai_interview.html';
+      });
+    });
+
+    // Bind remove buttons
+    tbody.querySelectorAll('.remove-app-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.idx);
+        if (confirm(`Remove "${appliedJobs[idx].title}" from your applications?`)) {
+          appliedJobs.splice(idx, 1);
+          localStorage.setItem('appliedJobs', JSON.stringify(appliedJobs));
+          location.reload();
+        }
+      });
+    });
+  }
+
+  renderTable(appliedJobs);
+
+  // ── Search Filter ──────────────────────────────────────────────────
+  document.getElementById('app-search-input')?.addEventListener('input', (e) => {
+    const q = e.target.value.toLowerCase();
+    const filtered = appliedJobs.filter(j =>
+      (j.title || '').toLowerCase().includes(q) ||
+      (j.company || '').toLowerCase().includes(q) ||
+      (j.location || '').toLowerCase().includes(q)
+    );
+    renderTable(filtered);
+  });
+
+  // ── ATS Screening ──────────────────────────────────────────────────
+  const atsModal = document.getElementById('ats-modal');
+  document.getElementById('ats-modal-close')?.addEventListener('click', () => atsModal.style.display = 'none');
+  atsModal?.addEventListener('click', (e) => { if (e.target === atsModal) atsModal.style.display = 'none'; });
+
+  async function runAtsScreening(idx, app, btn) {
+    // Update button to loading state
+    btn.innerHTML = '<div class="w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin"></div> Running...';
+    btn.disabled = true;
+
+    // Open modal in loading state
+    document.getElementById('ats-modal-title').textContent = 'ATS Resume Screening';
+    document.getElementById('ats-modal-subtitle').textContent = `${app.title} @ ${app.company}`;
+    document.getElementById('ats-modal-body').innerHTML = `
+      <div class="flex flex-col items-center justify-center gap-4 py-16 text-on-surface-variant">
+        <div class="w-8 h-8 border-2 border-secondary border-t-transparent rounded-full animate-spin"></div>
+        <p class="font-body-md text-body-md">Analyzing your resume against the job requirements...</p>
+        <p class="font-body-sm text-body-sm text-on-surface-variant/70">This usually takes 15–30 seconds.</p>
+      </div>`;
+    atsModal.style.display = 'flex';
+
+    try {
+      // Load candidate resume text
+      let resumeText = '';
+      let userEmail = '';
+      try {
+        const savedProfile = localStorage.getItem('currentUserProfile');
+        if (savedProfile) {
+          const profile = JSON.parse(savedProfile);
+          userEmail = profile.email;
+          if (profile.markdownFile) {
+            const res = await fetch(`/api/candidates/${profile.email}/resume`);
+            if (res.ok) resumeText = await res.text();
+          }
+          if (!resumeText && profile.resumeFile) {
+            resumeText = `Candidate: ${profile.fullName}\nEmail: ${profile.email}\nJob Title: ${profile.jobTitle}\nSkills: ${Array.isArray(profile.skills) ? profile.skills.join(', ') : profile.skills || ''}`;
+          }
+        }
+      } catch(e) {
+        console.error('Failed to load profile for resume text:', e);
+      }
+
+      if (!resumeText) {
+        throw new Error('No resume found. Please upload your resume from the profile setup page.');
+      }
+
+      const response = await fetch('/api/eval-resume', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ job_id: app.jobId, resume_text: resumeText, email: userEmail })
+      });
+
+      if (!response.ok) {
+        const errText = await response.text();
+        throw new Error(errText || `Server error ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      // Save result to localStorage
+      appliedJobs[idx].atsResult = result;
+      const parsedStatus = parseAtsResult(result);
+      const rec = (parsedStatus.recommendation || parsedStatus.status || '').toLowerCase();
+      let hrStage = 'Under Review';
+      if (rec === 'reject' || rec === 'rejected' || parsedStatus.overall_score < 70) {
+        appliedJobs[idx].status = 'Rejected';
+        hrStage = 'Rejected';
+      } else {
+        appliedJobs[idx].status = 'Screening';
+      }
+      localStorage.setItem('appliedJobs', JSON.stringify(appliedJobs));
+
+      // Push real-time stage update to HR Portal via database
+      if (userEmail) {
+          fetch('/api/update-stage', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email: userEmail, newStage: hrStage })
+          }).catch(err => console.error('Failed to update stage in DB:', err));
+      }
+
+      showAtsModal(app, result, true);
+
+      // Refresh table to update button
+      renderTable(appliedJobs);
+
+    } catch (err) {
+      console.error('ATS screening failed:', err);
+      document.getElementById('ats-modal-body').innerHTML = `
+        <div class="flex flex-col items-center justify-center gap-4 py-16 text-center">
+          <span class="material-symbols-outlined text-[48px] text-error">error_outline</span>
+          <p class="font-headline-sm text-headline-sm text-on-surface">Screening failed</p>
+          <p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm">${err.message}</p>
+          <button onclick="document.getElementById('ats-modal').style.display='none'" class="mt-4 px-5 py-2 bg-primary text-on-primary rounded-lg font-label-md text-label-md">Close</button>
+        </div>`;
+      btn.innerHTML = '<span class="material-symbols-outlined text-[14px]">manage_search</span> ATS Screening';
+      btn.disabled = false;
+    }
+  }
+
+  function parseAtsResult(raw) {
+    let data = raw;
+
+    // ── TIER 1: Unwrap { response: ... } envelope ──────────
+    if (typeof data === 'object' && data !== null) {
+      if (data.response !== undefined) data = data.response;
+      if (data.status === 'completed' && data.data !== undefined) data = data.data;
+      if (data.output !== undefined) data = data.output;
+      if (data.text !== undefined) data = data.text;
+    }
+
+    // ── TIER 2: If it's already a plain object, return it directly ──────
+    if (typeof data === 'object' && data !== null) {
+      return data;
+    }
+
+    // ── TIER 3: String path — strip fences, clean, then parse ──────────
+    if (typeof data === 'string') {
+      // Strip markdown code fences
+      data = data.trim()
+        .replace(/^```json\s*/i, '')
+        .replace(/^```\s*/i, '')
+        .replace(/\s*```$/, '')
+        .trim();
+
+      // Clean AI-generated invalid JSON annotations:
+      // e.g.  "Sales" (partial credit through "XYZ" and "ABC")
+      // → strip everything after a closing quote that is followed by a space + (
+      let cleaned = data
+        // Remove trailing parenthetical comments after quoted array items
+        // "Some value" (extra text here), → "Some value",
+        .replace(/"([^"]*?)"\s*\([^)]*\)/g, '"$1"')
+        // Also handle double-nested quotes inside parentheses (AI sometimes does this)
+        .replace(/"\s*\(([^)]*)\)/g, '"');
+
+      // Try JSON.parse on cleaned string
+      try {
+        return JSON.parse(cleaned);
+      } catch (e1) {
+        // ── TIER 4: Regex extraction fallback ─────────────────────────
+        // If JSON is still invalid, extract values using regex
+        const extract = (key) => {
+          // Match "key": value  (number, string, array, or nested object)
+          const numMatch = data.match(new RegExp(`"${key}"\\s*:\\s*(-?\\d+(?:\\.\\d+)?)`));
+          if (numMatch) return parseFloat(numMatch[1]);
+          const strMatch = data.match(new RegExp(`"${key}"\\s*:\\s*"([^"]+)"`));
+          if (strMatch) return strMatch[1];
+          return undefined;
+        };
+
+        const extractArray = (key) => {
+          // Find the array block for this key
+          const re = new RegExp(`"${key}"\\s*:\\s*\\[([\\s\\S]*?)\\]`);
+          const m = data.match(re);
+          if (!m) return [];
+          // Extract all quoted strings from the block
+          const items = [];
+          const inner = m[1];
+          const itemRe = /"([^"]+)"/g;
+          let im;
+          while ((im = itemRe.exec(inner)) !== null) {
+            items.push(im[1]);
+          }
+          return items;
+        };
+
+        return {
+          candidate_name:       extract('candidate_name'),
+          overall_score:        extract('overall_score'),
+          technical_score:      extract('technical_score'),
+          experience_score:     extract('experience_score'),
+          projects_score:       extract('projects_score'),
+          education_score:      extract('education_score'),
+          preferred_skill_score:extract('preferred_skill_score'),
+          keyword_score:        extract('keyword_score'),
+          recommendation:       extract('recommendation'),
+          status:               extract('status'),
+          matched_skills:       extractArray('matched_skills'),
+          missing_skills:       extractArray('missing_skills'),
+          strengths:            extractArray('strengths'),
+          weaknesses:           extractArray('weaknesses'),
+          summary:              extract('summary'),
+          interview_focus:      extractArray('interview_focus'),
+        };
+      }
+    }
+
+    return {};
+
+  }
+
+  function showAtsModal(app, result, isNew) {
+    // Always open the modal (this was missing for the cached-result path)
+    atsModal.style.display = 'flex';
+    document.getElementById('ats-modal-title').textContent = 'ATS Screening Results';
+    document.getElementById('ats-modal-subtitle').textContent = `${app.title} @ ${app.company}`;
+
+    const d = parseAtsResult(result);
+
+    // If raw text fallback
+    if (d._raw !== undefined) {
+      document.getElementById('ats-modal-body').innerHTML = `
+        <div class="p-4 bg-surface-container rounded-xl">
+          <p class="font-body-sm text-body-sm text-on-surface whitespace-pre-wrap leading-relaxed">${d._raw}</p>
+        </div>`;
+      return;
+    }
+
+    // ── Extract fields ──────────────────────────────────────────────
+    const overallScore   = d.overall_score ?? d.score ?? d.matchScore ?? d.overallScore ?? null;
+    const recommendation = d.recommendation || d.status || '';
+    const status         = d.status || '';
+    const matchedSkills  = d.matched_skills  || d.matchedSkills  || [];
+    const missingSkills  = d.missing_skills  || d.missingSkills  || d.gaps || [];
+    const strengths      = d.strengths || [];
+    const weaknesses     = d.weaknesses || d.weaknesses_areas || [];
+    const summary        = d.summary || d.executive_summary || d.overallAssessment || '';
+    const interviewFocus = d.interview_focus || d.interviewFocus || [];
+
+    // Sub-scores
+    const subScores = [
+      { label: 'Technical',       val: d.technical_score },
+      { label: 'Experience',      val: d.experience_score },
+      { label: 'Projects',        val: d.projects_score },
+      { label: 'Education',       val: d.education_score },
+      { label: 'Pref. Skills',    val: d.preferred_skill_score },
+      { label: 'Keywords',        val: d.keyword_score },
+    ].filter(s => s.val !== undefined && s.val !== null);
+
+    const scoreNum = typeof overallScore === 'number' ? overallScore
+      : (overallScore !== null ? parseInt(overallScore) : null);
+    const scoreColor   = scoreNum >= 75 ? '#10b981' : scoreNum >= 50 ? '#f59e0b' : '#ef4444';
+    const scoreBg      = scoreNum >= 75 ? 'bg-emerald-50 border-emerald-200' : scoreNum >= 50 ? 'bg-amber-50 border-amber-200' : 'bg-red-50 border-red-200';
+    const scoreText    = scoreNum >= 75 ? 'text-emerald-700' : scoreNum >= 50 ? 'text-amber-700' : 'text-red-700';
+    const scoreBar     = scoreNum >= 75 ? 'bg-emerald-500' : scoreNum >= 50 ? 'bg-amber-400' : 'bg-red-500';
+    const scoreLabel   = scoreNum >= 75 ? 'Strong Match' : scoreNum >= 50 ? 'Moderate Match' : 'Low Match';
+
+    const recColor = recommendation.toLowerCase() === 'recommend' || status.toLowerCase() === 'passed'
+      ? 'bg-emerald-100 text-emerald-700 border-emerald-200'
+      : recommendation.toLowerCase() === 'consider'
+        ? 'bg-amber-100 text-amber-700 border-amber-200'
+        : 'bg-red-100 text-red-700 border-red-200';
+
+    const safeList = (arr) => Array.isArray(arr) ? arr : (typeof arr === 'string' ? [arr] : []);
+
+    document.getElementById('ats-modal-body').innerHTML = `
+      <div class="space-y-5">
+
+        <!-- Score & Status Banner -->
+        <div class="flex items-stretch gap-4">
+          <!-- Big Score -->
+          <div class="flex flex-col items-center justify-center p-5 rounded-xl border ${scoreBg} min-w-[100px]">
+            <div class="font-headline-xl text-headline-xl ${scoreText}" style="font-size:2.5rem;line-height:1">${scoreNum !== null ? scoreNum : '—'}<span style="font-size:1.2rem">%</span></div>
+            <div class="font-label-sm text-label-sm ${scoreText} uppercase tracking-wider mt-1">${scoreLabel}</div>
+          </div>
+          <!-- Bar + Status -->
+          <div class="flex-1 flex flex-col justify-between py-1">
+            <div>
+              <div class="flex justify-between items-center mb-1.5">
+                <span class="font-label-md text-label-md text-on-surface">Overall Match Score</span>
+                ${recommendation ? `<span class="px-2.5 py-0.5 rounded-full font-label-md text-label-md border ${recColor}">${recommendation}${status && status !== recommendation ? ' · ' + status : ''}</span>` : ''}
+              </div>
+              <div class="w-full h-3 bg-surface-container-high rounded-full overflow-hidden">
+                <div class="h-full rounded-full ${scoreBar}" style="width:${scoreNum || 0}%;transition:width 1s ease"></div>
+              </div>
+            </div>
+            <!-- Sub-score pills -->
+            ${subScores.length > 0 ? `
+            <div class="flex flex-wrap gap-2 mt-3">
+              ${subScores.map(s => `
+                <div class="flex items-center gap-1.5 px-2.5 py-1 bg-surface-container rounded-lg border border-outline-variant/30" title="${s.label} score">
+                  <span class="font-label-sm text-label-sm text-on-surface-variant">${s.label}</span>
+                  <span class="font-label-md text-label-md text-on-surface font-semibold">${s.val}</span>
+                </div>
+              `).join('')}
+            </div>` : ''}
+          </div>
+        </div>
+
+        <!-- Skill Match & Gaps (side by side) -->
+        ${(safeList(matchedSkills).length > 0 || safeList(missingSkills).length > 0) ? `
+        <div class="grid grid-cols-2 gap-3">
+          <!-- Matched Skills -->
+          ${safeList(matchedSkills).length > 0 ? `
+          <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-200">
+            <h4 class="font-headline-sm text-headline-sm text-emerald-800 mb-3 flex items-center gap-2">
+              <span class="material-symbols-outlined text-emerald-600 text-[18px]">check_circle</span> Matched Skills
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              ${safeList(matchedSkills).map(s => `<span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 border border-emerald-200 rounded-full font-label-sm text-label-sm">${s}</span>`).join('')}
+            </div>
+          </div>` : '<div></div>'}
+          <!-- Missing Skills -->
+          ${safeList(missingSkills).length > 0 ? `
+          <div class="p-4 bg-red-50 rounded-xl border border-red-200">
+            <h4 class="font-headline-sm text-headline-sm text-red-800 mb-3 flex items-center gap-2">
+              <span class="material-symbols-outlined text-red-500 text-[18px]">cancel</span> Missing Skills
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              ${safeList(missingSkills).map(s => `<span class="px-2.5 py-1 bg-red-100 text-red-800 border border-red-200 rounded-full font-label-sm text-label-sm">${s}</span>`).join('')}
+            </div>
+          </div>` : '<div></div>'}
+        </div>` : ''}
+
+        <!-- Strengths & Weaknesses (side by side) -->
+        ${(safeList(strengths).length > 0 || safeList(weaknesses).length > 0) ? `
+        <div class="grid grid-cols-2 gap-3">
+          ${safeList(strengths).length > 0 ? `
+          <div class="p-4 bg-surface-container-low rounded-xl border border-outline-variant/30">
+            <h4 class="font-headline-sm text-headline-sm text-on-surface mb-3 flex items-center gap-2">
+              <span class="material-symbols-outlined text-emerald-600 text-[18px]">thumb_up</span> Strengths
+            </h4>
+            <ul class="space-y-1.5">
+              ${safeList(strengths).map(s => `<li class="flex items-start gap-2 font-body-sm text-body-sm text-on-surface"><span class="text-emerald-500 shrink-0 mt-0.5">✓</span>${s}</li>`).join('')}
+            </ul>
+          </div>` : '<div></div>'}
+          ${safeList(weaknesses).length > 0 ? `
+          <div class="p-4 bg-surface-container-low rounded-xl border border-outline-variant/30">
+            <h4 class="font-headline-sm text-headline-sm text-on-surface mb-3 flex items-center gap-2">
+              <span class="material-symbols-outlined text-amber-500 text-[18px]">thumb_down</span> Weaknesses
+            </h4>
+            <ul class="space-y-1.5">
+              ${safeList(weaknesses).map(w => `<li class="flex items-start gap-2 font-body-sm text-body-sm text-on-surface"><span class="text-amber-500 shrink-0 mt-0.5">⚠</span>${w}</li>`).join('')}
+            </ul>
+          </div>` : '<div></div>'}
+        </div>` : ''}
+
+        <!-- Executive Summary -->
+        ${summary ? `
+        <div class="p-4 bg-primary/5 rounded-xl border-l-4 border-primary">
+          <h4 class="font-headline-sm text-headline-sm text-on-surface mb-2 flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary text-[18px]">summarize</span> Executive Summary
+          </h4>
+          <p class="font-body-sm text-body-sm text-on-surface leading-relaxed">${summary}</p>
+        </div>` : ''}
+
+        <!-- Interview Focus -->
+        ${safeList(interviewFocus).length > 0 ? `
+        <div class="p-4 bg-secondary/5 rounded-xl border border-secondary/20">
+          <h4 class="font-headline-sm text-headline-sm text-on-surface mb-3 flex items-center gap-2">
+            <span class="material-symbols-outlined text-secondary text-[18px]">forum</span> Interview Focus Areas
+          </h4>
+          <ul class="space-y-2">
+            ${safeList(interviewFocus).map((f,i) => `
+              <li class="flex items-start gap-3 font-body-sm text-body-sm text-on-surface">
+                <span class="w-5 h-5 rounded-full bg-secondary/20 text-secondary flex items-center justify-center font-label-md text-label-md shrink-0 mt-0.5">${i+1}</span>
+                ${f}
+              </li>`).join('')}
+          </ul>
+        </div>` : ''}
+
+      </div>
+    `;
+  }
+});
+</script>
+</body></html>
