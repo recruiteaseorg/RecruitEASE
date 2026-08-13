@@ -865,11 +865,7 @@ app.post('/api/profile/avatar', upload.single('profilePic'), async (req, res) =>
         res.status(500).send('Error updating avatar');
     }
 });
-    } catch (err) {
-        console.error('Error updating profile picture:', err);
-        res.status(500).send('Internal server error.');
-    }
-});
+
 
 // GET endpoint to return environment configurations safely
 app.get('/api/config', (req, res) => {
