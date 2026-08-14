@@ -98,7 +98,7 @@ Keys:
             if (!geminiApiKey) return res.status(500).json({ error: 'GEMINI_API_KEY is missing.' });
             
             const base64Pdf = file.buffer.toString('base64');
-            const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.0-flash:generateContent?key=${geminiApiKey}`, {
+            const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiApiKey}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -771,6 +771,7 @@ app.post('/api/login', async (req, res) => {
 
 app.post('/api/register', async (req, res) => {
     try {
+        await connectToMongo();
         const { fullName, email, password, phone, jobTitle, role } = req.body;
         
         if (role === 'HR Manager' || role === 'hr') {
